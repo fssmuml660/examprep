@@ -47,10 +47,12 @@
         <div id="hint-box"></div>
         <div id="feedback-box"></div>
 
-        <div class="controls">
-            <button class="btn hint-btn" id="hint-button" onclick="showHint()">Get Hint 💡</button>
-            <button class="btn next-btn" id="next-button" onclick="loadNextQuestion()">Next Question ➜</button>
-        </div>
+        <div class="controls" style="display: flex; justify-content: space-between; gap: 10px; margin-top: 25px;">
+    <button class="btn hint-btn" id="back-button" onclick="loadPrevQuestion()" style="background:#6c757d; visibility:hidden;">⬅ Back</button>
+    <button class="btn hint-btn" id="hint-button" onclick="showHint()" style="background:#fbc02d; color:#000;">Hint 💡</button>
+    <button class="btn next-btn" id="next-button" onclick="loadNextQuestion()" style="background:#004a99; color:white; flex-grow:1; display:none;">Next ➜</button>
+</div>
+
     </div>
 </div>
 
