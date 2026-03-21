@@ -1,0 +1,4802 @@
+[
+  {
+    "question": "[Q1] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q2] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q3] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q4] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q5] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q6] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q7] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q8] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q9] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q10] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q11] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q12] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q13] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q14] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q15] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q16] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q17] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q18] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q19] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q20] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q21] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q22] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q23] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q24] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q25] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q26] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q27] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q28] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q29] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q30] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q31] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q32] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q33] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q34] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q35] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q36] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q37] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q38] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q39] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q40] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q41] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q42] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q43] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q44] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q45] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q46] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q47] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q48] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q49] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q50] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q51] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q52] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q53] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q54] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q55] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q56] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q57] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q58] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q59] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q60] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q61] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q62] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q63] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q64] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q65] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q66] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q67] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q68] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q69] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q70] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q71] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q72] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q73] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q74] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q75] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q76] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q77] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q78] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q79] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q80] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q81] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q82] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q83] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q84] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q85] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q86] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q87] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q88] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q89] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q90] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q91] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q92] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q93] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q94] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q95] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q96] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q97] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q98] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q99] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q100] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q101] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q102] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q103] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q104] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q105] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q106] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q107] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q108] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q109] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q110] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q111] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q112] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q113] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q114] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q115] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q116] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q117] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q118] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q119] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q120] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q121] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q122] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q123] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q124] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q125] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q126] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q127] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q128] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q129] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q130] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q131] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q132] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q133] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q134] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q135] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q136] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q137] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q138] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q139] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q140] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q141] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q142] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q143] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q144] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q145] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q146] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q147] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q148] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q149] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q150] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q151] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q152] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q153] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q154] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q155] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q156] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q157] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q158] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q159] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q160] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q161] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q162] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q163] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q164] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q165] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q166] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q167] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q168] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q169] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q170] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q171] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q172] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q173] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q174] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q175] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q176] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q177] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q178] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q179] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q180] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q181] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q182] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q183] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q184] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q185] Which Linux command checks memory usage?",
+    "options": [
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "free -m",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ps -ef",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q186] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 2,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q187] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q188] Which ITIL process handles recurring issues?",
+    "options": [
+      {
+        "text": "Incident Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Release Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Change Management",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Problem Management",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q189] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q190] A WebLogic server is stuck in STARTING state. What should you check first?",
+    "options": [
+      {
+        "text": "Disk usage",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network cables",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "User sessions",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Thread dumps",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q191] SSL handshake fails. What is the likely cause?",
+    "options": [
+      {
+        "text": "RAM low",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Disk full",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CPU high",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "CN/SAN mismatch",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q192] Docker container keeps restarting. Why?",
+    "options": [
+      {
+        "text": "Disk empty",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Application crash",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Docker not installed",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Network slow",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q193] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q194] In Kubernetes, smallest deployable unit is?",
+    "options": [
+      {
+        "text": "Pod",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Cluster",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Node",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q195] What does tcpdump do?",
+    "options": [
+      {
+        "text": "Check disk",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Restart service",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Monitor CPU",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Capture packets",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q196] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q197] Which view shows Oracle active sessions?",
+    "options": [
+      {
+        "text": "DBA_TABLES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ALL_USERS",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "USER_INDEXES",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "V$SESSION",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q198] A service is not reachable on port 8080. What command to verify?",
+    "options": [
+      {
+        "text": "top",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "netstat -tulnp",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "df -h",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "ls -lrt",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 1,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q199] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      }
+    ],
+    "answer": 0,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  },
+  {
+    "question": "[Q200] An Oracle database shows high CPU usage. What should you analyze first?",
+    "options": [
+      {
+        "text": "Reboot server",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Add tablespace",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "Drop users",
+        "feedback": "Incorrect. Not the best choice."
+      },
+      {
+        "text": "AWR/ASH reports",
+        "feedback": "Correct! This aligns with real production support approach."
+      }
+    ],
+    "answer": 3,
+    "hint": "Think practically.",
+    "explanation": "Focus on real-world troubleshooting approach used in production."
+  }
+]
