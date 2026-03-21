@@ -1,38 +1,2546 @@
 [
   {
-    "question": "A production WebLogic server is experiencing 'STUCK' threads. What is the most reliable diagnostic step to perform before any restart?",
+    "question": "A WebLogic Managed Server is stuck in 'STARTING' mode for a long time. What is the most likely cause in a clustered environment?",
     "options": [
-      {"text": "Check the OS top command", "feedback": "Useful for CPU, but doesn't show why Java threads are blocked."},
-      {"text": "Generate 3-5 Thread Dumps", "feedback": "Correct! This provides a stack trace of every thread to identify locking issues."},
-      {"text": "Immediately restart the Managed Server", "feedback": "Incorrect. This is a disruptive 'blind' fix that clears diagnostic evidence."},
-      {"text": "Clear the WebLogic cache folders", "feedback": "Incorrect. Cache clearing is for class-loading or corruption issues, not runtime thread states."}
+      {"text": "Admin Server is down", "feedback": "Incorrect. Managed servers can start in 'Managed Server Independence' mode if configured."},
+      {"text": "Unreachable LDAP or Database for security provider", "feedback": "Correct! If the security data store is unreachable, the boot identity cannot be verified."},
+      {"text": "Incorrect Java version", "feedback": "Incorrect. This would usually cause an immediate 'ClassFormatError' or failure to launch the JVM."},
+      {"text": "Low Disk Space on /tmp", "feedback": "Incorrect. While it causes issues later, it rarely hangs the entire boot process indefinitely."}
     ],
     "answer": 1,
-    "hint": "You need to see the internal execution path of the Java process.",
-    "explanation": "Thread dumps allow you to see if threads are waiting on Database I/O, deadlocks, or external socket reads."
+    "hint": "Think about what WebLogic needs to 'verify' before it can fully open.",
+    "explanation": "WebLogic requires access to the Embedded LDAP or an external RDBMS security provider to authenticate the boot user. Connectivity issues here cause long hangs."
   },
   {
-    "question": "In an Oracle environment, which dynamic performance view is best for identifying the SID of a blocking session?",
+    "question": "Which command is used to identify the 'Top 5 Timed Events' in an Oracle Database to diagnose a sudden slowdown?",
     "options": [
-      {"text": "V$DATABASE", "feedback": "Incorrect. This shows instance-level metadata like the DB name and ID."},
-      {"text": "DBA_OBJECTS", "feedback": "Incorrect. This lists all objects in the database, not active sessions."},
-      {"text": "V$SESSION", "feedback": "Correct! The BLOCKING_SESSION column identifies the SID holding the lock."},
-      {"text": "V$PARAMETER", "feedback": "Incorrect. This shows initialization parameters (spfile/pfile settings)."}
+      {"text": "SELECT * FROM V$SESSION", "feedback": "Incorrect. This shows current sessions, not a historical performance summary."},
+      {"text": "Generating an AWR (Automatic Workload Repository) Report", "feedback": "Correct! The AWR report's 'Top 5 Timed Events' section is the starting point for performance tuning."},
+      {"text": "EXPLAIN PLAN FOR...", "feedback": "Incorrect. This is used for tuning a single SQL statement, not the whole instance."},
+      {"text": "ALTER SYSTEM FLUSH SHARED_POOL", "feedback": "Incorrect. This is a disruptive action that clears the cache and should not be used for diagnosis."}
     ],
-    "answer": 2,
-    "hint": "The answer starts with V$ and relates to user connections.",
-    "explanation": "V$SESSION is the primary view for monitoring real-time activity and identifying contention between users."
+    "answer": 1,
+    "hint": "You need a report that summarizes database activity over a specific 'snapshot' interval.",
+    "explanation": "AWR reports provide a comprehensive view of wait events, CPU usage, and memory statistics between two snapshots."
   },
   {
-    "question": "Which ITIL process is responsible for restoring a failed banking service as quickly as possible, even if it requires a temporary workaround?",
+    "question": "In a Linux environment, you see 'High Wait I/O' in the 'top' command. Which tool will help you identify which specific disk or partition is the bottleneck?",
     "options": [
-      {"text": "Problem Management", "feedback": "Incorrect. This focuses on the long-term 'Root Cause' analysis."},
-      {"text": "Change Management", "feedback": "Incorrect. This is about risk assessment for future modifications."},
-      {"text": "Incident Management", "feedback": "Correct! The priority here is 'Service Restoration' over 'Root Cause'."},
-      {"text": "Service Level Management", "feedback": "Incorrect. This defines the 'Targets' (SLAs), but doesn't perform the restoration."}
+      {"text": "netstat -an", "feedback": "Incorrect. This is for network connection troubleshooting."},
+      {"text": "iostat -xz 1", "feedback": "Correct! This provides detailed statistics for each disk device, including service time and utilization."},
+      {"text": "df -h", "feedback": "Incorrect. This shows disk space usage, not disk performance or throughput."},
+      {"text": "ps -ef", "feedback": "Incorrect. This lists processes but doesn't map them to disk latency."}
+    ],
+    "answer": 1,
+    "hint": "Look for the tool specifically designed for 'Input/Output' statistics.",
+    "explanation": "iostat (part of the sysstat package) is essential for Production Support to differentiate between an application hang and a physical hardware/SAN bottleneck."
+  },
+  {
+    "question": "What is the primary purpose of the 'Multicast' address in a WebLogic Cluster?",
+    "options": [
+      {"text": "To load balance HTTP traffic", "feedback": "Incorrect. This is handled by a Load Balancer or Proxy (like OHS)."},
+      {"text": "Cluster heartbeats and state broadcasting", "feedback": "Correct! It allows managed servers to 'find' each other and monitor health."},
+      {"text": "To encrypt data between servers", "feedback": "Incorrect. This is handled by SSL/TLS configurations."},
+      {"text": "To connect to the Oracle Database", "feedback": "Incorrect. DB connections use JDBC URLs, not multicast."}
+    ],
+    "answer": 1,
+    "hint": "Think about how servers in a group stay 'aware' of each other's status.",
+    "explanation": "Cluster members use either Unicast or Multicast to announce their presence. If heartbeats fail, servers are removed from the cluster 'View'."
+  },
+  {
+    "question": "An Oracle 'ORA-01555: snapshot too old' error occurs. What is the most common resolution for Production Support?",
+    "options": [
+      {"text": "Increase the size of the Datafiles", "feedback": "Incorrect. This error is about 'Undo' data, not 'Data' space."},
+      {"text": "Increase the UNDO_RETENTION parameter", "feedback": "Correct! This ensures the DB keeps old versions of data long enough for slow-running queries."},
+      {"text": "Restart the Database instance", "feedback": "Incorrect. This does not fix the underlying retention issue and causes downtime."},
+      {"text": "Rebuild the indexes on the affected table", "feedback": "Incorrect. Index corruption is not related to snapshot consistency."}
+    ],
+    "answer": 1,
+    "hint": "The error is related to 'Read Consistency' over time.",
+    "explanation": "ORA-01555 happens when a long-running query needs an old version of data that has already been overwritten in the Undo Tablespace."
+  },
+  {
+    "question": "A Java application is failing to connect to a remote service. Which Linux command will verify if the specific destination port (e.g., 8080) is open and reachable?",
+    "options": [
+      {"text": "ping <IP_Address>", "feedback": "Incorrect. Ping uses ICMP and only tells you if the server is up, not if the port is open."},
+      {"text": "nc -zv <IP_Address> 8080", "feedback": "Correct! Netcat (nc) verifies if a specific TCP/UDP port is accepting connections."},
+      {"text": "ifconfig -a", "feedback": "Incorrect. This shows local interface configuration, not remote connectivity."},
+      {"text": "top -u root", "feedback": "Incorrect. This shows processes owned by the root user."}
+    ],
+    "answer": 1,
+    "hint": "Think of a 'Swiss Army Knife' tool for networking.",
+    "explanation": "Netcat or Telnet are the primary tools for 'Port Scanning' from a production server to troubleshoot firewall or listener issues."
+  },
+  {
+    "question": "You receive a 'java.security.cert.CertificateExpiredException' in the logs. How do you check the expiry date of a specific .jks keystore file?",
+    "options": [
+      {"text": "openssl x509 -in cert.pem -text", "feedback": "Incorrect. This works for PEM files, but not for Java JKS formats."},
+      {"text": "keytool -list -v -keystore identity.jks", "feedback": "Correct! Keytool is the standard Java utility for managing JKS keystores."},
+      {"text": "cat /etc/hosts", "feedback": "Incorrect. This file maps hostnames to IP addresses."},
+      {"text": "ls -lR /etc/ssl", "feedback": "Incorrect. This only lists files and permissions, not their internal metadata."}
+    ],
+    "answer": 1,
+    "hint": "Use the standard Java SDK utility.",
+    "explanation": "Production Support often involves verifying SSL validity. 'keytool' allows you to see the validity dates and the 'Alias' within the store."
+  },
+  {
+    "question": "Which Linux command helps you find which process is consuming the most Disk I/O in real-time?",
+    "options": [
+      {"text": "iotop", "feedback": "Correct! Like 'top' for CPU, 'iotop' shows per-process disk read/write statistics."},
+      {"text": "df -k", "feedback": "Incorrect. This shows space, not throughput."},
+      {"text": "uptime", "feedback": "Incorrect. This shows load average and system boot time."},
+      {"text": "chmod 777", "feedback": "Incorrect. This changes file permissions and is a security risk."}
+    ],
+    "answer": 0,
+    "hint": "It's like 'top', but for Input/Output.",
+    "explanation": "When an application hangs due to disk wait, 'iotop' identifies if it's a log-writer, a backup script, or a DB process causing the lag."
+  },
+  {
+    "question": "A 'Major Incident' has occurred. Which document provides the step-by-step instructions to bring up services at the Disaster Recovery (DR) site?",
+    "options": [
+      {"text": "SLA (Service Level Agreement)", "feedback": "Incorrect. This defines the targets, not the technical steps."},
+      {"text": "DR Runbook / Playbook", "feedback": "Correct! A Runbook contains the technical sequences for failover."},
+      {"text": "Change Request (CR)", "feedback": "Incorrect. A CR is for planned modifications, not emergency recovery steps."},
+      {"text": "Incident Log", "feedback": "Incorrect. This tracks what happened, not how to recover."}
+    ],
+    "answer": 1,
+    "hint": "Look for the 'how-to' guide for recovery.",
+    "explanation": "Runbooks are critical in banking for DR drills and real-world failovers to ensure consistency and speed."
+  },
+  {
+    "question": "In AppDynamics, what is a 'Business Transaction' (BT)?",
+    "options": [
+      {"text": "The amount of money processed by the app", "feedback": "Incorrect. BT is a technical performance metric, not a financial one."},
+      {"text": "An end-to-end request flow (e.g., Login or Fund Transfer)", "feedback": "Correct! It tracks the health of a specific user action across all tiers."},
+      {"text": "A physical server heartbeat", "feedback": "Incorrect. That is an Infrastructure metric."},
+      {"text": "A database table lock", "feedback": "Incorrect. That is a DB-level metric."}
+    ],
+    "answer": 1,
+    "hint": "It represents a complete 'User Journey'.",
+    "explanation": "BTs allow support teams to see exactly where a specific function (like 'Withdrawal') is slowing down, even if other functions are fast."
+  },
+  {
+    "question": "A containerized application is crashing immediately after start. Which Docker command is best for troubleshooting the crash?",
+    "options": [
+      {"text": "docker ps", "feedback": "Incorrect. This only shows running containers; it won't show the crashed one by default."},
+      {"text": "docker logs <container_id>", "feedback": "Correct! This shows the stdout/stderr which usually contains the stack trace."},
+      {"text": "docker stop", "feedback": "Incorrect. The container is already stopped/crashed."},
+      {"text": "docker images", "feedback": "Incorrect. This lists downloaded images, not runtime errors."}
+    ],
+    "answer": 1,
+    "hint": "You need to see the application's internal 'output' logs.",
+    "explanation": "Most container crashes are due to missing environment variables or config errors, which are visible via 'docker logs'."
+  },
+  {
+    "question": "In Kubernetes (K8s), what is the purpose of a 'Liveness Probe'?",
+    "options": [
+      {"text": "To check if the Pod is ready to accept traffic", "feedback": "Incorrect. That is a 'Readiness Probe'."},
+      {"text": "To restart a container if it becomes unresponsive", "feedback": "Correct! It helps self-heal deadlocked applications."},
+      {"text": "To scale the number of pods", "feedback": "Incorrect. Scaling is handled by the HPA (Horizontal Pod Autoscaler)."},
+      {"text": "To backup the database", "feedback": "Incorrect. Backup is a separate scheduled task (CronJob)."}
+    ],
+    "answer": 1,
+    "hint": "It detects if the application is 'stuck' but still running.",
+    "explanation": "If a WebLogic managed server hangs, a Liveness probe can automatically trigger a Pod restart to restore service."
+  },
+  {
+    "question": "A Java application is failing to connect to a remote service. Which Linux command verifies if port 8080 is open and reachable on a remote server?",
+    "options": [
+      {"text": "ping <IP_Address>", "feedback": "Incorrect. Ping uses ICMP and doesn't check specific TCP ports."},
+      {"text": "nc -zv <IP_Address> 8080", "feedback": "Correct! Netcat (nc) is the standard for checking port connectivity."},
+      {"text": "ifconfig -a", "feedback": "Incorrect. This only shows local network interface details."},
+      {"text": "top -u root", "feedback": "Incorrect. This monitors processes, not network ports."}
+    ],
+    "answer": 1,
+    "hint": "Think of a 'Swiss Army Knife' tool for networking.",
+    "explanation": "Netcat (-z for scanning, -v for verbose) is essential for troubleshooting firewall or listener issues in a banking DMZ."
+  },
+  {
+    "question": "You receive a 'java.security.cert.CertificateExpiredException'. How do you check the expiry date of a specific .jks keystore?",
+    "options": [
+      {"text": "openssl x509 -in cert.pem -text", "feedback": "Incorrect. This is for PEM files, not Java Keystores (JKS)."},
+      {"text": "keytool -list -v -keystore identity.jks", "feedback": "Correct! Keytool is the Java utility for managing keystores."},
+      {"text": "cat /etc/hosts", "feedback": "Incorrect. This file maps hostnames to IPs."},
+      {"text": "ls -l /etc/ssl", "feedback": "Incorrect. This only shows file permissions, not certificate metadata."}
+    ],
+    "answer": 1,
+    "hint": "Use the standard Java SDK utility.",
+    "explanation": "Production Support often involves certificate renewals. 'keytool' allows you to see the 'Valid from/until' dates inside a JKS."
+  },
+  {
+    "question": "Which Linux command helps you find which process is consuming the most Disk I/O in real-time?",
+    "options": [
+      {"text": "iotop", "feedback": "Correct! Similar to 'top', it monitors disk read/write throughput per process."},
+      {"text": "df -k", "feedback": "Incorrect. This shows disk space usage, not real-time I/O performance."},
+      {"text": "uptime", "feedback": "Incorrect. This shows system load average and boot time."},
+      {"text": "chmod 777", "feedback": "Incorrect. This changes permissions and doesn't monitor performance."}
+    ],
+    "answer": 0,
+    "hint": "It's like 'top', but for Input/Output.",
+    "explanation": "If an application is slow due to 'disk wait', 'iotop' identifies if a log-writer or a backup script is the bottleneck."
+  },
+  {
+    "question": "What does a Load Average of '5.0' on a 4-Core Linux CPU indicate?",
+    "options": [
+      {"text": "The CPU is 50% utilized", "feedback": "Incorrect. Load average relates to the process queue, not just percentage."},
+      {"text": "The CPU is over-utilized and processes are waiting for CPU time", "feedback": "Correct! Anything above the number of cores means the system is saturated."},
+      {"text": "The system is perfectly healthy", "feedback": "Incorrect. A load higher than the core count indicates a bottleneck."},
+      {"text": "5 users are currently logged in", "feedback": "Incorrect. Load average tracks processes, not user sessions."}
+    ],
+    "answer": 1,
+    "hint": "Compare the load number to the number of available CPU cores.",
+    "explanation": "In Production Support, a load average higher than the core count (e.g., 5.0 on 4 cores) signals that the system is lagging."
+  },
+  {
+    "question": "Which command is used to capture network packets for a specific port to troubleshoot a handshake failure?",
+    "options": [
+      {"text": "netstat -rn", "feedback": "Incorrect. This shows the routing table."},
+      {"text": "tcpdump -i eth0 port 443", "feedback": "Correct! tcpdump captures actual traffic for low-level analysis."},
+      {"text": "ps -ef | grep java", "feedback": "Incorrect. This only shows running Java processes."},
+      {"text": "tail -f access.log", "feedback": "Incorrect. This shows application logs, not network packets."}
+    ],
+    "answer": 1,
+    "hint": "Think of a 'packet sniffer' for the command line.",
+    "explanation": "Tcpdump is used to determine if a connection is being reset (RST) or if there is a 'SYN' but no 'ACK' from the remote server."
+  },
+  {
+    "question": "What is the significance of the '/etc/fstab' file in Linux?",
+    "options": [
+      {"text": "It stores user passwords", "feedback": "Incorrect. Passwords are in /etc/shadow."},
+      {"text": "It defines how disk partitions are mounted on boot", "feedback": "Correct! It maps physical disks to mount points like /u01 or /home."},
+      {"text": "It configures the firewall", "feedback": "Incorrect. Firewalls are configured via iptables or firewalld."},
+      {"text": "It stores the kernel version", "feedback": "Incorrect. Use 'uname -r' for that."}
+    ],
+    "answer": 1,
+    "hint": "It relates to 'File Systems' and 'Tables'.",
+    "explanation": "Incorrect entries in fstab can cause a production server to fail during a reboot (entering Emergency Mode)."
+  },
+  {
+    "question": "In a Linux system, what is an 'Inode'?",
+    "options": [
+      {"text": "A type of network protocol", "feedback": "Incorrect. Protocols are things like TCP/UDP."},
+      {"text": "A data structure that stores file metadata", "feedback": "Correct! It stores owner, size, and location info (but not the filename)."},
+      {"text": "A physical disk sector", "feedback": "Incorrect. That is a hardware-level term."},
+      {"text": "A process ID", "feedback": "Incorrect. That is a PID."}
+    ],
+    "answer": 1,
+    "hint": "Every file in Linux uses one of these unique identifiers.",
+    "explanation": "If a disk has space but you cannot create files, you may have 'run out of inodes' (common with many small log files)."
+  },
+  {
+    "question": "Which command allows a user to run a specific command with 'root' privileges?",
+    "options": [
+      {"text": "runas", "feedback": "Incorrect. This is a Windows command."},
+      {"text": "sudo", "feedback": "Correct! It stands for 'SuperUser Do'."},
+      {"text": "chown", "feedback": "Incorrect. This changes file ownership."},
+      {"text": "su -", "feedback": "Incorrect. This switches to the root user entirely, rather than running one command."}
+    ],
+    "answer": 1,
+    "hint": "It's the most common command used for administrative tasks.",
+    "explanation": "Using 'sudo' is preferred over logging in as root for security and audit trailing in banking environments."
+  },
+  {
+    "question": "A server is responding slowly. You run 'vmstat 1'. What does a high 'wa' value in the output signify?",
+    "options": [
+      {"text": "Waiting for User input", "feedback": "Incorrect. 'wa' stands for I/O Wait."},
+      {"text": "Waiting for Disk I/O to complete", "feedback": "Correct! High 'wa' means the CPU is idle because it's waiting on a slow disk."},
+      {"text": "Web Application latency", "feedback": "Incorrect. vmstat tracks OS-level kernel metrics."},
+      {"text": "Wireless adapter activity", "feedback": "Incorrect. It's about virtual memory and CPU."}
+    ],
+    "answer": 1,
+    "hint": "It stands for 'Wait' for 'Input/Output'.",
+    "explanation": "If 'wa' is high (>15-20%), the bottleneck is likely the Storage Area Network (SAN) or a failing physical disk."
+  },
+  {
+    "question": "Which signal is sent when you run the command 'kill -9 <PID>'?",
+    "options": [
+      {"text": "SIGTERM (Graceful shutdown)", "feedback": "Incorrect. That is kill -15."},
+      {"text": "SIGKILL (Forced immediate termination)", "feedback": "Correct! The process cannot ignore this signal."},
+      {"text": "SIGHUP (Reload configuration)", "feedback": "Incorrect. That is kill -1."},
+      {"text": "SIGINT (Keyboard interrupt)", "feedback": "Incorrect. That is Ctrl+C or kill -2."}
+    ],
+    "answer": 1,
+    "hint": "It is the 'Nuclear Option' for stuck processes.",
+    "explanation": "Use kill -9 only as a last resort, as it doesn't allow the application (like WebLogic) to close DB connections or clear temp files."
+  },
+  {
+    "question": "How do you find the absolute path of the 'java' executable currently in use?",
+    "options": [
+      {"text": "which java", "feedback": "Correct! This shows the path to the command found in your $PATH variable."},
+      {"text": "find / -name java", "feedback": "Incorrect. This searches the whole disk and will find many versions."},
+      {"text": "echo $JAVA_HOME", "feedback": "Incorrect. This shows an environment variable, which might not match the active binary."},
+      {"text": "ls java", "feedback": "Incorrect. This only lists the word 'java' if it's in the current folder."}
+    ],
+    "answer": 0,
+    "hint": "Think of a command that asks 'Which one?'.",
+    "explanation": "Using 'which' helps verify if you are accidentally using an old version of Java instead of the one required for Production."
+  },
+  {
+    "question": "What is the purpose of 'KeepAlive' in a TCP connection?",
+    "options": [
+      {"text": "To speed up the initial handshake", "feedback": "Incorrect. That is TCP Fast Open."},
+      {"text": "To detect if the other end is still reachable during long periods of inactivity", "feedback": "Correct! It prevents firewalls from dropping 'silent' connections."},
+      {"text": "To encrypt the payload", "feedback": "Incorrect. Encryption is TLS/SSL."},
+      {"text": "To compress the data", "feedback": "Incorrect. Compression is a different layer."}
+    ],
+    "answer": 1,
+    "hint": "It 'keeps' the connection 'alive' during silence.",
+    "explanation": "In banking apps, KeepAlive prevents firewalls from timing out JDBC connections to the database."
+  },
+  {
+    "question": "Which file contains the list of DNS resolvers (nameservers) in Linux?",
+    "options": [
+      {"text": "/etc/hosts", "feedback": "Incorrect. This is for local IP mappings, not DNS servers."},
+      {"text": "/etc/resolv.conf", "feedback": "Correct! This defines which DNS servers the system queries."},
+      {"text": "/etc/sysconfig/network", "feedback": "Incorrect. This defines general networking but not specific DNS IPs."},
+      {"text": "/etc/dns.conf", "feedback": "Incorrect. This file doesn't exist by default."}
+    ],
+    "answer": 1,
+    "hint": "The filename sounds like 'Resolve'.",
+    "explanation": "If a server can ping an IP but not a hostname, check if nameservers are correctly listed in /etc/resolv.conf."
+  },
+  {
+    "question": "You see 'Too many open files' in your application log. Which Linux command helps you check the current limit for a user?",
+    "options": [
+      {"text": "ulimit -n", "feedback": "Correct! This displays or sets the maximum number of open file descriptors."},
+      {"text": "df -i", "feedback": "Incorrect. This shows inode usage, not file descriptor limits."},
+      {"text": "free -m", "feedback": "Incorrect. This shows memory usage."},
+      {"text": "lscpu", "feedback": "Incorrect. This shows CPU architecture info."}
+    ],
+    "answer": 0,
+    "hint": "Think of 'User Limits'.",
+    "explanation": "WebLogic and Databases require high ulimit values. If the limit is too low, the application cannot open new sockets or logs."
+  },
+  {
+    "question": "What is the default port for the SSH (Secure Shell) protocol?",
+    "options": [
+      {"text": "80", "feedback": "Incorrect. That is HTTP."},
+      {"text": "443", "feedback": "Incorrect. That is HTTPS."},
+      {"text": "22", "feedback": "Correct! SSH defaults to port 22."},
+      {"text": "21", "feedback": "Incorrect. That is FTP."}
     ],
     "answer": 2,
-    "hint": "Think about the 'Speed' of restoration vs the 'Reason' for failure.",
+    "hint": "It's a low double-digit number.",
+    "explanation": "Knowing default ports is essential for troubleshooting firewall connectivity between production servers."
+  },
+  {
+    "question": "Which command is used to see the kernel boot messages and hardware errors?",
+    "options": [
+      {"text": "tail /var/log/messages", "feedback": "Incorrect. This shows general system logs, not just kernel ring buffer messages."},
+      {"text": "dmesg", "feedback": "Correct! It displays the message buffer of the kernel."},
+      {"text": "cat /proc/cpuinfo", "feedback": "Incorrect. This shows CPU specifications."},
+      {"text": "last", "feedback": "Incorrect. This shows the history of user logins."}
+    ],
+    "answer": 1,
+    "hint": "Short for 'Display Message'.",
+    "explanation": "Use 'dmesg' to find Out-Of-Memory (OOM) Killer events or hardware/disk failures reported by the OS."
+  },
+  {
+    "question": "What does 'sticky bit' permission on a directory (like /tmp) do?",
+    "options": [
+      {"text": "Prevents anyone from reading files", "feedback": "Incorrect. That is read permission."},
+      {"text": "Ensures only the file owner can delete their own files", "feedback": "Correct! It prevents users from deleting each other's files."},
+      {"text": "Makes all files executable", "feedback": "Incorrect. That is +x permission."},
+      {"text": "Automatically encrypts the files", "feedback": "Incorrect. Linux doesn't do this via permissions."}
+    ],
+    "answer": 1,
+    "hint": "It makes files 'stick' to their owners.",
+    "explanation": "The sticky bit (indicated by a 't' in ls -l) is crucial for shared folders like /tmp to prevent accidental data loss."
+  },
+  {
+    "question": "How do you check the routing table to see the Default Gateway in Linux?",
+    "options": [
+      {"text": "netstat -rn or ip route", "feedback": "Correct! Both commands display the kernel's IP routing table."},
+      {"text": "traceroute google.com", "feedback": "Incorrect. This shows the path, not the local configuration table."},
+      {"text": "cat /etc/gateway", "feedback": "Incorrect. This is not a standard Linux configuration file."},
+      {"text": "ping 127.0.0.1", "feedback": "Incorrect. This only pings the local loopback address."}
+    ],
+    "answer": 0,
+    "hint": "Look for a command that shows 'routes'.",
+    "explanation": "If a server cannot reach an external network, verify the Default Gateway (0.0.0.0) is correctly pointed to the router IP."
+  },
+  {
+    "question": "Which command creates a 'soft link' (symbolic link) between two files?",
+    "options": [
+      {"text": "cp -s source target", "feedback": "Incorrect. cp is for copying."},
+      {"text": "ln -s source target", "feedback": "Correct! ln -s creates a pointer to the original file."},
+      {"text": "mv source target", "feedback": "Incorrect. mv moves or renames a file."},
+      {"text": "touch source target", "feedback": "Incorrect. touch creates empty files."}
+    ],
+    "answer": 1,
+    "hint": "Short for 'Link'.",
+    "explanation": "Symbolic links are used in Production to point 'latest_log' to a specific dated log file without moving the data."
+  },
+  {
+    "question": "What is the purpose of the 'Swap' space in Linux?",
+    "options": [
+      {"text": "To increase the speed of the CPU", "feedback": "Incorrect. Swap doesn't affect CPU clock speed."},
+      {"text": "To act as virtual memory when physical RAM is full", "feedback": "Correct! It prevents the system from crashing immediately when memory is exhausted."},
+      {"text": "To store the BIOS settings", "feedback": "Incorrect. BIOS is on the motherboard."},
+      {"text": "To backup the /root directory", "feedback": "Incorrect. Swap is not a backup partition."}
+    ],
+    "answer": 1,
+    "hint": "It 'swaps' data from RAM to Disk.",
+    "explanation": "High swap usage ('swapping') is a sign of memory pressure and usually causes severe application performance degradation."
+  },
+  {
+    "question": "A firewall is blocking traffic. Which tool shows the current 'Iptables' rules in a readable format?",
+    "options": [
+      {"text": "iptables -L -n", "feedback": "Correct! -L lists rules and -n shows numeric IP/Port values instead of names."},
+      {"text": "cat /var/log/firewall", "feedback": "Incorrect. This would show logs, not the active rule-set."},
+      {"text": "service firewall status", "feedback": "Incorrect. This shows if the service is running, but not the specific rules."},
+      {"text": "grep firewall /etc/services", "feedback": "Incorrect. This only shows port definitions."}
+    ],
+    "answer": 0,
+    "hint": "L stands for 'List'.",
+    "explanation": "Checking iptables is the first step when a 'Connection Refused' error occurs despite the service being running."
+  },
+  {
+    "question": "What is the difference between 'Top' and 'Htop'?",
+    "options": [
+      {"text": "Top is for Windows; Htop is for Linux", "feedback": "Incorrect. Both are Linux tools."},
+      {"text": "Htop is a more visual, interactive version of Top with color and easier scrolling", "feedback": "Correct! It provides a better UI for monitoring system resources."},
+      {"text": "Top monitors memory; Htop only monitors CPU", "feedback": "Incorrect. Both monitor CPU, Memory, and Swap."},
+      {"text": "There is no difference", "feedback": "Incorrect. Htop must be installed separately and is much more user-friendly."}
+    ],
+    "answer": 1,
+    "hint": "The 'H' makes it more 'Human-friendly'.",
+    "explanation": "Htop is preferred by Production Support for quickly identifying which process is 'pinned' to which CPU core."
+  },
+  {
+    "question": "Which file specifies the mapping between hostnames and IP addresses locally before the system queries DNS?",
+    "options": [
+      {"text": "/etc/resolv.conf", "feedback": "Incorrect. This defines DNS servers, not local mappings."},
+      {"text": "/etc/hosts", "feedback": "Correct! The OS checks this file first for hostname resolution."},
+      {"text": "/etc/networks", "feedback": "Incorrect. This defines network names, not host mappings."},
+      {"text": "/etc/hostname", "feedback": "Incorrect. This file only contains the name of the local machine."}
+    ],
+    "answer": 1,
+    "hint": "It's the Linux equivalent of the Windows 'hosts' file.",
+    "explanation": "In production, /etc/hosts is used to hardcode internal DB IPs to ensure connectivity even if DNS is down."
+  },
+  {
+    "question": "What does the 'nice' value in Linux represent?",
+    "options": [
+      {"text": "The security level of a process", "feedback": "Incorrect. This is handled by SELinux/Permissions."},
+      {"text": "The CPU scheduling priority of a process", "feedback": "Correct! A higher 'niceness' means lower priority (being 'nice' to other processes)."},
+      {"text": "The memory limit for a user", "feedback": "Incorrect. That is ulimit."},
+      {"text": "The network bandwidth limit", "feedback": "Incorrect. That is traffic shaping (tc)."}
+    ],
+    "answer": 1,
+    "hint": "If a process is 'nice', it lets others go first.",
+    "explanation": "Use 'renice' to lower the priority of a non-critical background task (like a backup) that is starving a production Java process of CPU."
+  },
+  {
+    "question": "Which command is used to safely shut down a Linux system immediately?",
+    "options": [
+      {"text": "exit", "feedback": "Incorrect. This only logs out the current session."},
+      {"text": "shutdown -h now", "feedback": "Correct! It stops all processes and halts the system cleanly."},
+      {"text": "stop system", "feedback": "Incorrect. This is not a valid Linux command."},
+      {"text": "kill -1", "feedback": "Incorrect. This usually reloads the configuration of a process."}
+    ],
+    "answer": 1,
+    "hint": "You want to 'shut down' and 'halt' it 'now'.",
+    "explanation": "Always use a clean shutdown command to allow databases and middleware to flush buffers and close files correctly."
+  },
+  {
+    "question": "A WebLogic Managed Server is stuck in 'STARTING' mode. What is the most likely cause in a clustered environment?",
+    "options": [
+      {"text": "Admin Server is down", "feedback": "Incorrect. Managed servers can start in 'Independence' mode."},
+      {"text": "Unreachable LDAP or Database for security provider", "feedback": "Correct! If the security store is unreachable, boot identity cannot be verified."},
+      {"text": "Incorrect Java version", "feedback": "Incorrect. This usually causes an immediate JVM launch failure."},
+      {"text": "Low Disk Space on /tmp", "feedback": "Incorrect. This causes runtime issues, but rarely hangs the boot indefinitely."}
+    ],
+    "answer": 1,
+    "hint": "Think about what WebLogic needs to 'verify' before it can fully open.",
+    "explanation": "WebLogic requires access to the Embedded LDAP or an external RDBMS security provider to authenticate the boot user."
+  },
+  {
+    "question": "Which Oracle view is best for identifying the 'Top 5 Timed Events' to diagnose a sudden slowdown?",
+    "options": [
+      {"text": "V$SESSION", "feedback": "Incorrect. This shows current sessions, not a performance summary."},
+      {"text": "AWR (Automatic Workload Repository) Report", "feedback": "Correct! The AWR report's 'Top 5 Timed Events' is the standard starting point."},
+      {"text": "EXPLAIN PLAN", "feedback": "Incorrect. This tunes a single SQL statement, not the whole instance."},
+      {"text": "V$PARAMETER", "feedback": "Incorrect. This shows configuration settings, not performance metrics."}
+    ],
+    "answer": 1,
+    "hint": "You need a report that summarizes activity over a 'snapshot' interval.",
+    "explanation": "AWR reports provide a comprehensive view of wait events and CPU usage between two database snapshots."
+  },
+  {
+    "question": "In Linux, high 'Wait I/O' is observed. Which tool identifies the specific disk partition bottleneck?",
+    "options": [
+      {"text": "netstat -an", "feedback": "Incorrect. This is for network connection troubleshooting."},
+      {"text": "iostat -xz 1", "feedback": "Correct! This provides detailed per-disk statistics and utilization."},
+      {"text": "df -h", "feedback": "Incorrect. This shows space usage, not throughput performance."},
+      {"text": "ps -ef", "feedback": "Incorrect. This lists processes but doesn't map them to disk latency."}
+    ],
+    "answer": 1,
+    "hint": "Look for the tool specifically designed for 'Input/Output' statistics.",
+    "explanation": "iostat is essential to differentiate between an application hang and a physical SAN or disk bottleneck."
+  },
+  {
+    "question": "What is the primary purpose of 'Multicast' in a WebLogic Cluster?",
+    "options": [
+      {"text": "To load balance HTTP traffic", "feedback": "Incorrect. This is handled by a Load Balancer or OHS."},
+      {"text": "Cluster heartbeats and state broadcasting", "feedback": "Correct! It allows managed servers to find each other and monitor health."},
+      {"text": "To encrypt data between servers", "feedback": "Incorrect. This is handled by SSL/TLS."},
+      {"text": "To connect to the Oracle Database", "feedback": "Incorrect. DB connections use JDBC URLs."}
+    ],
+    "answer": 1,
+    "hint": "Think about how servers in a group stay 'aware' of each other.",
+    "explanation": "Cluster members use heartbeats to announce presence. If heartbeats fail, servers are removed from the cluster 'View'."
+  },
+  {
+    "question": "An Oracle 'ORA-01555: snapshot too old' error occurs. What is the most common resolution?",
+    "options": [
+      {"text": "Increase Datafile size", "feedback": "Incorrect. This error is about Undo data, not Data space."},
+      {"text": "Increase UNDO_RETENTION parameter", "feedback": "Correct! This ensures the DB keeps old versions of data long enough for slow queries."},
+      {"text": "Restart the Database", "feedback": "Incorrect. This doesn't fix the underlying retention issue."},
+      {"text": "Rebuild indexes", "feedback": "Incorrect. Index corruption is not related to read consistency."}
+    ],
+    "answer": 1,
+    "hint": "The error is related to 'Read Consistency' over a duration of time.",
+    "explanation": "ORA-01555 occurs when a long-running query needs an old version of data that has been overwritten in the Undo Tablespace."
+  },
+  {
+    "question": "Which WebLogic log file is best for diagnosing a JVM crash or an 'Out of Memory' error?",
+    "options": [
+      {"text": "access.log", "feedback": "Incorrect. This only tracks HTTP requests and status codes."},
+      {"text": "stdout.log / ManagedServer.out", "feedback": "Correct! JVM-level errors and thread dumps are printed to the standard output log."},
+      {"text": "config.xml", "feedback": "Incorrect. This is a configuration file, not a log file."},
+      {"text": "AdminServer.log", "feedback": "Incorrect. This tracks the Admin server, not the specific Managed server crash."}
+    ],
+    "answer": 1,
+    "hint": "Look for the log where the 'Standard Output' of the Java process is redirected.",
+    "explanation": "Major JVM crashes (like fatal signals) often bypass the application logging framework and appear only in the .out file."
+  },
+  {
+    "question": "What does the 'v$session_wait' view provide in Oracle?",
+    "options": [
+      {"text": "A list of all users logged in", "feedback": "Incorrect. That is simply v$session."},
+      {"text": "Real-time information on what resources a session is waiting for", "feedback": "Correct! It shows wait events like 'db file sequential read'."},
+      {"text": "The history of all SQLs executed", "feedback": "Incorrect. That is v$sqlarea or v$sqlstats."},
+      {"text": "The current CPU temperature", "feedback": "Incorrect. Oracle views don't monitor hardware thermals."}
+    ],
+    "answer": 1,
+    "hint": "It focuses on the 'Active' bottlenecks of a connection.",
+    "explanation": "v$session_wait is critical for diagnosing why a specific banking transaction is hanging right now."
+  },
+  {
+    "question": "How do you enable 'Verbose GC' in a WebLogic Startup script?",
+    "options": [
+      {"text": "-verbose:gc", "feedback": "Correct! This flag enables Garbage Collection logging in the stdout log."},
+      {"text": "-debug:gc", "feedback": "Incorrect. This is not a valid JVM performance flag."},
+      {"text": "-check:mem", "feedback": "Incorrect. This does not exist in standard HotSpot JVMs."},
+      {"text": "-gc:log", "feedback": "Incorrect. The standard flag is -Xloggc or -verbose:gc."}
+    ],
+    "answer": 0,
+    "hint": "It starts with '-verbose:' and is a standard Java parameter.",
+    "explanation": "Verbose GC is essential for Production Support to diagnose 'Memory Leaks' or 'Stop-the-world' pauses."
+  },
+  {
+    "question": "In a WebLogic Data Source, what does 'Test Connections On Reserve' do?",
+    "options": [
+      {"text": "It checks the DB health every 1 second", "feedback": "Incorrect. This would be too resource-intensive."},
+      {"text": "It validates the connection before giving it to the application", "feedback": "Correct! It prevents 'Broken Pipe' errors if the DB was restarted."},
+      {"text": "It encrypts the DB password", "feedback": "Incorrect. This is handled by the security realm."},
+      {"text": "It doubles the pool size during peak hours", "feedback": "Incorrect. Pool size is managed by capacity settings."}
+    ],
+    "answer": 1,
+    "hint": "It tests the connection right when the application 'reserves' it from the pool.",
+    "explanation": "This setting ensures the application never receives a 'stale' or 'dead' database connection."
+  },
+  {
+    "question": "Which command checks the current status of an Oracle Listener?",
+    "options": [
+      {"text": "lsnrctl status", "feedback": "Correct! This shows if the listener is active and which services it supports."},
+      {"text": "sqlplus / as sysdba", "feedback": "Incorrect. This logs into the DB, but doesn't check the listener process."},
+      {"text": "tnsping <alias>", "feedback": "Incorrect. This tests connectivity, but 'lsnrctl' is the tool for management."},
+      {"text": "ps -ef | grep tns", "feedback": "Incorrect. This shows the process is running, but not its functional health."}
+    ],
+    "answer": 0,
+    "hint": "It uses the 'Listener Control' utility.",
+    "explanation": "lsnrctl status shows the 'Uptime' and the 'Endpoints' the database is listening on."
+  },
+  {
+    "question": "A Java application is throwing 'java.lang.OutOfMemoryError: PermGen space'. What should you increase?",
+    "options": [
+      {"text": "-Xmx (Maximum Heap)", "feedback": "Incorrect. PermGen is separate from the standard Object Heap."},
+      {"text": "-XX:MaxPermSize", "feedback": "Correct! PermGen stores class metadata and requires its own limit (pre-Java 8)."},
+      {"text": "-Xms (Initial Heap)", "feedback": "Incorrect. This only sets the starting size of the heap."},
+      {"text": "-XX:MaxMetaspaceSize", "feedback": "Incorrect. Metaspace replaced PermGen in Java 8+; the question specifies PermGen."}
+    ],
+    "answer": 1,
+    "hint": "Look for the flag that specifically mentions 'PermSize'.",
+    "explanation": "PermGen errors often happen in legacy banking apps when too many classes are loaded or redeployed."
+  },
+  {
+    "question": "What is the role of 'Node Manager' in WebLogic?",
+    "options": [
+      {"text": "To balance user traffic", "feedback": "Incorrect. That is a Load Balancer's job."},
+      {"text": "To start, stop, and restart Managed Servers remotely", "feedback": "Correct! It acts as an agent on the physical host."},
+      {"text": "To store the application WAR files", "feedback": "Incorrect. Files are stored on the disk/SAN."},
+      {"text": "To monitor the Database performance", "feedback": "Incorrect. OEM or AWR does this."}
+    ],
+    "answer": 1,
+    "hint": "It 'manages' the 'nodes' (machines) where servers live.",
+    "explanation": "Node Manager is essential for High Availability (HA) to automatically restart servers if they crash."
+  },
+  {
+    "question": "In Oracle, what does a 'Hard Parse' signify?",
+    "options": [
+      {"text": "The DB is deleting old data", "feedback": "Incorrect. Parsing is a query optimization step."},
+      {"text": "The DB has to build a new execution plan from scratch", "feedback": "Correct! This is CPU intensive and happens if bind variables are not used."},
+      {"text": "The user entered an incorrect password", "feedback": "Incorrect. That is an authentication error."},
+      {"text": "The disk is too slow to read the block", "feedback": "Incorrect. That is an I/O wait issue."}
+    ],
+    "answer": 1,
+    "hint": "It's the opposite of a 'Soft Parse' where the plan is reused from the library cache.",
+    "explanation": "Frequent hard parses lead to 'Library Cache' contention and high CPU usage in production."
+  },
+  {
+    "question": "Which tool is used to monitor WebLogic performance in real-time with a GUI?",
+    "options": [
+      {"text": "WebLogic Admin Console", "feedback": "Correct! It provides monitoring tabs for Health, Threads, and JDBC."},
+      {"text": "vi editor", "feedback": "Incorrect. This is a text editor for configs/logs."},
+      {"text": "sqlplus", "feedback": "Incorrect. This is for Database queries."},
+      {"text": "putty", "feedback": "Incorrect. This is an SSH client to access the terminal."}
+    ],
+    "answer": 0,
+    "hint": "It is the web-based 'dashboard' for WebLogic.",
+    "explanation": "The Admin Console (usually port 7001) is the first place Support looks for server health status."
+  },
+  {
+    "question": "What is 'JDBC Connection Leak'?",
+    "options": [
+      {"text": "Data is being stolen from the DB", "feedback": "Incorrect. That would be a security breach."},
+      {"text": "Application opens a connection but fails to close it", "feedback": "Correct! Eventually, the pool is exhausted and no new users can connect."},
+      {"text": "The DB cable is physically damaged", "feedback": "Incorrect. This is a software logic issue."},
+      {"text": "The DB password has expired", "feedback": "Incorrect. That causes a connection failure, not a leak."}
+    ],
+    "answer": 1,
+    "hint": "The application is 'forgetting' to return a resource to the pool.",
+    "explanation": "Support must monitor 'Active Connections' vs 'Total Connections' to identify leaks in application code."
+  },
+  {
+    "question": "What is the default port for an Oracle TNS Listener?",
+    "options": [
+      {"text": "7001", "feedback": "Incorrect. This is usually WebLogic Admin."},
+      {"text": "1521", "feedback": "Correct! 1521 is the standard port for Oracle DB connectivity."},
+      {"text": "8080", "feedback": "Incorrect. This is commonly used for HTTP/Tomcat."},
+      {"text": "443", "feedback": "Incorrect. This is HTTPS."}
+    ],
+    "answer": 1,
+    "hint": "It is a 4-digit number starting with 15.",
+    "explanation": "Firewalls between the app server and DB server must have 1521 open for the application to work."
+  },
+  {
+    "question": "Which Oracle background process is responsible for writing dirty buffers to the datafiles?",
+    "options": [
+      {"text": "LGWR (Log Writer)", "feedback": "Incorrect. LGWR writes to the Redo Logs."},
+      {"text": "DBWR (Database Writer)", "feedback": "Correct! It manages the buffer cache and physical datafiles."},
+      {"text": "PMON (Process Monitor)", "feedback": "Incorrect. PMON cleans up failed user processes."},
+      {"text": "SMON (System Monitor)", "feedback": "Incorrect. SMON performs instance recovery on startup."}
+    ],
+    "answer": 1,
+    "hint": "It 'Writes' to the 'Database' files.",
+    "explanation": "If DBWR is slow, you will see 'free buffer waits' in the database performance logs."
+  },
+  {
+    "question": "In WebLogic, what is a 'Work Manager' used for?",
+    "options": [
+      {"text": "To schedule cron jobs in Linux", "feedback": "Incorrect. Linux uses crontab for that."},
+      {"text": "To prioritize thread execution for specific applications", "feedback": "Correct! It prevents one low-priority app from hogging all threads."},
+      {"text": "To manage the payroll of developers", "feedback": "Incorrect. It is a technical resource manager."},
+      {"text": "To restart the operating system", "feedback": "Incorrect. It only manages WebLogic internal threads."}
+    ],
+    "answer": 1,
+    "hint": "It 'manages' how the 'work' (requests) is distributed to threads.",
+    "explanation": "Work Managers allow Support to set 'Fair Share' or 'Max Threads' for critical banking modules."
+  },
+  {
+    "question": "Which command is used to see the version of an installed Oracle Home?",
+    "options": [
+      {"text": "opatch lsinventory", "feedback": "Correct! This lists the version and all applied patches."},
+      {"text": "java -version", "feedback": "Incorrect. This only shows the Java version."},
+      {"text": "ls -l", "feedback": "Incorrect. This lists files, not software metadata."},
+      {"text": "cat /etc/passwd", "feedback": "Incorrect. This lists system users."}
+    ],
+    "answer": 0,
+    "hint": "Use the 'Oracle Patch' utility.",
+    "explanation": "opatch is the standard tool for verifying if security patches are applied in a Production environment."
+  },
+  {
+    "question": "What is the difference between a 'Hot Backup' and a 'Cold Backup' in Oracle?",
+    "options": [
+      {"text": "Hot is fast; Cold is slow", "feedback": "Incorrect. The difference is the DB state."},
+      {"text": "Hot is taken while DB is running; Cold requires DB shutdown", "feedback": "Correct! Hot backups require ARCHIVELOG mode."},
+      {"text": "Hot is only for small databases", "feedback": "Incorrect. Any size DB can use Hot backup."},
+      {"text": "Cold backup is only for cloud environments", "feedback": "Incorrect. It is an old-school on-premise method."}
+    ],
+    "answer": 1,
+    "hint": "Think about whether the 'engine' is running during the backup.",
+    "explanation": "Banking systems almost always use 'Hot Backups' via RMAN to ensure 24/7 availability."
+  },
+  {
+    "question": "In WebLogic, what is a 'Stuck Thread'?",
+    "options": [
+      {"text": "A thread that has crashed the server", "feedback": "Incorrect. The server is still up, but the thread is occupied."},
+      {"text": "A thread executing for more than the configured 'Stuck Thread Max Time' (default 600s)", "feedback": "Correct! It indicates a long-running DB query or deadlock."},
+      {"text": "A thread that is waiting for a user to log in", "feedback": "Incorrect. Waiting for input is a 'Listen' state, not 'Stuck'."},
+      {"text": "A thread used for sending emails", "feedback": "Incorrect. That is a normal application thread."}
+    ],
+    "answer": 1,
+    "hint": "It is a thread that hasn't finished its task in a very long time.",
+    "explanation": "If more than 25 threads get stuck, the WebLogic server health changes to 'Warning' or 'Critical'."
+  },
+  {
+    "question": "Which Oracle view shows the historical growth of a Tablespace?",
+    "options": [
+      {"text": "DBA_FREE_SPACE", "feedback": "Incorrect. This shows current free space, not history."},
+      {"text": "DBA_HIST_TBS_PC_CNT (via AWR data)", "feedback": "Correct! Historical views (DBA_HIST_*) allow you to forecast when a disk will be full."},
+      {"text": "V$DATABASE", "feedback": "Incorrect. This shows instance names."},
+      {"text": "DBA_USERS", "feedback": "Incorrect. This lists database users."}
+    ],
+    "answer": 1,
+    "hint": "Look for a view that starts with 'DBA_HIST'.",
+    "explanation": "Production Support uses historical views to perform 'Capacity Planning' and request more storage in advance."
+  },
+  {
+    "question": "What happens during a 'Garbage Collection' (GC) in Java?",
+    "options": [
+      {"text": "Old log files are deleted from the disk", "feedback": "Incorrect. That is log rotation."},
+      {"text": "Unused objects in memory are identified and removed to free up heap space", "feedback": "Correct! This is an automatic memory management process."},
+      {"text": "The server is restarted to clear the RAM", "feedback": "Incorrect. GC happens while the server is running."},
+      {"text": "The database is compressed", "feedback": "Incorrect. GC is a JVM process, not a DB process."}
+    ],
+    "answer": 1,
+    "hint": "It cleans up the 'Heap' memory.",
+    "explanation": "If GC takes too long, it causes 'Stop-The-World' pauses, making the application unresponsive for users."
+  },
+  {
+    "question": "Which command allows you to see the real-time 'tail' of a WebLogic log file?",
+    "options": [
+      {"text": "tail -f ManagedServer.log", "feedback": "Correct! -f follows the file as new lines are added."},
+      {"text": "cat ManagedServer.log", "feedback": "Incorrect. This prints the whole file once."},
+      {"text": "grep 'Error' ManagedServer.log", "feedback": "Incorrect. This searches for errors but doesn't show new entries."},
+      {"text": "vi ManagedServer.log", "feedback": "Incorrect. This opens the file in a static editor."}
+    ],
+    "answer": 0,
+    "hint": "It's a Linux command used to 'follow' a file.",
+    "explanation": "Support engineers keep a terminal open with 'tail -f' during a deployment or an incident to see errors live."
+  },
+  {
+    "question": "In Oracle, what is 'Redo Log' used for?",
+    "options": [
+      {"text": "To store the names of all users", "feedback": "Incorrect. Users are in the SYSTEM tablespace."},
+      {"text": "To record all changes made to data for recovery purposes", "feedback": "Correct! It is essential for instance recovery after a crash."},
+      {"text": "To speed up the SELECT queries", "feedback": "Incorrect. It is for DML (Insert/Update/Delete) logging."},
+      {"text": "To store the application images", "feedback": "Incorrect. Images are BLOBs in datafiles."}
+    ],
+    "answer": 1,
+    "hint": "It 're-does' the transactions if the DB crashes.",
+    "explanation": "The Log Writer (LGWR) writes Redo Log entries before the data is even written to the disk to ensure durability."
+  },
+  {
+    "question": "What is 'Session Affinity' (Sticky Sessions) in a Load Balancer?",
+    "options": [
+      {"text": "The user is forced to log in twice", "feedback": "Incorrect. This is a bad user experience."},
+      {"text": "Directing a user's requests to the same server for the duration of their session", "feedback": "Correct! This is necessary if the app doesn't replicate sessions across servers."},
+      {"text": "Sending every user to the Admin Server", "feedback": "Incorrect. Admin servers should not handle user traffic."},
+      {"text": "Disconnecting a user after 5 minutes", "feedback": "Incorrect. That is a timeout, not affinity."}
+    ],
+    "answer": 1,
+    "hint": "It 'sticks' the user to a specific 'Managed Server'.",
+    "explanation": "In banking, session affinity ensures that a user's 'Shopping Cart' or 'Transaction State' is not lost."
+  },
+  {
+    "question": "Which tool is best for analyzing a Java Heap Dump to find a memory leak?",
+    "options": [
+      {"text": "Eclipse MAT (Memory Analyzer Tool)", "feedback": "Correct! It identifies which objects are hogging the most RAM."},
+      {"text": "Notepad++", "feedback": "Incorrect. Heap dumps are binary files and too large for text editors."},
+      {"text": "SQL Developer", "feedback": "Incorrect. This is for Database management."},
+      {"text": "Wireshark", "feedback": "Incorrect. This is for network packet analysis."}
+    ],
+    "answer": 0,
+    "hint": "It's an 'Analyzer Tool' for Java 'Memory'.",
+    "explanation": "If a server crashes with OutOfMemory, MAT can show you the 'Leak Suspects' in the code."
+  },
+  {
+    "question": "In Oracle RAC (Real Application Clusters), what is 'SGA'?",
+    "options": [
+      {"text": "System Global Area (Memory shared by all processes of an instance)", "feedback": "Correct! It contains the buffer cache and shared pool."},
+      {"text": "Software Generation Agent", "feedback": "Incorrect. This is not a DB term."},
+      {"text": "Storage Gateway Access", "feedback": "Incorrect. This is a networking term."},
+      {"text": "Server Generation Architecture", "feedback": "Incorrect. This is generic jargon."}
+    ],
+    "answer": 0,
+    "hint": "It is the main 'Memory' structure of an Oracle Instance.",
+    "explanation": "Production Support must monitor SGA usage to avoid 'ORA-04031: unable to allocate bytes of shared memory' errors."
+  },
+  {
+    "question": "How do you identify which WebLogic version is currently running on a Linux box?",
+    "options": [
+      {"text": "cat /etc/weblogic_version", "feedback": "Incorrect. WebLogic version is not stored in a system-wide file."},
+      {"text": "Check the registry.xml file or the 'About' section in Admin Console", "feedback": "Correct! These are the definitive places for version info."},
+      {"text": "uname -a", "feedback": "Incorrect. This shows the OS kernel version."},
+      {"text": "ls -l /bin/weblogic", "feedback": "Incorrect. There is no single 'weblogic' binary in /bin."}
+    ],
+    "answer": 1,
+    "hint": "Look in the 'Console' or the 'registry' file in the Middleware home.",
+    "explanation": "Knowing the exact patch level (e.g., 12.2.1.4) is vital for applying security fixes."
+  },
+  {
+    "question": "What is 'Deadlock' in a Database?",
+    "options": [
+      {"text": "The database has been deleted", "feedback": "Incorrect. That is a disaster."},
+      {"text": "Two processes are waiting for each other to release a lock, causing both to hang", "feedback": "Correct! Oracle automatically detects and breaks one of the sessions."},
+      {"text": "The server's battery is dead", "feedback": "Incorrect. This is a software logic state."},
+      {"text": "The user is locked out after 3 wrong password attempts", "feedback": "Incorrect. That is an account lock, not a DB deadlock."}
+    ],
+    "answer": 1,
+    "hint": "It is a 'circular' wait condition.",
+    "explanation": "Deadlocks usually result in 'ORA-00060: deadlock detected while waiting for resource' errors in the alert log."
+  },
+  {
+    "question": "Which command shows the current 'Load Average' of a Linux server?",
+    "options": [
+      {"text": "uptime", "feedback": "Correct! It shows the 1, 5, and 15-minute load averages."},
+      {"text": "df -h", "feedback": "Incorrect. This shows disk space."},
+      {"text": "date", "feedback": "Incorrect. This shows current time/date."},
+      {"text": "whoami", "feedback": "Incorrect. This shows current logged-in user."}
+    ],
+    "answer": 0,
+    "hint": "It shows how long the system has been 'Up'.",
+    "explanation": "If the load average is higher than the number of CPU cores, the system is over-utilized."
+  },
+  {
+    "question": "In WebLogic, what is 'Managed Server Independence' (MSI) mode?",
+    "options": [
+      {"text": "Managed servers can run without an Admin Server", "feedback": "Correct! They use a cached copy of the config to start/run if Admin is down."},
+      {"text": "Managed servers have their own separate database", "feedback": "Incorrect. They share the same application database."},
+      {"text": "Managed servers don't need a license", "feedback": "Incorrect. Licensing is per core/CPU."},
+      {"text": "Managed servers can be accessed by anyone without a password", "feedback": "Incorrect. Security is always enforced."}
+    ],
+    "answer": 0,
+    "hint": "It makes the 'Managed Server' 'Independent' of the Admin server.",
+    "explanation": "MSI is crucial for banking availability—if the Admin server fails, users can still access the banking site."
+  },
+  {
+    "question": "What is the primary function of the 'Alert Log' in Oracle?",
+    "options": [
+      {"text": "To send SMS to the DBA", "feedback": "Incorrect. It is just a text file on the server."},
+      {"text": "To record all critical errors, instance startups, and shutdowns", "feedback": "Correct! It is the first place to look when the DB is down."},
+      {"text": "To store the user's internet history", "feedback": "Incorrect. That is a browser function."},
+      {"text": "To list all the tables in the database", "feedback": "Incorrect. That is DBA_TABLES."}
+    ],
+    "answer": 1,
+    "hint": "It is a 'Log' for 'Alerts' (errors).",
+    "explanation": "Look for the 'alert_SID.log' file in the ADR (Automatic Diagnostic Repository) folder."
+  },
+  {
+    "question": "How do you check if a specific port (e.g., 7001) is listening on a Linux server?",
+    "options": [
+      {"text": "netstat -tulpn | grep 7001", "feedback": "Correct! This shows the process ID and the status (LISTEN)."},
+      {"text": "ls -l /ports", "feedback": "Incorrect. Ports are not files in a folder."},
+      {"text": "ping 7001", "feedback": "Incorrect. You can only ping an IP address, not a port."},
+      {"text": "cat /etc/services | grep 7001", "feedback": "Incorrect. This shows default port mappings, not what is currently active."}
+    ],
+    "answer": 0,
+    "hint": "Use the 'network statistics' command.",
+    "explanation": "If 'netstat' doesn't show the port, it means the WebLogic server has not started correctly or failed to bind to the port."
+  },
+  {
+    "question": "In Java, what is a 'Thread Dump'?",
+    "options": [
+      {"text": "A list of all users on the system", "feedback": "Incorrect. That is a system-level audit."},
+      {"text": "A snapshot of the state of all threads running in a JVM at a specific moment", "feedback": "Correct! It is essential for diagnosing CPU spikes and hangs."},
+      {"text": "A way to delete unwanted threads", "feedback": "Incorrect. It is a diagnostic view, not a deletion tool."},
+      {"text": "A report on the size of the hard drive", "feedback": "Incorrect. That is df -h."}
+    ],
+    "answer": 1,
+    "hint": "It 'dumps' the state of all 'threads'.",
+    "explanation": "Take 3 thread dumps at 10-second intervals to see if a thread is moving or actually 'stuck'."
+  },
+  {
+    "question": "What is the purpose of 'Archivelog Mode' in Oracle?",
+    "options": [
+      {"text": "To compress old data to save space", "feedback": "Incorrect. It doesn't compress data by itself."},
+      {"text": "To save all redo logs so the DB can be recovered to any point in time", "feedback": "Correct! It is mandatory for Point-in-Time Recovery (PITR)."},
+      {"text": "To make the database faster", "feedback": "Incorrect. It actually adds a slight I/O overhead for log writing."},
+      {"text": "To allow users to delete their own logs", "feedback": "Incorrect. Only DBAs manage these logs."}
+    ],
+    "answer": 1,
+    "hint": "It 'Archives' the 'Logs'.",
+    "explanation": "In production, if the 'Archive Destination' is full, the database will hang and stop accepting new transactions."
+  },
+  {
+    "question": "In WebLogic, what is a 'Domain'?",
+    "options": [
+      {"text": "A website name like google.com", "feedback": "Incorrect. That is a DNS domain."},
+      {"text": "A logical group of WebLogic resources (Servers, Clusters, Data Sources) managed as a unit", "feedback": "Correct! It is the top-level container for WebLogic."},
+      {"text": "A physical server room", "feedback": "Incorrect. That is a Data Center."},
+      {"text": "A type of database user", "feedback": "Incorrect. That is a Schema."}
+    ],
+    "answer": 1,
+    "hint": "It's the overall 'Home' for your Admin and Managed servers.",
+    "explanation": "A typical bank environment may have separate domains for 'Retail Banking' and 'Corporate Banking'."
+  },
+  {
+    "question": "Which SQL command is used to see the current 'Wait Events' for all sessions in Oracle?",
+    "options": [
+      {"text": "SELECT event, state FROM v$session_wait", "feedback": "Correct! It shows what every active user is currently waiting on."},
+      {"text": "SELECT * FROM all_tables", "feedback": "Incorrect. This shows table metadata."},
+      {"text": "DESC v$session", "feedback": "Incorrect. This shows the structure of the view, not the data."},
+      {"text": "SELECT name FROM v$database", "feedback": "Incorrect. This shows the DB name."}
+    ],
+    "answer": 0,
+    "hint": "Look for a view that combines 'Session' and 'Wait'.",
+    "explanation": "If 'log file sync' is a top wait event, it indicates a slow Redo Log disk."
+  },
+  {
+    "question": "What is 'Heap Memory' in Java?",
+    "options": [
+      {"text": "Memory used by the operating system kernel", "feedback": "Incorrect. That is kernel memory."},
+      {"text": "The runtime data area from which memory for all class instances and arrays is allocated", "feedback": "Correct! This is where your Java objects live."},
+      {"text": "The memory on the graphics card", "feedback": "Incorrect. That is VRAM."},
+      {"text": "A temporary folder on the hard drive", "feedback": "Incorrect. Heap is in the RAM."}
+    ],
+    "answer": 1,
+    "hint": "It's where the application's 'Objects' are created.",
+    "explanation": "If the heap is too small, you get 'OutOfMemoryError: Java heap space'."
+  },
+  {
+    "question": "Which Linux command displays the amount of free and used memory in the system?",
+    "options": [
+      {"text": "free -m", "feedback": "Correct! -m shows the values in Megabytes."},
+      {"text": "top", "feedback": "Correct (partially), but 'free' is the most direct tool for memory overview."},
+      {"text": "df -h", "feedback": "Incorrect. This is for disk space."},
+      {"text": "ls", "feedback": "Incorrect. This lists files."}
+    ],
+    "answer": 0,
+    "hint": "It's a simple command that sounds like 'unoccupied'.",
+    "explanation": "Use 'free -m' to quickly check if the OS is running out of physical RAM and using Swap."
+  },
+  {
+    "question": "What is an Oracle 'Tablespace'?",
+    "options": [
+      {"text": "A physical disk in the server", "feedback": "Incorrect. That is a Disk Drive."},
+      {"text": "A logical storage container that groups related datafiles", "feedback": "Correct! Tables and indexes are stored inside tablespaces."},
+      {"text": "A table that stores user passwords", "feedback": "Incorrect. That is a specific table, not a storage container."},
+      {"text": "The space between two rows in a table", "feedback": "Incorrect. That is just empty bytes."}
+    ],
+    "answer": 1,
+    "hint": "It is a 'Space' for 'Tables'.",
+    "explanation": "If a tablespace is 100% full, the application will fail to insert new data (e.g., 'ORA-01653: unable to extend table')."
+  },
+  {
+    "question": "What is 'TNSNAMES.ORA' used for?",
+    "options": [
+      {"text": "To store the database passwords", "feedback": "Incorrect. Passwords are in the DB or a wallet."},
+      {"text": "To map database service names to network addresses", "feedback": "Correct! It's like a phonebook for connecting to Oracle DBs."},
+      {"text": "To configure the WebLogic server", "feedback": "Incorrect. WebLogic uses config.xml."},
+      {"text": "To list all the users on the Linux server", "feedback": "Incorrect. That is /etc/passwd."}
+    ],
+    "answer": 1,
+    "hint": "It's the 'Address Book' for the Oracle client.",
+    "explanation": "If TNSNAMES.ORA has a typo, the application will throw 'ORA-12154: TNS:could not resolve the connect identifier'."
+  },
+  {
+    "question": "Which WebLogic component is responsible for distributing requests to multiple managed servers in a cluster?",
+    "options": [
+      {"text": "A Load Balancer or Proxy (like Oracle HTTP Server)", "feedback": "Correct! It uses plugins to route traffic based on health and load."},
+      {"text": "The Database", "feedback": "Incorrect. The DB only stores data."},
+      {"text": "The Node Manager", "feedback": "Incorrect. This starts/stops servers."},
+      {"text": "The Admin Console", "feedback": "Incorrect. This is for administration, not request routing."}
+    ],
+    "answer": 0,
+    "hint": "It 'balances' the 'load'.",
+    "explanation": "OHS (Oracle HTTP Server) with the 'mod_wl' plugin is the most common way to route traffic in WebLogic."
+  },
+  {
+    "question": "What is 'Oracle Data Guard' used for?",
+    "options": [
+      {"text": "To encrypt the database", "feedback": "Incorrect. That is Transparent Data Encryption (TDE)."},
+      {"text": "To maintain a standby (replica) database for Disaster Recovery", "feedback": "Correct! It synchronizes a secondary DB with the primary."},
+      {"text": "To guard the server room from physical intruders", "feedback": "Incorrect. That is a security guard."},
+      {"text": "To speed up the internet connection", "feedback": "Incorrect. It is a database availability tool."}
+    ],
+    "answer": 1,
+    "hint": "It 'guards' the 'data' by having a backup copy ready to take over.",
+    "explanation": "In a 'Failover', Data Guard promotes the standby database to become the new primary."
+  },
+  {
+    "question": "Which command is used to change the owner of a file in Linux?",
+    "options": [
+      {"text": "chmod", "feedback": "Incorrect. This changes permissions (read/write)."},
+      {"text": "chown", "feedback": "Correct! It stands for 'CHange OWNer'."},
+      {"text": "chgrp", "feedback": "Incorrect. This only changes the group, not the owner."},
+      {"text": "mv", "feedback": "Incorrect. This moves the file."}
+    ],
+    "answer": 1,
+    "hint": "It 'CHanges' the 'OWNer'.",
+    "explanation": "If WebLogic can't write to its logs, check if the file is 'chown'ed to the correct 'oracle' or 'weblogic' user."
+  },
+  {
+    "question": "What is the primary difference between 'TCP' and 'UDP'?",
+    "options": [
+      {"text": "TCP is slow; UDP is fast", "feedback": "Incorrect. It's about reliability, not just speed."},
+      {"text": "TCP is connection-oriented (reliable); UDP is connectionless (unreliable)", "feedback": "Correct! Most banking apps use TCP."},
+      {"text": "TCP is for wireless; UDP is for cables", "feedback": "Incorrect. Both work on any medium."},
+      {"text": "TCP is only for emails; UDP is only for video", "feedback": "Incorrect. They are general-purpose transport layers."}
+    ],
+    "answer": 1,
+    "hint": "One ensures every packet arrives; the other just 'sends and forgets'.",
+    "explanation": "JDBC connections use TCP because every bit of financial data must be accurately delivered."
+  },
+  {
+    "question": "What is 'Thread Contention'?",
+    "options": [
+      {"text": "When threads are fighting to write to the same log file", "feedback": "Incorrect. This is just I/O serialization."},
+      {"text": "Multiple threads waiting for a single resource (like a lock) simultaneously", "feedback": "Correct! It causes the application to slow down significantly."},
+      {"text": "When the server has too many threads", "feedback": "Incorrect. That is thread exhaustion."},
+      {"text": "When a thread is deleted by the OS", "feedback": "Incorrect. Threads are managed by the JVM."}
+    ],
+    "answer": 1,
+    "hint": "The threads are 'contending' (competing) for one thing.",
+    "explanation": "If 'Thread Contention' is high, your CPU will be high but the work being done will be low."
+  },
+  {
+    "question": "Which WebLogic setting defines the maximum number of simultaneous users a Data Source can support?",
+    "options": [
+      {"text": "Maximum Capacity", "feedback": "Correct! This limits the total number of JDBC connections in the pool."},
+      {"text": "Initial Capacity", "feedback": "Incorrect. This is how many connections are created at startup."},
+      {"text": "Connection Timeout", "feedback": "Incorrect. This is how long a user waits for a connection."},
+      {"text": "Shrink Frequency", "feedback": "Incorrect. This is how often unused connections are removed."}
+    ],
+    "answer": 0,
+    "hint": "It's the 'Maximum' amount of connections the 'pool' can hold.",
+    "explanation": "If 'Maximum Capacity' is too low, users will get 'Connection Unavailable' errors during peak hours."
+  },
+  {
+    "question": "In Oracle, what is 'Automatic Diagnostic Repository' (ADR)?",
+    "options": [
+      {"text": "A folder where user passwords are saved", "feedback": "Incorrect. Passwords are never in plain text logs."},
+      {"text": "A file-based repository for database diagnostic data (logs, traces, dumps)", "feedback": "Correct! Use 'adrci' tool to manage it."},
+      {"text": "A backup tool for the operating system", "feedback": "Incorrect. It is Oracle-specific."},
+      {"text": "A way to automatically fix SQL errors", "feedback": "Incorrect. It records the errors, it doesn't fix the code."}
+    ],
+    "answer": 1,
+    "hint": "It is a 'Repository' for 'Diagnostic' info.",
+    "explanation": "When you open a ticket with Oracle Support, they will ask for a 'package' created from the ADR."
+  },
+  {
+    "question": "Which command is used to check the amount of disk space used on a Linux server?",
+    "options": [
+      {"text": "df -h", "feedback": "Correct! -h makes it 'Human Readable' (GB/MB)."},
+      {"text": "du -sh", "feedback": "Correct (partially), but 'df' is for the whole filesystem status."},
+      {"text": "ls -l", "feedback": "Incorrect. This shows file sizes, but not disk usage status."},
+      {"text": "top", "feedback": "Incorrect. This shows CPU/Memory, not disk space."}
+    ],
+    "answer": 0,
+    "hint": "Short for 'Disk Free'.",
+    "explanation": "Regularly monitoring 'df -h' is the best way to prevent production outages caused by 'No space left on device'."
+  },
+  {
+    "question": "Which Linux command is used to verify the 'Route' a packet takes to reach a remote banking server?",
+    "options": [
+      {"text": "ping", "feedback": "Incorrect. Ping only checks if the destination is alive, not the path."},
+      {"text": "traceroute", "feedback": "Correct! It shows every 'hop' (router) between your server and the destination."},
+      {"text": "netstat", "feedback": "Incorrect. This shows local connections, not the external network path."},
+      {"text": "route -n", "feedback": "Incorrect. This shows the local routing table, not the live path."}
+    ],
+    "answer": 1,
+    "hint": "It 'traces' the 'route'.",
+    "explanation": "Traceroute is essential for identifying which network segment or ISP is causing latency in a multi-site banking network."
+  },
+  {
+    "question": "You see a 'java.security.cert.CertificateExpiredException' in the logs. Which tool helps you check the expiry date of a .jks file?",
+    "options": [
+      {"text": "openssl", "feedback": "Incorrect. Openssl is great for .pem files but not native Java Keystores."},
+      {"text": "keytool -list -v -keystore identity.jks", "feedback": "Correct! Keytool is the standard Java utility for managing JKS files."},
+      {"text": "cat /etc/hosts", "feedback": "Incorrect. This file is for IP mappings, not certificates."},
+      {"text": "jar -xvf", "feedback": "Incorrect. This extracts files from a JAR, it doesn't read certificate metadata."}
+    ],
+    "answer": 1,
+    "hint": "Use the utility provided with the Java SDK.",
+    "explanation": "Production Support must track certificate expiry (usually 1-2 years) to prevent sudden SSL handshake failures."
+  },
+  {
+    "question": "What is the significance of 'Load Average' (e.g., 5.0, 2.0, 1.0) in the 'uptime' command on a 4-core CPU?",
+    "options": [
+      {"text": "The system is 50% utilized", "feedback": "Incorrect. Load average isn't a simple percentage of CPU."},
+      {"text": "A value of 5.0 means the CPU is saturated and processes are waiting", "feedback": "Correct! Anything above the core count (4) indicates a bottleneck."},
+      {"text": "5 users are currently logged in", "feedback": "Incorrect. Load average tracks the process queue, not users."},
+      {"text": "The system has been up for 5 days", "feedback": "Incorrect. Uptime shows boot time separately."}
+    ],
+    "answer": 1,
+    "hint": "Compare the first number to the number of available CPU cores.",
+    "explanation": "If load average > number of cores, the system is 'overloaded'. If it's 4.0 on 4 cores, it's at 100% capacity."
+  },
+  {
+    "question": "In ITIL, what is a 'Standard Change'?",
+    "options": [
+      {"text": "A change that must be implemented immediately during a crisis", "feedback": "Incorrect. That is an Emergency Change."},
+      {"text": "A pre-approved, low-risk, recurring change (e.g., weekly reboot)", "feedback": "Correct! These do not require a fresh CAB meeting every time."},
+      {"text": "A change that has failed in the past", "feedback": "Incorrect. That would be a high-risk change."},
+      {"text": "Changing the password of a single user", "feedback": "Incorrect. This is usually a Service Request, not a Change."}
+    ],
+    "answer": 1,
+    "hint": "It is 'standardized' and happens frequently with no risk.",
+    "explanation": "Standard Changes improve efficiency by bypassing long approval cycles for routine maintenance tasks."
+  },
+  {
+    "question": "Which command is used to capture live network traffic for a specific port (e.g., 443) on a Linux server?",
+    "options": [
+      {"text": "tcpdump -i eth0 port 443", "feedback": "Correct! tcpdump is the 'sniffer' used for deep packet analysis."},
+      {"text": "telnet <IP> 443", "feedback": "Incorrect. Telnet checks if a port is open, it doesn't capture traffic."},
+      {"text": "netstat -an", "feedback": "Incorrect. This shows established connections, not the packets themselves."},
+      {"text": "top", "feedback": "Incorrect. This is for CPU/Memory monitoring."}
+    ],
+    "answer": 0,
+    "hint": "It 'dumps' the 'TCP' traffic.",
+    "explanation": "Tcpdump is used to see if a firewall is 'Dropping' packets or if the 'SSL Hello' is reaching the server."
+  },
+  {
+    "question": "What is the purpose of a 'Business Continuity Plan' (BCP)?",
+    "options": [
+      {"text": "To increase the bank's profit", "feedback": "Incorrect. That is a business strategy, not BCP."},
+      {"text": "To ensure critical services continue even during a disaster", "feedback": "Correct! It involves DR sites, backups, and manual workarounds."},
+      {"text": "To hire new employees", "feedback": "Incorrect. This is HR's responsibility."},
+      {"text": "To upgrade the server hardware every month", "feedback": "Incorrect. That is lifecycle management."}
+    ],
+    "answer": 1,
+    "hint": "It's about 'Continuing' the 'Business' after a crash.",
+    "explanation": "BCP is a regulatory requirement for banks (RBI guidelines) to ensure 99.9% availability for customers."
+  },
+  {
+    "question": "Which file in Linux contains the local hostname-to-IP mappings?",
+    "options": [
+      {"text": "/etc/resolv.conf", "feedback": "Incorrect. This defines DNS servers, not local host mappings."},
+      {"text": "/etc/hosts", "feedback": "Correct! The OS checks this file before querying external DNS."},
+      {"text": "/etc/networks", "feedback": "Incorrect. This defines network names, not host IPs."},
+      {"text": "/etc/sysconfig/network", "feedback": "Incorrect. This sets the system's own hostname."}
+    ],
+    "answer": 1,
+    "hint": "It's a plural word for 'computers' in a network.",
+    "explanation": "In production, we often map the DB IP in /etc/hosts so that the app works even if the DNS server fails."
+  },
+  {
+    "question": "What does 'VAPT' stand for in banking security?",
+    "options": [
+      {"text": "Virtual Access Port Transfer", "feedback": "Incorrect. This is not a standard security term."},
+      {"text": "Vulnerability Assessment and Penetration Testing", "feedback": "Correct! It is a security audit to find and fix holes in the app."},
+      {"text": "Verified Application Power Tools", "feedback": "Incorrect. This is made-up jargon."},
+      {"text": "Visual Analytics for Production Teams", "feedback": "Incorrect. This relates to data visualization."}
+    ],
+    "answer": 1,
+    "hint": "It involves 'Assessing' 'Vulnerabilities'.",
+    "explanation": "Banks perform VAPT annually. Production Support is responsible for 'Closing the Observations' (e.g., patching weak SSL ciphers)."
+  },
+  {
+    "question": "Which command checks the remaining 'Inodes' on a Linux filesystem?",
+    "options": [
+      {"text": "df -h", "feedback": "Incorrect. This shows disk space (GB/MB), not Inodes."},
+      {"text": "df -i", "feedback": "Correct! If Inodes are 100% full, you cannot create new files even if you have GBs of space."},
+      {"text": "du -sh", "feedback": "Incorrect. This shows the size of a specific folder."},
+      {"text": "free -m", "feedback": "Incorrect. This is for RAM."}
+    ],
+    "answer": 1,
+    "hint": "Use the 'disk free' command with a specific flag for 'Inodes'.",
+    "explanation": "High Inode usage is common in applications that generate millions of tiny log files or temp files."
+  },
+  {
+    "question": "In ITIL, what is the role of a 'CAB'?",
+    "options": [
+      {"text": "To transport employees to the office", "feedback": "Incorrect. That is a taxi service."},
+      {"text": "Change Advisory Board: To review and approve changes to production", "feedback": "Correct! They assess the risk of every change."},
+      {"text": "Central Archive Bureau: To store old data", "feedback": "Incorrect. That would be data archiving."},
+      {"text": "Code Analysis Branch: To check for bugs", "feedback": "Incorrect. This happens in the Dev/QA phase."}
+    ],
+    "answer": 1,
+    "hint": "It is a board that 'Advises' on 'Changes'.",
+    "explanation": "The CAB ensures that a change in the 'Payment' module doesn't accidentally crash the 'Account Summary' module."
+  },
+  {
+    "question": "What is the function of the 'OOM Killer' in the Linux kernel?",
+    "options": [
+      {"text": "To delete viruses from the system", "feedback": "Incorrect. That is an Antivirus function."},
+      {"text": "Out Of Memory Killer: To kill high-memory processes to save the OS from crashing", "feedback": "Correct! It kicks in when RAM is completely exhausted."},
+      {"text": "To stop users from logging in at night", "feedback": "Incorrect. This is handled by PAM or cron."},
+      {"text": "To speed up the database", "feedback": "Incorrect. It actually causes outages by killing DB or Java processes."}
+    ],
+    "answer": 1,
+    "hint": "It 'Kills' processes when there is 'OOM'.",
+    "explanation": "If a WebLogic server suddenly disappears from 'ps -ef', check 'dmesg' to see if the OOM Killer terminated it."
+  },
+  {
+    "question": "Which tool is best for monitoring 'Application Performance Management' (APM) in real-time?",
+    "options": [
+      {"text": "AppDynamics / Dynatrace", "feedback": "Correct! These tools show the full call graph and DB query latency."},
+      {"text": "Putty", "feedback": "Incorrect. This is just a terminal client."},
+      {"text": "Microsoft Excel", "feedback": "Incorrect. This is for static data reporting."},
+      {"text": "WinZip", "feedback": "Incorrect. This is for file compression."}
+    ],
+    "answer": 0,
+    "hint": "Think of modern tools that 'Trace' or use 'Dynamics'.",
+    "explanation": "APM tools allow you to see that a 'Fund Transfer' is slow because of a specific SQL taking 10 seconds."
+  },
+  {
+    "question": "What is a 'Workaround' in Incident Management?",
+    "options": [
+      {"text": "A permanent fix that resolves the root cause", "feedback": "Incorrect. That is a 'Problem Resolution'."},
+      {"text": "A temporary way to restore service while the root cause is being investigated", "feedback": "Correct! Example: Restarting a server to clear a hang."},
+      {"text": "Working from home during a disaster", "feedback": "Incorrect. That is remote working."},
+      {"text": "Bypassing the security firewall", "feedback": "Incorrect. This is a security violation, not a workaround."}
+    ],
+    "answer": 1,
+    "hint": "It is a 'temporary' fix to get the 'work' done.",
+    "explanation": "The goal of Incident Management is to restore service FAST. Workarounds are the primary tool for this."
+  },
+  {
+    "question": "Which Linux command displays the 'Kernel' version and OS architecture?",
+    "options": [
+      {"text": "uname -a", "feedback": "Correct! It shows the Linux version, hostname, and CPU architecture (x86_64)."},
+      {"text": "cat /proc/meminfo", "feedback": "Incorrect. This shows RAM details."},
+      {"text": "lscpu", "feedback": "Incorrect. This shows CPU specs, not kernel version."},
+      {"text": "whoami", "feedback": "Incorrect. This shows current user."}
+    ],
+    "answer": 0,
+    "hint": "Short for 'Unix Name'.",
+    "explanation": "Support engineers need this to verify if the OS is compatible with a new WebLogic or Oracle patch."
+  },
+  {
+    "question": "What is 'SSL Termination' on a Load Balancer?",
+    "options": [
+      {"text": "Deleting the SSL certificates", "feedback": "Incorrect. This would break the site."},
+      {"text": "Decrypting HTTPS traffic at the Load Balancer and sending HTTP to the internal servers", "feedback": "Correct! It reduces the CPU load on the app servers."},
+      {"text": "Blocking all HTTPS traffic", "feedback": "Incorrect. This is a firewall block."},
+      {"text": "Changing the SSL password every hour", "feedback": "Incorrect. This is not a standard practice."}
+    ],
+    "answer": 1,
+    "hint": "The SSL 'ends' (terminates) at the Load Balancer.",
+    "explanation": "SSL Termination allows the Load Balancer to 'see' the traffic to perform content-based routing (e.g., /retail vs /corporate)."
+  },
+  {
+    "question": "In Linux, what does the command 'chmod 755 filename' do?",
+    "options": [
+      {"text": "Gives full access to everyone", "feedback": "Incorrect. That is 777."},
+      {"text": "Owner can do everything; Group and Others can only Read and Execute", "feedback": "Correct! rwxr-xr-x."},
+      {"text": "Deletes the file", "feedback": "Incorrect. That is 'rm'."},
+      {"text": "Makes the file hidden", "feedback": "Incorrect. Filenames starting with '.' are hidden."}
+    ],
+    "answer": 1,
+    "hint": "7 = Read+Write+Execute. 5 = Read+Execute.",
+    "explanation": "755 is the standard permission for scripts in production—safe for execution but protected from modification by others."
+  },
+  {
+    "question": "Which monitoring tool is specifically used for 'Log Aggregation' and searching unstructured data?",
+    "options": [
+      {"text": "Splunk / ELK Stack", "feedback": "Correct! They index logs from hundreds of servers into one searchable UI."},
+      {"text": "Oracle Enterprise Manager (OEM)", "feedback": "Incorrect. OEM is for DB metrics, not general log searching."},
+      {"text": "Windows Task Manager", "feedback": "Incorrect. This is a local Windows resource monitor."},
+      {"text": "Google Search", "feedback": "Incorrect. This is for the public internet, not internal logs."}
+    ],
+    "answer": 0,
+    "hint": "It's often called the 'Google for log files'.",
+    "explanation": "If a transaction failed at 10:05 AM, you can search 'ERROR' in Splunk across all servers to find the cause in seconds."
+  },
+  {
+    "question": "What is the default port for 'HTTPS' traffic?",
+    "options": [
+      {"text": "80", "feedback": "Incorrect. This is for standard HTTP (unsecured)."},
+      {"text": "443", "feedback": "Correct! HTTPS secure traffic uses port 443."},
+      {"text": "22", "feedback": "Incorrect. This is for SSH."},
+      {"text": "3389", "feedback": "Incorrect. This is for Remote Desktop (RDP)."}
+    ],
+    "answer": 1,
+    "hint": "It's a 3-digit number starting with 4.",
+    "explanation": "Production Support must ensure port 443 is open on the VIP (Virtual IP) of the bank's website."
+  },
+  {
+    "question": "Which command is used to see all 'Established' network connections on a server?",
+    "options": [
+      {"text": "netstat -an | grep ESTABLISHED", "feedback": "Correct! It lists active connections to and from the server."},
+      {"text": "ping google.com", "feedback": "Incorrect. This tests a single destination."},
+      {"text": "ifconfig", "feedback": "Incorrect. This shows interface IPs."},
+      {"text": "cat /proc/net", "feedback": "Incorrect. This is a directory of raw networking data."}
+    ],
+    "answer": 0,
+    "hint": "Use 'network statistics'.",
+    "explanation": "If the app is slow, use netstat to see if there are 'thousands' of connections from a single IP, which might indicate a DDoS attack."
+  },
+  {
+    "question": "What is 'RCA' in the context of Production Support?",
+    "options": [
+      {"text": "Remote Computer Access", "feedback": "Incorrect. This is a tool function."},
+      {"text": "Root Cause Analysis", "feedback": "Correct! Identifying why an incident happened to prevent it from repeating."},
+      {"text": "Retail Credit Account", "feedback": "Incorrect. This is a banking business term."},
+      {"text": "Rapid Code Assembly", "feedback": "Incorrect. This is related to DevOps."}
+    ],
+    "answer": 1,
+    "hint": "It's about finding the 'Root' of the problem.",
+    "explanation": "Problem Management owns the RCA process. After every Major Incident, an RCA document must be submitted to the bank's management."
+  },
+  {
+    "question": "Which Linux command displays the current 'Date and Time' and is used to sync server clocks?",
+    "options": [
+      {"text": "time", "feedback": "Incorrect. 'time' measures how long a command takes to run."},
+      {"text": "date", "feedback": "Correct! Running 'date' shows the system clock. 'ntpdate' is used to sync."},
+      {"text": "clock -s", "feedback": "Incorrect. Not a standard primary command for time check."},
+      {"text": "cal", "feedback": "Incorrect. This shows a calendar, not the time."}
+    ],
+    "answer": 1,
+    "hint": "It's a simple 4-letter word.",
+    "explanation": "In banking, server clocks must be perfectly synced (via NTP) for accurate transaction timestamps and audit logs."
+  },
+  {
+    "question": "What is 'Sticky Session' (Session Affinity) in Load Balancing?",
+    "options": [
+      {"text": "The user is stuck on the login page", "feedback": "Incorrect. This is a bug."},
+      {"text": "Directing all requests from a specific user to the same server", "feedback": "Correct! Essential if the app stores session data locally."},
+      {"text": "The Load Balancer is slow", "feedback": "Incorrect. This is a performance issue."},
+      {"text": "A session that never expires", "feedback": "Incorrect. All sessions have a timeout."}
+    ],
+    "answer": 1,
+    "hint": "It 'sticks' the session to one server.",
+    "explanation": "If 'Sticky Session' is off, a user might log in on Server A, but their next click goes to Server B, where they are 'not logged in'."
+  },
+  {
+    "question": "What does the 'ps -ef' command do in Linux?",
+    "options": [
+      {"text": "Shows Disk Space", "feedback": "Incorrect. That is df."},
+      {"text": "Shows all running Processes in full format", "feedback": "Correct! It shows User, PID, and the full command path."},
+      {"text": "Shows Network connections", "feedback": "Incorrect. That is netstat."},
+      {"text": "Shows RAM usage", "feedback": "Incorrect. That is free."}
+    ],
+    "answer": 1,
+    "hint": "Short for 'Process Status'.",
+    "explanation": "Use 'ps -ef | grep java' to find the Process ID (PID) of your WebLogic managed server."
+  },
+  {
+    "question": "In ITIL, which process ensures that new software is thoroughly tested before deployment?",
+    "options": [
+      {"text": "Incident Management", "feedback": "Incorrect. This is for live fixes."},
+      {"text": "Release and Deployment Management", "feedback": "Correct! It manages the transition from Build to Production."},
+      {"text": "Capacity Management", "feedback": "Incorrect. This manages hardware resources."},
+      {"text": "Financial Management", "feedback": "Incorrect. This manages the IT budget."}
+    ],
+    "answer": 1,
+    "hint": "It handles the 'Release' of new code.",
+    "explanation": "Release Management prevents 'buggy' code from reaching production by enforcing QA sign-offs."
+  },
+  {
+    "question": "Which command is used to 'Archive' and 'Compress' a folder in Linux?",
+    "options": [
+      {"text": "zip / unzip", "feedback": "Correct (partially), but 'tar' is the standard for Linux server backups."},
+      {"text": "tar -cvzf backup.tar.gz /folder_name", "feedback": "Correct! c=create, v=verbose, z=gzip, f=file."},
+      {"text": "cp -r", "feedback": "Incorrect. This only copies, it doesn't compress."},
+      {"text": "mv", "feedback": "Incorrect. This moves the folder."}
+    ],
+    "answer": 1,
+    "hint": "It starts with 'tar' (Tape Archive).",
+    "explanation": "Support engineers use 'tar' to bundle log files before downloading them for local analysis."
+  },
+  {
+    "question": "A critical banking service is down. Which ITIL process is primarily responsible for restoring the service as quickly as possible, even via a temporary workaround?",
+    "options": [
+      {"text": "Problem Management", "feedback": "Incorrect. This focuses on long-term root cause, not speed."},
+      {"text": "Incident Management", "feedback": "Correct! The goal is service restoration over root cause analysis."},
+      {"text": "Change Management", "feedback": "Incorrect. This is for risk-assessing future modifications."},
+      {"text": "Service Level Management", "feedback": "Incorrect. This defines targets (SLAs) but doesn't perform the fix."}
+    ],
+    "answer": 1,
+    "hint": "Think about 'Speed' of restoration vs 'Reason' for failure.",
     "explanation": "Incident Management aims to minimize business impact by restoring normal service operation as fast as possible."
+  },
+  {
+    "question": "In Splunk, what is the purpose of an 'Index'?",
+    "options": [
+      {"text": "To delete old logs automatically", "feedback": "Incorrect. That is a retention policy, not the index itself."},
+      {"text": "A repository where Splunk stores and searches raw log data", "feedback": "Correct! It is the searchable database for your logs."},
+      {"text": "To restart the remote server", "feedback": "Incorrect. Splunk is a monitoring tool, not a server manager."},
+      {"text": "To encrypt the user's password", "feedback": "Incorrect. This is handled by LDAP/SAML integration."}
+    ],
+    "answer": 1,
+    "hint": "It's like the 'Index' at the back of a book for quick searching.",
+    "explanation": "Proper indexing allows Production Support to search through terabytes of banking logs in seconds using SPL (Search Processing Language)."
+  },
+  {
+    "question": "Which metric in AppDynamics indicates that a specific Java method or SQL query is the 'bottleneck' in a transaction?",
+    "options": [
+      {"text": "Call Graph / Snapshot", "feedback": "Correct! Snapshots show the time spent in each method call or DB execution."},
+      {"text": "CPU % of the server", "feedback": "Incorrect. High CPU doesn't always point to a specific code bottleneck."},
+      {"text": "Number of logged-in users", "feedback": "Incorrect. This is a load metric, not a bottleneck metric."},
+      {"text": "RAM usage of the Load Balancer", "feedback": "Incorrect. This is infrastructure health, not transaction flow."}
+    ],
+    "answer": 0,
+    "hint": "Look for the feature that 'records' a single slow request.",
+    "explanation": "Transaction Snapshots are essential for Production Support to provide 'Evidence' to developers for code fixes."
+  },
+  {
+    "question": "What is the 'RTO' (Recovery Time Objective) in a Disaster Recovery plan?",
+    "options": [
+      {"text": "The maximum amount of data loss allowed (in hours)", "feedback": "Incorrect. That is RPO (Recovery Point Objective)."},
+      {"text": "The maximum allowed duration to restore a service after a disaster", "feedback": "Correct! It measures 'downtime' tolerance."},
+      {"text": "The cost of the DR server", "feedback": "Incorrect. This is a financial metric."},
+      {"text": "The number of employees at the DR site", "feedback": "Incorrect. This is a resource metric."}
+    ],
+    "answer": 1,
+    "hint": "It's about 'Time' to 'Recover'.",
+    "explanation": "In critical banking (like IMPS/UPI), RTO is often less than 30 minutes to minimize customer impact."
+  },
+  {
+    "question": "Which Docker command shows all containers, including those that have crashed or exited?",
+    "options": [
+      {"text": "docker ps", "feedback": "Incorrect. This only shows currently running containers."},
+      {"text": "docker ps -a", "feedback": "Correct! The '-a' (all) flag shows exited and stopped containers."},
+      {"text": "docker images", "feedback": "Incorrect. This lists downloaded images, not runtime containers."},
+      {"text": "docker top", "feedback": "Incorrect. This shows processes inside a running container."}
+    ],
+    "answer": 1,
+    "hint": "You need to see 'All' containers.",
+    "explanation": "Using 'docker ps -a' is the first step to find a 'Exited (1)' status, which indicates a crash."
+  },
+  {
+    "question": "In ITIL, what is an 'Emergency Change'?",
+    "options": [
+      {"text": "A change that happens every Sunday", "feedback": "Incorrect. That is a Standard/Routine change."},
+      {"text": "A change that must be implemented as soon as possible to resolve a Major Incident", "feedback": "Correct! It follows a fast-track approval process via ECAB."},
+      {"text": "A change that doesn't need any approval", "feedback": "Incorrect. All changes in production require some form of approval/logging."},
+      {"text": "A code update for a new feature", "feedback": "Incorrect. That is a Normal/Planned change."}
+    ],
+    "answer": 1,
+    "hint": "It's for 'Emergencies'.",
+    "explanation": "Emergency changes are risky but necessary to stop a massive financial loss or widespread outage."
+  },
+  {
+    "question": "Which monitoring tool is 'Agentless' and primarily uses SNMP or WMI for infrastructure monitoring?",
+    "options": [
+      {"text": "AppDynamics", "feedback": "Incorrect. This requires a Bytecode/Machine agent."},
+      {"text": "SolarWinds / Nagios", "feedback": "Correct! They often pull data without installing a dedicated agent on every app server."},
+      {"text": "Dynatrace", "feedback": "Incorrect. This uses a 'OneAgent' approach."},
+      {"text": "Splunk", "feedback": "Incorrect. Splunk usually requires a Universal Forwarder agent to send logs."}
+    ],
+    "answer": 1,
+    "hint": "Think of traditional network/server monitoring tools.",
+    "explanation": "Agentless monitoring is easier to deploy in restricted banking environments where installing new software is prohibited."
+  },
+  {
+    "question": "What is a 'Post-Implementation Review' (PIR) in Change Management?",
+    "options": [
+      {"text": "A meeting to plan the next month's work", "feedback": "Incorrect. This is a planning meeting."},
+      {"text": "An assessment conducted after a change to see if it was successful and didn't cause issues", "feedback": "Correct! It captures lessons learned."},
+      {"text": "Reviewing the developer's salary", "feedback": "Incorrect. Not related to ITIL changes."},
+      {"text": "Writing the code for the next version", "feedback": "Incorrect. This is part of the SDLC, not Change Management."}
+    ],
+    "answer": 1,
+    "hint": "It's a 'Review' 'Post' (after) 'Implementation'.",
+    "explanation": "A PIR is mandatory for 'Failed' or 'Partially Successful' changes to prevent future deployment errors."
+  },
+  {
+    "question": "Which command in Kubernetes (kubectl) allows you to see the real-time logs of a Pod?",
+    "options": [
+      {"text": "kubectl get pods", "feedback": "Incorrect. This only shows the status (Running/Pending)."},
+      {"text": "kubectl logs -f <pod_name>", "feedback": "Correct! Like 'tail -f', it streams logs to your terminal."},
+      {"text": "kubectl describe pod", "feedback": "Incorrect. This shows metadata and events, not application logs."},
+      {"text": "kubectl delete pod", "feedback": "Incorrect. This kills the pod."}
+    ],
+    "answer": 1,
+    "hint": "It's the 'logs' command with a 'follow' flag.",
+    "explanation": "Streaming logs is the most direct way to troubleshoot a 'CrashLoopBackOff' error in OpenShift or K8s."
+  },
+  {
+    "question": "In a Disaster Recovery (DR) scenario, what is 'Data Lag'?",
+    "options": [
+      {"text": "The time it takes for a user to log in", "feedback": "Incorrect. That is application latency."},
+      {"text": "The time difference between the Primary DB and the Standby DB", "feedback": "Correct! High lag means potential data loss during failover."},
+      {"text": "The speed of the internet connection", "feedback": "Incorrect. That is bandwidth/latency."},
+      {"text": "The age of the server hardware", "feedback": "Incorrect. This is lifecycle data."}
+    ],
+    "answer": 1,
+    "hint": "The 'Lag' in data synchronization.",
+    "explanation": "Production Support must monitor 'Apply Lag' in Oracle Data Guard to ensure RPO targets are met."
+  },
+  {
+    "question": "What is the primary difference between a 'Hot Site' and a 'Cold Site' in BCP?",
+    "options": [
+      {"text": "Hot Site is for summer; Cold Site is for winter", "feedback": "Incorrect. Weather is not a factor."},
+      {"text": "Hot Site is fully equipped and ready for immediate switch; Cold Site needs hardware/data setup", "feedback": "Correct! Hot sites have much lower RTO."},
+      {"text": "Hot Site is more expensive but slower", "feedback": "Incorrect. It is more expensive but much faster."},
+      {"text": "Cold site is for backup; Hot site is for primary traffic", "feedback": "Incorrect. Both are DR options."}
+    ],
+    "answer": 1,
+    "hint": "Think of 'Ready to use' vs 'Need to build'.",
+    "explanation": "Banks use 'Hot Sites' for core banking (CBS) to ensure they can failover in minutes."
+  },
+  {
+    "question": "Which monitoring approach focuses on 'User Experience' by simulating a user's path through the website?",
+    "options": [
+      {"text": "Infrastructure Monitoring", "feedback": "Incorrect. This looks at CPU/RAM."},
+      {"text": "Synthetic Monitoring (Robotic Transactions)", "feedback": "Correct! It runs scripts every 5 mins to check if the 'Login' page works."},
+      {"text": "Log Monitoring", "feedback": "Incorrect. This looks at error strings in files."},
+      {"text": "Database Monitoring", "feedback": "Incorrect. This looks at SQL latency."}
+    ],
+    "answer": 1,
+    "hint": "It 'Synthetically' mimics a real user.",
+    "explanation": "Synthetic monitoring alerts you that the 'ATM Locator' is down before an actual customer complains."
+  },
+  {
+    "question": "In ITIL, what is the 'CMDB'?",
+    "options": [
+      {"text": "Configuration Management Database: A central repository of all IT assets (CIs)", "feedback": "Correct! It maps relationships between servers, apps, and DBs."},
+      {"text": "Central Money Deposit Bank", "feedback": "Incorrect. This is a financial term."},
+      {"text": "Code Management Dashboard", "feedback": "Incorrect. This is for version control (like Git)."},
+      {"text": "Customer Management Data Branch", "feedback": "Incorrect. This is related to CRM."}
+    ],
+    "answer": 0,
+    "hint": "A database of 'Configuration' items.",
+    "explanation": "If a server fails, the CMDB tells you which critical banking apps are running on that specific hardware."
+  },
+  {
+    "question": "What is a 'Vulnerability' in VAPT?",
+    "options": [
+      {"text": "A feature that users like", "feedback": "Incorrect. Features are intended behaviors."},
+      {"text": "A weakness in software or configuration that can be exploited by an attacker", "feedback": "Correct! Example: Using an old version of OpenSSL."},
+      {"text": "A high CPU usage event", "feedback": "Incorrect. This is a performance issue."},
+      {"text": "A mistake in the bank's balance sheet", "feedback": "Incorrect. This is an accounting error."}
+    ],
+    "answer": 1,
+    "hint": "It's a 'hole' or 'weakness' in security.",
+    "explanation": "Closing vulnerabilities (Patching) is a major part of a Production Support engineer's 'Security Compliance' duty."
+  },
+  {
+    "question": "Which protocol is used by monitoring tools like Zabbix or Nagios to query CPU/RAM data from a network device?",
+    "options": [
+      {"text": "HTTP", "feedback": "Incorrect. HTTP is for web content."},
+      {"text": "SNMP (Simple Network Management Protocol)", "feedback": "Correct! It is the industry standard for infra monitoring."},
+      {"text": "FTP", "feedback": "Incorrect. FTP is for file transfers."},
+      {"text": "SMTP", "feedback": "Incorrect. SMTP is for sending emails."}
+    ],
+    "answer": 1,
+    "hint": "A 'Simple' 'Network' 'Management' protocol.",
+    "explanation": "SNMP 'Traps' are used to send immediate alerts when a hardware component (like a Power Supply) fails."
+  },
+  {
+    "question": "What is 'RCA' (Root Cause Analysis)?",
+    "options": [
+      {"text": "Repairing the Computer Automatically", "feedback": "Incorrect. RCA is an analytical process."},
+      {"text": "Identifying the fundamental cause of a problem to prevent recurrence", "feedback": "Correct! It answers 'Why' it happened."},
+      {"text": "Registering a Customer Account", "feedback": "Incorrect. This is a business process."},
+      {"text": "Reading Code Aloud", "feedback": "Incorrect. This is a code review technique."}
+    ],
+    "answer": 1,
+    "hint": "Finding the 'Root' of the issue.",
+    "explanation": "Problem Management creates the RCA. Example: 'The disk filled up because log rotation was disabled'."
+  },
+  {
+    "question": "What does 'SLA Breach' mean in Production Support?",
+    "options": [
+      {"text": "The server was hacked", "feedback": "Incorrect. This is a security breach."},
+      {"text": "Failing to resolve an incident within the agreed-upon time limit", "feedback": "Correct! It may lead to financial penalties for the vendor."},
+      {"text": "A user forgot their password", "feedback": "Incorrect. This is a normal service request."},
+      {"text": "The power went out in the office", "feedback": "Incorrect. This is a facility issue."}
+    ],
+    "answer": 1,
+    "hint": "You 'Breached' the 'Agreement' time.",
+    "explanation": "Scale II officers must prioritize 'P1' tickets to avoid an SLA breach, which is reported to senior management."
+  },
+  {
+    "question": "Which command in Docker is used to remove all unused containers, networks, and images to free up space?",
+    "options": [
+      {"text": "docker delete", "feedback": "Incorrect. This is not a valid Docker command."},
+      {"text": "docker system prune", "feedback": "Correct! It cleans up all dangling resources."},
+      {"text": "docker stop", "feedback": "Incorrect. This only stops containers, it doesn't delete them."},
+      {"text": "docker rmi", "feedback": "Incorrect. This only removes specific images."}
+    ],
+    "answer": 1,
+    "hint": "You want to 'Prune' the 'System'.",
+    "explanation": "On a production Docker host, 'prune' is used periodically to prevent the /var/lib/docker partition from getting full."
+  },
+  {
+    "question": "In ITIL, what is the difference between a 'Service Request' and an 'Incident'?",
+    "options": [
+      {"text": "No difference; they are the same", "feedback": "Incorrect. They have very different workflows."},
+      {"text": "Incident is a failure; Service Request is a formal request for something new (e.g., password reset)", "feedback": "Correct! Requests are planned; Incidents are unplanned."},
+      {"text": "Incidents are only for hardware; Requests are only for software", "feedback": "Incorrect. Both can be for either."},
+      {"text": "Requests are for VIPs; Incidents are for everyone", "feedback": "Incorrect. Classification is based on the nature of the issue."}
+    ],
+    "answer": 1,
+    "hint": "One is 'Something is broken'; the other is 'I need something'.",
+    "explanation": "Classification is key for reporting. 'Password Reset' should never be counted as a 'System Failure' incident."
+  },
+  {
+    "question": "What is 'BCP Drill' (Disaster Recovery Drill)?",
+    "options": [
+      {"text": "Repairing a broken server with a drill machine", "feedback": "Incorrect. This is a physical repair."},
+      {"text": "A planned exercise to test if the bank can successfully failover to the DR site", "feedback": "Correct! It validates the RTO and RPO targets."},
+      {"text": "A mandatory training for new bank tellers", "feedback": "Incorrect. This is business training."},
+      {"text": "A way to check the internet speed at the branch", "feedback": "Incorrect. This is network testing."}
+    ],
+    "answer": 1,
+    "hint": "It's a 'Practice' or 'Drill' for a 'Disaster'.",
+    "explanation": "RBI requires banks to perform DR drills at least twice a year to ensure national financial stability."
+  },
+  {
+    "question": "Which HTTP status code indicates a 'Gateway Timeout' (App server took too long to respond)?",
+    "options": [
+      {"text": "404", "feedback": "Incorrect. That is 'Not Found'."},
+      {"text": "504", "feedback": "Correct! 504 means the proxy (Load Balancer) timed out waiting for the back-end."},
+      {"text": "200", "feedback": "Incorrect. That is 'Success'."},
+      {"text": "500", "feedback": "Incorrect. That is a generic 'Internal Server Error'."}
+    ],
+    "answer": 1,
+    "hint": "It's a 5xx series code.",
+    "explanation": "If a user gets a 504, Production Support should check if the WebLogic threads are stuck or if the DB is slow."
+  },
+  {
+    "question": "What is a 'Deployment' in the context of Production Support?",
+    "options": [
+      {"text": "Moving soldiers to a new location", "feedback": "Incorrect. This is a military term."},
+      {"text": "The process of pushing new code or patches into the live production environment", "feedback": "Correct! It usually follows a Change Request approval."},
+      {"text": "Deleting old user accounts", "feedback": "Incorrect. This is user maintenance."},
+      {"text": "Purchasing new laptops for the staff", "feedback": "Incorrect. This is procurement."}
+    ],
+    "answer": 1,
+    "hint": "It's 'Deploying' new software.",
+    "explanation": "Successful deployment requires a 'Rollback Plan' in case the new code causes a production crash."
+  },
+  {
+    "question": "Which monitoring tool uses 'Kibana' for visualization and 'Elasticsearch' for storage?",
+    "options": [
+      {"text": "AppDynamics", "feedback": "Incorrect. This is a proprietary APM tool."},
+      {"text": "ELK Stack", "feedback": "Correct! (Elasticsearch, Logstash, Kibana)."},
+      {"text": "ServiceNow", "feedback": "Incorrect. This is an ITSM ticketing tool."},
+      {"text": "Oracle OEM", "feedback": "Incorrect. This uses an Oracle DB for storage."}
+    ],
+    "answer": 1,
+    "hint": "It's a three-letter acronym for 'Elastic, Logstash, Kibana'.",
+    "explanation": "ELK is a popular open-source alternative to Splunk for centralized log management in banks."
+  },
+  {
+    "question": "What is the primary goal of 'Capacity Management'?",
+    "options": [
+      {"text": "To hire more people", "feedback": "Incorrect. This is workforce management."},
+      {"text": "To ensure IT resources are sized correctly to meet current and future business needs", "feedback": "Correct! It prevents 'Disk Full' or 'CPU Saturation' outages."},
+      {"text": "To increase the speed of the office Wi-Fi", "feedback": "Incorrect. This is a subset of network management."},
+      {"text": "To count the number of servers in the data center", "feedback": "Incorrect. That is Asset Management."}
+    ],
+    "answer": 1,
+    "hint": "Managing the 'Capacity' of resources.",
+    "explanation": "Scale II officers must review 'Capacity Reports' monthly to justify hardware upgrades before the system crashes during a peak sale."
+  },
+  {
+    "question": "What does a 'P1' Incident signify?",
+    "options": [
+      {"text": "Priority 1: A critical service is completely down for all users", "feedback": "Correct! It requires immediate attention and constant updates to management."},
+      {"text": "Project 1: The first task of the day", "feedback": "Incorrect. This is not ITIL terminology."},
+      {"text": "Password 1: A user needs a password reset", "feedback": "Incorrect. This is a low-priority request."},
+      {"text": "Partial 1: A small feature is slow for one user", "feedback": "Incorrect. This would be P3 or P4."}
+    ],
+    "answer": 0,
+    "hint": "It's the highest 'Priority'.",
+    "explanation": "P1 incidents often trigger a 'War Room' where DBAs, Middleware, and Network teams work together until the service is restored."
+  },
+  {
+    "question": "Which Linux command is used to verify the 'Route' a packet takes to reach a remote banking server?",
+    "options": [
+      {"text": "ping", "feedback": "Incorrect. Ping only checks if the destination is alive, not the path."},
+      {"text": "traceroute", "feedback": "Correct! It shows every 'hop' (router) between your server and the destination."},
+      {"text": "netstat", "feedback": "Incorrect. This shows local connections, not the external network path."},
+      {"text": "route -n", "feedback": "Incorrect. This shows the local routing table, not the live path."}
+    ],
+    "answer": 1,
+    "hint": "It 'traces' the 'route'.",
+    "explanation": "Traceroute identifies which network segment or ISP is causing latency in a multi-site banking network."
+  },
+  {
+    "question": "You see a 'java.security.cert.CertificateExpiredException' in the logs. Which tool helps you check the expiry date of a .jks file?",
+    "options": [
+      {"text": "openssl", "feedback": "Incorrect. Openssl is for .pem files, not native Java Keystores."},
+      {"text": "keytool -list -v -keystore identity.jks", "feedback": "Correct! Keytool is the standard Java utility for managing JKS files."},
+      {"text": "cat /etc/hosts", "feedback": "Incorrect. This file is for IP mappings, not certificates."},
+      {"text": "jar -xvf", "feedback": "Incorrect. This extracts files but doesn't read certificate metadata."}
+    ],
+    "answer": 1,
+    "hint": "Use the utility provided with the Java SDK.",
+    "explanation": "Production Support must track certificate expiry to prevent sudden SSL handshake failures."
+  },
+  {
+    "question": "What does a Load Average of '5.0' on a 4-core CPU signify?",
+    "options": [
+      {"text": "The system is 50% utilized", "feedback": "Incorrect. Load average isn't a simple percentage."},
+      {"text": "The CPU is saturated and processes are waiting in queue", "feedback": "Correct! Anything above the core count indicates a bottleneck."},
+      {"text": "5 users are logged in", "feedback": "Incorrect. Load tracks processes, not users."},
+      {"text": "The system has been up for 5 days", "feedback": "Incorrect. Uptime shows boot time separately."}
+    ],
+    "answer": 1,
+    "hint": "Compare the number to the available CPU cores.",
+    "explanation": "If load average > core count, processes are queuing for CPU time, leading to application slowness."
+  },
+  {
+    "question": "In ITIL, what is a 'Standard Change'?",
+    "options": [
+      {"text": "An emergency fix for a crisis", "feedback": "Incorrect. That is an Emergency Change."},
+      {"text": "A pre-approved, low-risk, recurring change", "feedback": "Correct! Example: a weekly server reboot or log cleanup."},
+      {"text": "A change that failed in QA", "feedback": "Incorrect. That would be high risk."},
+      {"text": "A change to a user's password", "feedback": "Incorrect. That is a Service Request."}
+    ],
+    "answer": 1,
+    "hint": "It is 'standardized' and happens frequently with minimal risk.",
+    "explanation": "Standard Changes improve efficiency by bypassing long CAB approval cycles for routine tasks."
+  },
+  {
+    "question": "Which command captures live network traffic for a specific port (e.g., 443) on Linux?",
+    "options": [
+      {"text": "tcpdump -i eth0 port 443", "feedback": "Correct! tcpdump is the 'sniffer' used for deep packet analysis."},
+      {"text": "telnet <IP> 443", "feedback": "Incorrect. Telnet only checks if a port is open."},
+      {"text": "netstat -an", "feedback": "Incorrect. This shows established connections, not the packets."},
+      {"text": "top", "feedback": "Incorrect. This is for resource monitoring."}
+    ],
+    "answer": 0,
+    "hint": "It 'dumps' the 'TCP' traffic.",
+    "explanation": "Tcpdump is used to see if a firewall is 'Dropping' packets during an SSL handshake."
+  },
+  {
+    "question": "What is the purpose of a 'Business Continuity Plan' (BCP)?",
+    "options": [
+      {"text": "To increase bank profit", "feedback": "Incorrect. That is a business strategy."},
+      {"text": "To ensure critical services continue during a disaster", "feedback": "Correct! It involves DR sites and manual workarounds."},
+      {"text": "To hire new staff", "feedback": "Incorrect. This is an HR function."},
+      {"text": "To upgrade hardware monthly", "feedback": "Incorrect. That is lifecycle management."}
+    ],
+    "answer": 1,
+    "hint": "It's about 'Continuing' the 'Business' after a crash.",
+    "explanation": "BCP is an RBI requirement for banks to ensure 99.9% availability for financial stability."
+  },
+  {
+    "question": "Which file in Linux contains local hostname-to-IP mappings?",
+    "options": [
+      {"text": "/etc/resolv.conf", "feedback": "Incorrect. This defines DNS servers, not mappings."},
+      {"text": "/etc/hosts", "feedback": "Correct! The OS checks this before querying DNS."},
+      {"text": "/etc/networks", "feedback": "Incorrect. This defines network names."},
+      {"text": "/etc/hostname", "feedback": "Incorrect. This sets the local machine name."}
+    ],
+    "answer": 1,
+    "hint": "It's a plural word for 'computers'.",
+    "explanation": "Mapping DB IPs in /etc/hosts ensures connectivity even if the DNS server is down."
+  },
+  {
+    "question": "What does 'VAPT' stand for in banking security?",
+    "options": [
+      {"text": "Virtual Access Port Transfer", "feedback": "Incorrect jargon."},
+      {"text": "Vulnerability Assessment and Penetration Testing", "feedback": "Correct! It is a security audit to find holes in the app."},
+      {"text": "Verified Application Power Tools", "feedback": "Incorrect jargon."},
+      {"text": "Visual Analytics for Production", "feedback": "Incorrect jargon."}
+    ],
+    "answer": 1,
+    "hint": "It involves 'Assessing' 'Vulnerabilities'.",
+    "explanation": "Banks perform VAPT annually. Support must close observations by patching weak SSL ciphers."
+  },
+  {
+    "question": "Which command checks remaining 'Inodes' on a Linux filesystem?",
+    "options": [
+      {"text": "df -h", "feedback": "Incorrect. This shows disk space in GB/MB."},
+      {"text": "df -i", "feedback": "Correct! It shows Inode usage; if full, you can't create files."},
+      {"text": "du -sh", "feedback": "Incorrect. This shows folder size."},
+      {"text": "free -m", "feedback": "Incorrect. This is for RAM."}
+    ],
+    "answer": 1,
+    "hint": "Flag for 'Inodes'.",
+    "explanation": "High Inode usage is caused by applications generating millions of tiny log or temp files."
+  },
+  {
+    "question": "In ITIL, what is the role of a 'CAB'?",
+    "options": [
+      {"text": "To transport employees", "feedback": "Incorrect."},
+      {"text": "Change Advisory Board: To review and approve production changes", "feedback": "Correct! They assess the risk of every change."},
+      {"text": "Central Archive Bureau", "feedback": "Incorrect."},
+      {"text": "Code Analysis Branch", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "A board that 'Advises' on 'Changes'.",
+    "explanation": "The CAB ensures a change in one module doesn't crash another banking service."
+  },
+  {
+    "question": "What is the function of the 'OOM Killer' in Linux?",
+    "options": [
+      {"text": "To delete viruses", "feedback": "Incorrect."},
+      {"text": "To kill high-memory processes to save the OS from crashing", "feedback": "Correct! It triggers when RAM is exhausted."},
+      {"text": "To stop night logins", "feedback": "Incorrect."},
+      {"text": "To speed up the DB", "feedback": "Incorrect. It causes outages by killing apps."}
+    ],
+    "answer": 1,
+    "hint": "It 'Kills' processes when there is 'Out Of Memory'.",
+    "explanation": "If a server process disappears, check 'dmesg' for OOM Killer termination events."
+  },
+  {
+    "question": "Which tool is best for monitoring 'Application Performance Management' (APM)?",
+    "options": [
+      {"text": "AppDynamics / Dynatrace", "feedback": "Correct! They show the full call graph and SQL latency."},
+      {"text": "Putty", "feedback": "Incorrect. This is a terminal client."},
+      {"text": "Excel", "feedback": "Incorrect."},
+      {"text": "WinZip", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "Think of modern tools that use 'Dynamics'.",
+    "explanation": "APM tools allow you to see that a 'Fund Transfer' is slow because of a specific SQL call."
+  },
+  {
+    "question": "What is a 'Workaround' in Incident Management?",
+    "options": [
+      {"text": "A permanent fix", "feedback": "Incorrect. That is a Problem Resolution."},
+      {"text": "A temporary way to restore service while investigating", "feedback": "Correct! Example: Restarting a server to clear a hang."},
+      {"text": "Working from home", "feedback": "Incorrect."},
+      {"text": "Bypassing firewalls", "feedback": "Incorrect. This is a security violation."}
+    ],
+    "answer": 1,
+    "hint": "A 'temporary' fix to get the 'work' done.",
+    "explanation": "The goal of Incident Management is to restore service FAST. Workarounds are the primary tool."
+  },
+  {
+    "question": "Which Linux command displays the 'Kernel' version?",
+    "options": [
+      {"text": "uname -a", "feedback": "Correct! It shows the Linux version and architecture."},
+      {"text": "cat /proc/meminfo", "feedback": "Incorrect. This is for RAM."},
+      {"text": "lscpu", "feedback": "Incorrect."},
+      {"text": "whoami", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "Short for 'Unix Name'.",
+    "explanation": "Support needs this to verify OS compatibility with new middleware patches."
+  },
+  {
+    "question": "What is 'SSL Termination' on a Load Balancer?",
+    "options": [
+      {"text": "Deleting certificates", "feedback": "Incorrect."},
+      {"text": "Decrypting HTTPS traffic at the LB and sending HTTP to app servers", "feedback": "Correct! It reduces CPU load on the internal servers."},
+      {"text": "Blocking HTTPS", "feedback": "Incorrect."},
+      {"text": "Changing passwords", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "SSL 'ends' (terminates) at the Load Balancer.",
+    "explanation": "SSL Termination allows the Load Balancer to perform content-based routing (e.g., /retail vs /corporate)."
+  },
+  {
+    "question": "What does 'chmod 755 filename' do?",
+    "options": [
+      {"text": "Full access to everyone", "feedback": "Incorrect. That is 777."},
+      {"text": "Owner can do everything; Others can Read and Execute", "feedback": "Correct! rwxr-xr-x."},
+      {"text": "Deletes the file", "feedback": "Incorrect."},
+      {"text": "Makes the file hidden", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "7 = Read+Write+Ex. 5 = Read+Ex.",
+    "explanation": "755 is the standard permission for scripts—safe for execution but protected from modification."
+  },
+  {
+    "question": "Which tool is for 'Log Aggregation' and searching unstructured data?",
+    "options": [
+      {"text": "Splunk / ELK Stack", "feedback": "Correct! They index logs into one searchable UI."},
+      {"text": "OEM", "feedback": "Incorrect. This is for DB metrics."},
+      {"text": "Task Manager", "feedback": "Incorrect."},
+      {"text": "Google Search", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "The 'Google for log files'.",
+    "explanation": "You can search 'ERROR' in Splunk across 100 servers to find a fault in seconds."
+  },
+  {
+    "question": "What is the default port for 'HTTPS'?",
+    "options": [
+      {"text": "80", "feedback": "Incorrect. This is HTTP."},
+      {"text": "443", "feedback": "Correct! Secure traffic uses 443."},
+      {"text": "22", "feedback": "Incorrect. This is SSH."},
+      {"text": "3389", "feedback": "Incorrect. This is RDP."}
+    ],
+    "answer": 1,
+    "hint": "3-digit number starting with 4.",
+    "explanation": "Port 443 must be open on the VIP for the bank's website to be accessible securely."
+  },
+  {
+    "question": "Which command shows all 'Established' network connections?",
+    "options": [
+      {"text": "netstat -an | grep ESTABLISHED", "feedback": "Correct! It lists active connections to/from the server."},
+      {"text": "ping google.com", "feedback": "Incorrect."},
+      {"text": "ifconfig", "feedback": "Incorrect."},
+      {"text": "cat /proc/net", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "Use 'network statistics'.",
+    "explanation": "Netstat helps identify if a specific IP is flooding the server with connections (DDoS check)."
+  },
+  {
+    "question": "What is 'RCA' in Production Support?",
+    "options": [
+      {"text": "Remote Computer Access", "feedback": "Incorrect."},
+      {"text": "Root Cause Analysis", "feedback": "Correct! Identifying why an incident happened to prevent repetition."},
+      {"text": "Retail Credit Account", "feedback": "Incorrect."},
+      {"text": "Rapid Code Assembly", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Finding the 'Root' of the problem.",
+    "explanation": "After a Major Incident, an RCA must be submitted to management explaining the failure."
+  },
+  {
+    "question": "Which command displays current 'Date and Time'?",
+    "options": [
+      {"text": "time", "feedback": "Incorrect. This measures command duration."},
+      {"text": "date", "feedback": "Correct! Syncing clocks via NTP is vital for audit logs."},
+      {"text": "clock -s", "feedback": "Incorrect."},
+      {"text": "cal", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Simple 4-letter word.",
+    "explanation": "Server clocks must be synced for accurate financial transaction timestamps."
+  },
+  {
+    "question": "What is 'Sticky Session' (Session Affinity)?",
+    "options": [
+      {"text": "Stuck on login page", "feedback": "Incorrect."},
+      {"text": "Directing a user's requests to the same server", "feedback": "Correct! Prevents losing session state."},
+      {"text": "Slow Load Balancer", "feedback": "Incorrect."},
+      {"text": "Session that never expires", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It 'sticks' the session to one server.",
+    "explanation": "If affinity is off, a user may log in on Server A but get kicked out when Server B receives their next click."
+  },
+  {
+    "question": "What does 'ps -ef' do?",
+    "options": [
+      {"text": "Shows Disk Space", "feedback": "Incorrect."},
+      {"text": "Shows all running processes in full format", "feedback": "Correct! It shows PID, user, and command."},
+      {"text": "Shows connections", "feedback": "Incorrect."},
+      {"text": "Shows RAM", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Short for 'Process Status'.",
+    "explanation": "Use 'ps -ef | grep java' to find the Process ID of a WebLogic server."
+  },
+  {
+    "question": "Which ITIL process ensures software is tested before deployment?",
+    "options": [
+      {"text": "Incident Management", "feedback": "Incorrect."},
+      {"text": "Release and Deployment Management", "feedback": "Correct! It manages the transition from Build to Prod."},
+      {"text": "Capacity Management", "feedback": "Incorrect."},
+      {"text": "Financial Management", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Handles the 'Release' of new code.",
+    "explanation": "Release Management prevents buggy code from reaching production by enforcing sign-offs."
+  },
+  {
+    "question": "Which command archives and compresses a folder?",
+    "options": [
+      {"text": "zip", "feedback": "Incorrect."},
+      {"text": "tar -cvzf backup.tar.gz /folder", "feedback": "Correct! c=create, v=verbose, z=gzip, f=file."},
+      {"text": "cp -r", "feedback": "Incorrect."},
+      {"text": "mv", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Starts with 'tar' (Tape Archive).",
+    "explanation": "Support engineers use 'tar' to bundle log files for easier analysis."
+  },
+  {
+    "question": "What is the primary goal of Incident Management?",
+    "options": [
+      {"text": "Finding root cause", "feedback": "Incorrect. That is Problem Management."},
+      {"text": "Restoring service as quickly as possible", "feedback": "Correct! Minimizing business impact is the focus."},
+      {"text": "Approving changes", "feedback": "Incorrect."},
+      {"text": "Managing budget", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Restoring service fast.",
+    "explanation": "Incident management is about fixing the 'now', even if using a temporary workaround."
+  },
+  {
+    "question": "In Docker, what does 'docker ps' show?",
+    "options": [
+      {"text": "All images", "feedback": "Incorrect."},
+      {"text": "Only running containers", "feedback": "Correct! Use -a to see all."},
+      {"text": "System memory", "feedback": "Incorrect."},
+      {"text": "Network ports", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Shows 'Process Status' for Docker.",
+    "explanation": "It helps you verify if your application container is currently up and healthy."
+  },
+  {
+    "question": "What is an 'SLA'?",
+    "options": [
+      {"text": "A hardware cable", "feedback": "Incorrect."},
+      {"text": "Service Level Agreement: A contract defining uptime and response targets", "feedback": "Correct! P1 tickets usually have strict SLA targets."},
+      {"text": "A security software", "feedback": "Incorrect."},
+      {"text": "A type of database", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "An 'Agreement' for 'Service'.",
+    "explanation": "If a bank's CBS is down for 4 hours, it may constitute an SLA breach with severe penalties."
+  },
+  {
+    "question": "Which command shows the 'Kernel' ring buffer messages?",
+    "options": [
+      {"text": "ls", "feedback": "Incorrect."},
+      {"text": "dmesg", "feedback": "Correct! It shows boot-up errors and hardware failures."},
+      {"text": "history", "feedback": "Incorrect."},
+      {"text": "date", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Short for 'Display Messages'.",
+    "explanation": "Check dmesg to see if the OS killed a process due to 'Out of Memory'."
+  },
+  {
+    "question": "What is a 'Cold Site' in BCP?",
+    "options": [
+      {"text": "A server in a fridge", "feedback": "Incorrect."},
+      {"text": "A recovery site with space but no hardware/data ready", "feedback": "Correct! It is cheap but takes days to activate."},
+      {"text": "A fully mirrored site", "feedback": "Incorrect. That is a Hot Site."},
+      {"text": "A secondary office", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Needs setup time to 'warm up'.",
+    "explanation": "Cold sites are rarely used for core banking due to high RTO."
+  },
+  {
+    "question": "In Splunk, what is a 'Forwarder'?",
+    "options": [
+      {"text": "A user who sends emails", "feedback": "Incorrect."},
+      {"text": "An agent that sends logs from a server to the Splunk Indexer", "feedback": "Correct! It 'forwards' the data."},
+      {"text": "A database table", "feedback": "Incorrect."},
+      {"text": "A network router", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "An agent that 'forwards' data.",
+    "explanation": "Universal Forwarders are installed on every app server to aggregate logs into a central portal."
+  },
+  {
+    "question": "What is 'RPO' (Recovery Point Objective)?",
+    "options": [
+      {"text": "Maximum downtime allowed", "feedback": "Incorrect. That is RTO."},
+      {"text": "Maximum data loss allowed (e.g., 1 hour of transactions)", "feedback": "Correct! It defines backup frequency."},
+      {"text": "Cost of recovery", "feedback": "Incorrect."},
+      {"text": "Number of servers", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "The 'Point' in time data is recovered to.",
+    "explanation": "For banking, RPO is usually zero or near-zero using real-time DB replication."
+  },
+  {
+    "question": "Which command checks 'Memory' in human-readable format?",
+    "options": [
+      {"text": "free -m", "feedback": "Correct! It shows RAM and Swap in Megabytes."},
+      {"text": "df -h", "feedback": "Incorrect. This is for disk space."},
+      {"text": "du", "feedback": "Incorrect."},
+      {"text": "uptime", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "Shows 'free' memory.",
+    "explanation": "Use free -m to see if the system is 'swapping', which causes severe application slowness."
+  },
+  {
+    "question": "What is a 'P1' Incident?",
+    "options": [
+      {"text": "A low priority bug", "feedback": "Incorrect."},
+      {"text": "Priority 1: A critical service down for all users", "feedback": "Correct! High business impact requiring immediate fix."},
+      {"text": "A password reset", "feedback": "Incorrect."},
+      {"text": "A project milestone", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Highest 'Priority'.",
+    "explanation": "P1 incidents trigger 'War Rooms' involving multiple technical teams."
+  },
+  {
+    "question": "Which tool monitors 'Synthetic' user transactions?",
+    "options": [
+      {"text": "Nagios", "feedback": "Incorrect."},
+      {"text": "Dynatrace / Site24x7", "feedback": "Correct! They run automated scripts to check if Login works every 5 mins."},
+      {"text": "Splunk", "feedback": "Incorrect."},
+      {"text": "Oracle OEM", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It 'Synthetically' mimics a user.",
+    "explanation": "Synthetic monitoring catches outages before real customers complain."
+  },
+  {
+    "question": "What is 'CMDB'?",
+    "options": [
+      {"text": "A central asset database", "feedback": "Correct! It tracks relationships between servers and apps."},
+      {"text": "A crypto coin", "feedback": "Incorrect."},
+      {"text": "A coding language", "feedback": "Incorrect."},
+      {"text": "A database for movies", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "Configuration Management Database.",
+    "explanation": "If a server fails, the CMDB tells you exactly which bank services are impacted."
+  },
+  {
+    "question": "Which command stops a process using its ID?",
+    "options": [
+      {"text": "exit", "feedback": "Incorrect."},
+      {"text": "kill -9 <PID>", "feedback": "Correct! It forces the process to stop."},
+      {"text": "stop", "feedback": "Incorrect."},
+      {"text": "delete", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It 'Kills' the process.",
+    "explanation": "Only use kill -9 as a last resort, as it doesn't allow graceful shutdown."
+  },
+  {
+    "question": "In AppDynamics, what is a 'Snapshot'?",
+    "options": [
+      {"text": "A photo of the server", "feedback": "Incorrect."},
+      {"text": "A detailed record of a single slow transaction", "feedback": "Correct! Shows which code method or SQL was slow."},
+      {"text": "A disk backup", "feedback": "Incorrect."},
+      {"text": "A user profile", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "A 'Snapshot' of a transaction flow.",
+    "explanation": "Snapshots provide the 'proof' needed to tell developers where a performance bug exists."
+  },
+  {
+    "question": "What is 'Port 22' used for?",
+    "options": [
+      {"text": "HTTP", "feedback": "Incorrect."},
+      {"text": "SSH (Secure Shell)", "feedback": "Correct! Used for remote server access."},
+      {"text": "Database", "feedback": "Incorrect."},
+      {"text": "Email", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Standard for remote login.",
+    "explanation": "Firewalls must allow port 22 for sysadmins to manage production servers."
+  },
+  {
+    "question": "Which ITIL process handles 'Root Cause' identification?",
+    "options": [
+      {"text": "Incident Management", "feedback": "Incorrect."},
+      {"text": "Problem Management", "feedback": "Correct! Its goal is to prevent incident recurrence."},
+      {"text": "Change Management", "feedback": "Incorrect."},
+      {"text": "Release Management", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Finding the 'Problem's' root.",
+    "explanation": "Problem management creates RCAs and long-term fixes."
+  },
+  {
+    "question": "What is 'Horizontal Scaling'?",
+    "options": [
+      {"text": "Adding more RAM to one server", "feedback": "Incorrect. That is Vertical scaling."},
+      {"text": "Adding more servers to a cluster", "feedback": "Correct! It handles more users by adding 'nodes'."},
+      {"text": "Making the server physically wider", "feedback": "Incorrect."},
+      {"text": "Rebooting the server", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Adding more 'Nodes' (side-by-side).",
+    "explanation": "WebLogic clusters use horizontal scaling to handle peak banking traffic."
+  },
+  {
+    "question": "Which command lists files in long format with permissions?",
+    "options": [
+      {"text": "ls -l", "feedback": "Correct! Shows owner, group, size, and permissions."},
+      {"text": "cat", "feedback": "Incorrect."},
+      {"text": "pwd", "feedback": "Incorrect."},
+      {"text": "vi", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "List in Long format.",
+    "explanation": "Use ls -l to verify if the 'oracle' user has write permission on the logs."
+  },
+  {
+    "question": "What is 'Failover'?",
+    "options": [
+      {"text": "A failed exam", "feedback": "Incorrect."},
+      {"text": "Automatically switching to a standby server if the primary fails", "feedback": "Correct! Ensures High Availability."},
+      {"text": "Deleting a user", "feedback": "Incorrect."},
+      {"text": "Formatting the disk", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Falling 'over' to the backup.",
+    "explanation": "Data Guard enables failover for databases during a primary site crash."
+  },
+  {
+    "question": "Which status code means 'Internal Server Error'?",
+    "options": [
+      {"text": "200", "feedback": "Incorrect. That is OK."},
+      {"text": "500", "feedback": "Correct! Generic server-side error code."},
+      {"text": "404", "feedback": "Incorrect. That is Not Found."},
+      {"text": "403", "feedback": "Incorrect. That is Forbidden."}
+    ],
+    "answer": 1,
+    "hint": "A 5xx error.",
+    "explanation": "If a user gets 500, the support team must check the application server logs immediately."
+  },
+  {
+    "question": "What is 'DR Runbook'?",
+    "options": [
+      {"text": "A book about jogging", "feedback": "Incorrect."},
+      {"text": "A step-by-step manual to restore services at the DR site", "feedback": "Correct! Essential for quick recovery."},
+      {"text": "A code repository", "feedback": "Incorrect."},
+      {"text": "A bank statement", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "A 'How-to' guide for DR.",
+    "explanation": "Runbooks ensure that failover is done correctly without missing critical technical steps."
+  },
+  {
+    "question": "In Kubernetes, what is a 'Pod'?",
+    "options": [
+      {"text": "A physical server", "feedback": "Incorrect."},
+      {"text": "The smallest deployable unit containing one or more containers", "feedback": "Correct! It is the core of K8s/OpenShift."},
+      {"text": "A database table", "feedback": "Incorrect."},
+      {"text": "A network cable", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Smallest unit in K8s.",
+    "explanation": "A Pod runs your application container (e.g., a WebLogic instance) inside the cluster."
+  },
+  {
+    "question": "Which command checks 'Uptime' and 'Load Average'?",
+    "options": [
+      {"text": "date", "feedback": "Incorrect."},
+      {"text": "uptime", "feedback": "Correct! Shows how long the system has been running."},
+      {"text": "who", "feedback": "Incorrect."},
+      {"text": "top", "feedback": "Correct (partially), but uptime is the specific command."}
+    ],
+    "answer": 1,
+    "hint": "Tells you the system's 'Up' time.",
+    "explanation": "Sudden reboots are caught by checking if the 'uptime' is only a few minutes."
+  },
+  {
+    "question": "What is 'Patching'?",
+    "options": [
+      {"text": "Deleting code", "feedback": "Incorrect."},
+      {"text": "Applying updates to fix bugs or security holes", "feedback": "Correct! Essential for VAPT compliance."},
+      {"text": "Buying new hardware", "feedback": "Incorrect."},
+      {"text": "Hiring consultants", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Fixing 'holes' (vulnerabilities).",
+    "explanation": "Regular patching of OS and Middleware is the best defense against cyberattacks."
+  },
+  {
+    "question": "What is 'Change Rollback'?",
+    "options": [
+      {"text": "A successful change", "feedback": "Incorrect."},
+      {"text": "Reverting to the previous state after a failed change", "feedback": "Correct! Minimizes downtime if an update fails."},
+      {"text": "A system update", "feedback": "Incorrect."},
+      {"text": "Deleting logs", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Rolling 'back' to the old version.",
+    "explanation": "Every Change Request must have a rollback plan approved by the CAB."
+  },
+  {
+    "question": "Which tool is for 'Real-time' DB performance monitoring?",
+    "options": [
+      {"text": "Oracle Enterprise Manager (OEM)", "feedback": "Correct! It shows top SQL and I/O bottlenecks visually."},
+      {"text": "Notepad", "feedback": "Incorrect."},
+      {"text": "Putty", "feedback": "Incorrect."},
+      {"text": "Windows Explorer", "feedback": "Incorrect."}
+    ],
+    "answer": 0,
+    "hint": "Oracle's 'Manager'.",
+    "explanation": "OEM helps DBAs identify 'Blocking Sessions' without typing complex SQL commands."
+  },
+  {
+    "question": "In a banking UPI ecosystem, what is the primary role of the 'PSP' (Payment Service Provider)?",
+    "options": [
+      {"text": "To print physical currency", "feedback": "Incorrect. Central banks (RBI) do this."},
+      {"text": "To provide the interface for users to link accounts and initiate transactions", "feedback": "Correct! Apps like BHIM or Google Pay act as PSPs."},
+      {"text": "To manage the bank's fixed deposits", "feedback": "Incorrect. This is a core banking function."},
+      {"text": "To verify the user's physical signature", "feedback": "Incorrect. UPI uses MPIN/Biometrics."}
+    ],
+    "answer": 1,
+    "hint": "It 'Provides' the 'Service' to the 'Payment' user.",
+    "explanation": "PSPs interact with the NPCI switch to route transaction requests to the respective banks."
+  },
+  {
+    "question": "Which command in Kubernetes/OpenShift is used to see the 'Events' (like Pulling Image, Scheduled, Failed) for a specific Pod?",
+    "options": [
+      {"text": "kubectl logs", "feedback": "Incorrect. Logs show application output, not infrastructure events."},
+      {"text": "kubectl describe pod <pod_name>", "feedback": "Correct! The 'Events' section at the bottom shows why a pod failed to start."},
+      {"text": "kubectl get pods", "feedback": "Incorrect. This only shows the high-level status (e.g., ImagePullBackOff)."},
+      {"text": "kubectl delete pod", "feedback": "Incorrect. This removes the pod."}
+    ],
+    "answer": 1,
+    "hint": "You need to 'describe' the resource to see its history.",
+    "explanation": "Using 'describe' is the first step when a pod is stuck in 'Pending' or 'ContainerCreating' status."
+  },
+  {
+    "question": "What is 'Data Encryption at Rest'?",
+    "options": [
+      {"text": "Encrypting data while it is being sent over the internet", "feedback": "Incorrect. That is 'Data in Transit'."},
+      {"text": "Encrypting data stored on physical disks or databases", "feedback": "Correct! It protects data if the hard drive is physically stolen."},
+      {"text": "Changing the database password every night", "feedback": "Incorrect. That is password rotation."},
+      {"text": "Stopping the database during the night", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "The data is 'resting' on the disk.",
+    "explanation": "RBI guidelines mandate encryption at rest for sensitive customer data like PAN and Aadhaar numbers."
+  },
+  {
+    "question": "In Docker, what is the purpose of the 'EXPOSE' instruction in a Dockerfile?",
+    "options": [
+      {"text": "To copy files into the container", "feedback": "Incorrect. That is COPY or ADD."},
+      {"text": "To document which ports the application intends to use", "feedback": "Correct! It informs the user which ports to publish."},
+      {"text": "To make the container run faster", "feedback": "Incorrect. It is a metadata instruction."},
+      {"text": "To hide the application code", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It 'exposes' a port to the network.",
+    "explanation": "EXPOSE 7001 tells the administrator that the WebLogic container inside will be listening on that port."
+  },
+  {
+    "question": "What does 'TPS' stand for in the context of a Payment Gateway performance?",
+    "options": [
+      {"text": "Total Payment Security", "feedback": "Incorrect."},
+      {"text": "Transactions Per Second", "feedback": "Correct! It measures the throughput capacity of the system."},
+      {"text": "Technical Power Supply", "feedback": "Incorrect."},
+      {"text": "Timed Process Schedule", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It's a measure of 'Transactions' over 'Time'.",
+    "explanation": "During peak hours, a bank's UPI switch must handle thousands of TPS without increasing latency."
+  },
+  {
+    "question": "Which AWS service is commonly used for hosting scalable, managed relational databases like PostgreSQL or Oracle?",
+    "options": [
+      {"text": "EC2", "feedback": "Incorrect. EC2 is for raw virtual servers."},
+      {"text": "RDS (Relational Database Service)", "feedback": "Correct! It automates backups, patching, and failover."},
+      {"text": "S3", "feedback": "Incorrect. S3 is for object/file storage."},
+      {"text": "Lambda", "feedback": "Incorrect. Lambda is for serverless code execution."}
+    ],
+    "answer": 1,
+    "hint": "It's a 'Service' for 'Relational Databases'.",
+    "explanation": "RDS reduces the operational burden on Production Support by automating routine DBA tasks."
+  },
+  {
+    "question": "What is the primary risk of 'SQL Injection'?",
+    "options": [
+      {"text": "The database becomes too large", "feedback": "Incorrect."},
+      {"text": "An attacker can execute unauthorized SQL commands via application inputs", "feedback": "Correct! This can lead to data theft or deletion."},
+      {"text": "The server hardware fails", "feedback": "Incorrect."},
+      {"text": "The internet connection slows down", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "The attacker 'injects' malicious 'SQL'.",
+    "explanation": "VAPT scans look for SQL injection vulnerabilities. Using 'Bind Variables' is the best way to prevent this."
+  },
+  {
+    "question": "In ITIL, which process manages the lifecycle of all 'Configuration Items' (CIs)?",
+    "options": [
+      {"text": "Incident Management", "feedback": "Incorrect."},
+      {"text": "SACM (Service Asset and Configuration Management)", "feedback": "Correct! It maintains the CMDB."},
+      {"text": "Change Management", "feedback": "Incorrect."},
+      {"text": "Problem Management", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It manages 'Assets' and 'Configurations'.",
+    "explanation": "SACM ensures that if you upgrade a server's RAM, the record is updated in the central database."
+  },
+  {
+    "question": "What is a 'Horizontal Pod Autoscaler' (HPA) in Kubernetes?",
+    "options": [
+      {"text": "A tool to restart failed pods", "feedback": "Incorrect. That is the Kubelet/Liveness probe."},
+      {"text": "A feature that automatically scales the number of pods based on CPU/RAM usage", "feedback": "Correct! It handles sudden traffic spikes."},
+      {"text": "A way to increase the size of a disk", "feedback": "Incorrect."},
+      {"text": "A manual way to stop pods", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It 'scales' 'horizontally' and 'automatically'.",
+    "explanation": "During a salary day spike, HPA can increase the number of 'Transaction Service' pods from 2 to 10 automatically."
+  },
+  {
+    "question": "What is the purpose of 'Two-Factor Authentication' (2FA)?",
+    "options": [
+      {"text": "To make logging in faster", "feedback": "Incorrect. It adds a step."},
+      {"text": "To add an extra layer of security beyond just a password", "feedback": "Correct! Usually a password + an OTP/Biometric."},
+      {"text": "To allow two users to share one account", "feedback": "Incorrect. This is a security risk."},
+      {"text": "To backup the password", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It requires 'Two' 'Factors'.",
+    "explanation": "RBI mandates 2FA (AFA - Additional Factor of Authentication) for all digital payments in India."
+  },
+  {
+    "question": "Which HTTP status code represents 'Unauthorized' access?",
+    "options": [
+      {"text": "400", "feedback": "Incorrect. That is Bad Request."},
+      {"text": "401", "feedback": "Correct! The user must provide valid credentials."},
+      {"text": "403", "feedback": "Incorrect. That is Forbidden (user is logged in but has no permission)."},
+      {"text": "404", "feedback": "Incorrect. That is Not Found."}
+    ],
+    "answer": 1,
+    "hint": "It's the first '4xx' error related to login.",
+    "explanation": "A 401 error in logs usually points to expired tokens or incorrect credentials in an API call."
+  },
+  {
+    "question": "In a Linux cluster, what is a 'VIP'?",
+    "options": [
+      {"text": "Very Important Process", "feedback": "Incorrect."},
+      {"text": "Virtual IP: An IP address that can float between two servers for high availability", "feedback": "Correct! If Server A fails, the VIP moves to Server B."},
+      {"text": "Volume Integrated Partition", "feedback": "Incorrect."},
+      {"text": "Verified Internet Protocol", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It's an 'IP' that is 'Virtual'.",
+    "explanation": "Applications point to the VIP so that the connection remains active even if one physical server goes down."
+  },
+  {
+    "question": "What is 'DDoS' (Distributed Denial of Service)?",
+    "options": [
+      {"text": "A way to increase server speed", "feedback": "Incorrect."},
+      {"text": "An attack that crashes a site by flooding it with traffic from multiple sources", "feedback": "Correct! It overwhelms the bandwidth or CPU."},
+      {"text": "A database backup technique", "feedback": "Incorrect."},
+      {"text": "A type of network cable", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It's a 'Distributed' 'Denial' of 'Service'.",
+    "explanation": "Banks use DDoS protection services (like Akamai or Cloudflare) to filter out malicious traffic before it reaches the data center."
+  },
+  {
+    "question": "Which command is used to check the SSL certificate of a remote website via the terminal?",
+    "options": [
+      {"text": "ping google.com", "feedback": "Incorrect."},
+      {"text": "openssl s_client -connect google.com:443", "feedback": "Correct! It shows the full certificate chain and expiry."},
+      {"text": "telnet google.com 443", "feedback": "Incorrect. It only checks if the port is open."},
+      {"text": "curl -X GET google.com", "feedback": "Incorrect. This shows the HTML content."}
+    ],
+    "answer": 1,
+    "hint": "Use the 'openssl' client utility.",
+    "explanation": "This is the fastest way for Production Support to verify if a partner bank's SSL certificate has expired."
+  },
+  {
+    "question": "What is 'Autoscaling' in a Cloud environment?",
+    "options": [
+      {"text": "Automatically changing the server password", "feedback": "Incorrect."},
+      {"text": "Dynamically adjusting the number of servers based on load", "feedback": "Correct! It saves cost during low traffic and ensures stability during peaks."},
+      {"text": "Automatically deleting old files", "feedback": "Incorrect."},
+      {"text": "Automatically restarting the DB", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It 'scales' 'automatically'.",
+    "explanation": "In AWS, an 'Auto Scaling Group' (ASG) ensures that a minimum number of healthy EC2 instances are always running."
+  },
+  {
+    "question": "In ITIL, what is the 'Service Desk'?",
+    "options": [
+      {"text": "The table where servers are kept", "feedback": "Incorrect."},
+      {"text": "The Single Point of Contact (SPOC) between the service provider and the users", "feedback": "Correct! They handle incidents and service requests."},
+      {"text": "A software for writing code", "feedback": "Incorrect."},
+      {"text": "The bank's physical help counter", "feedback": "Incorrect. In ITIL, it refers to IT support."}
+    ],
+    "answer": 1,
+    "hint": "It is the 'Desk' for 'Service' requests.",
+    "explanation": "The Service Desk 'owns' the ticket until it is closed, even if it is assigned to the Middleware or DBA team."
+  },
+  {
+    "question": "What is the primary function of 'Redo Logs' in Oracle?",
+    "options": [
+      {"text": "To store the application logs", "feedback": "Incorrect."},
+      {"text": "To record every change made to the DB for recovery during a crash", "feedback": "Correct! LGWR writes these logs before committing data."},
+      {"text": "To list all active users", "feedback": "Incorrect."},
+      {"text": "To speed up SELECT queries", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "They allow the DB to 'Redo' transactions.",
+    "explanation": "If the 'Archive' disk is full, Redo logs cannot be cleared, and the database will hang."
+  },
+  {
+    "question": "What is a 'Deadlock' in a multi-threaded application?",
+    "options": [
+      {"text": "The server has no power", "feedback": "Incorrect."},
+      {"text": "Two or more threads are waiting for each other to release locks, causing a permanent hang", "feedback": "Correct! Neither can proceed."},
+      {"text": "A thread that is running very fast", "feedback": "Incorrect."},
+      {"text": "A user who has forgotten their password", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It's a 'Lock' that is 'Dead' (cannot move).",
+    "explanation": "JVM Thread Dumps are the only way to identify the specific lines of code causing a deadlock."
+  },
+  {
+    "question": "Which Linux command displays the 'Total' and 'Available' RAM in Megabytes?",
+    "options": [
+      {"text": "df -m", "feedback": "Incorrect. This is for disk space."},
+      {"text": "free -m", "feedback": "Correct! It gives a quick snapshot of RAM and Swap usage."},
+      {"text": "top", "feedback": "Incorrect. While it shows memory, 'free' is more direct for totals."},
+      {"text": "vmstat", "feedback": "Incorrect. This shows kernel stats and I/O wait."}
+    ],
+    "answer": 1,
+    "hint": "The command sounds like 'unoccupied'.",
+    "explanation": "High 'Swap' usage in 'free -m' output indicates that the system is low on physical RAM."
+  },
+  {
+    "question": "What is 'Server Hardening'?",
+    "options": [
+      {"text": "Making the server case out of stronger metal", "feedback": "Incorrect."},
+      {"text": "Closing unnecessary ports and services to improve security", "feedback": "Correct! It reduces the attack surface."},
+      {"text": "Overclocking the CPU", "feedback": "Incorrect."},
+      {"text": "Installing more RAM", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Making the server 'harder' to hack.",
+    "explanation": "As part of Production Support, you must ensure 'Telnet' or 'FTP' are disabled as part of OS hardening."
+  },
+  {
+    "question": "In a Java application, what is the 'Heap'?",
+    "options": [
+      {"text": "A folder for old logs", "feedback": "Incorrect."},
+      {"text": "The memory used by the JVM for dynamic object allocation", "feedback": "Correct! This is where 'new' objects live."},
+      {"text": "The CPU cache", "feedback": "Incorrect."},
+      {"text": "The physical disk space", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It's the 'pile' of memory for objects.",
+    "explanation": "If the Heap is full, you get 'java.lang.OutOfMemoryError: Java heap space'."
+  },
+  {
+    "question": "What is 'Disaster Recovery' (DR) 'Failover'?",
+    "options": [
+      {"text": "The DR site has failed", "feedback": "Incorrect."},
+      {"text": "Switching operations from the primary site to the DR site during an outage", "feedback": "Correct! It ensures business continuity."},
+      {"text": "Testing the server backup", "feedback": "Incorrect."},
+      {"text": "Deleting the old database", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "Falling 'over' to the DR site.",
+    "explanation": "A 'Clean Failover' means zero data loss and minimal downtime for the banking customers."
+  },
+  {
+    "question": "Which status code means 'Internal Server Error'?",
+    "options": [
+      {"text": "404", "feedback": "Incorrect. That is Not Found."},
+      {"text": "500", "feedback": "Correct! It means the application code crashed or failed on the server side."},
+      {"text": "200", "feedback": "Incorrect. That is Success."},
+      {"text": "302", "feedback": "Incorrect. That is Redirect."}
+    ],
+    "answer": 1,
+    "hint": "It's a generic '5xx' error.",
+    "explanation": "When a user sees a '500' error, the support team must immediately check the application logs for a stack trace."
+  },
+  {
+    "question": "What is the purpose of a 'Heartbeat' in a WebLogic Cluster?",
+    "options": [
+      {"text": "To measure the room temperature", "feedback": "Incorrect."},
+      {"text": "To allow cluster members to monitor each other's availability", "feedback": "Correct! If heartbeats stop, the server is marked as 'failed'."},
+      {"text": "To sync the server clocks", "feedback": "Incorrect. That is NTP."},
+      {"text": "To send emails to the admin", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It checks if the server is 'alive'.",
+    "explanation": "Cluster heartbeats use Unicast or Multicast protocols to maintain the cluster 'View'."
+  },
+  {
+    "question": "What is the final step in a 'Change Management' process?",
+    "options": [
+      {"text": "Deleting the code", "feedback": "Incorrect."},
+      {"text": "PIR (Post-Implementation Review) and Closing the ticket", "feedback": "Correct! To ensure the change was successful and document lessons learned."},
+      {"text": "Starting the server", "feedback": "Incorrect."},
+      {"text": "Hiring a new developer", "feedback": "Incorrect."}
+    ],
+    "answer": 1,
+    "hint": "It's a 'Review' 'Post' implementation.",
+    "explanation": "A PIR ensures that if a change caused a 'Minor Incident', it is documented to prevent future occurrences."
   }
 ]
