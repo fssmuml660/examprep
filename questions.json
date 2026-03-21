@@ -1,14 +1,38 @@
 [
   {
-    "question": "A WebLogic Server instance is in 'STUCK' thread state. What is the best non-disruptive diagnostic action?",
+    "question": "A production WebLogic server is experiencing 'STUCK' threads. What is the most reliable diagnostic step to perform before any restart?",
     "options": [
-      {"text": "Restart the Managed Server", "feedback": "Incorrect. Restarting destroys the evidence needed to find the root cause."},
-      {"text": "Generate 3-5 Thread Dumps", "feedback": "Correct! This captures the execution state of threads without affecting availability."},
-      {"text": "Clear the tmp/cache folders", "feedback": "Incorrect. This requires a restart and is for class-loading issues, not stuck threads."},
-      {"text": "Increase JVM Heap Size", "feedback": "Incorrect. Without evidence of OutOfMemory, this is just a guess and won't fix a stuck thread."}
+      {"text": "Check the OS top command", "feedback": "Useful for CPU, but doesn't show why Java threads are blocked."},
+      {"text": "Generate 3-5 Thread Dumps", "feedback": "Correct! This provides a stack trace of every thread to identify locking issues."},
+      {"text": "Immediately restart the Managed Server", "feedback": "Incorrect. This is a disruptive 'blind' fix that clears diagnostic evidence."},
+      {"text": "Clear the WebLogic cache folders", "feedback": "Incorrect. Cache clearing is for class-loading or corruption issues, not runtime thread states."}
     ],
     "answer": 1,
-    "hint": "You need to 'freeze time' to see what the CPU is doing.",
-    "explanation": "Thread dumps are the 'gold standard' for STUCK threads. They show if threads are waiting on DB locks, network I/O, or infinite loops."
+    "hint": "You need to see the internal execution path of the Java process.",
+    "explanation": "Thread dumps allow you to see if threads are waiting on Database I/O, deadlocks, or external socket reads."
+  },
+  {
+    "question": "In an Oracle environment, which dynamic performance view is best for identifying the SID of a blocking session?",
+    "options": [
+      {"text": "V$DATABASE", "feedback": "Incorrect. This shows instance-level metadata like the DB name and ID."},
+      {"text": "DBA_OBJECTS", "feedback": "Incorrect. This lists all objects in the database, not active sessions."},
+      {"text": "V$SESSION", "feedback": "Correct! The BLOCKING_SESSION column identifies the SID holding the lock."},
+      {"text": "V$PARAMETER", "feedback": "Incorrect. This shows initialization parameters (spfile/pfile settings)."}
+    ],
+    "answer": 2,
+    "hint": "The answer starts with V$ and relates to user connections.",
+    "explanation": "V$SESSION is the primary view for monitoring real-time activity and identifying contention between users."
+  },
+  {
+    "question": "Which ITIL process is responsible for restoring a failed banking service as quickly as possible, even if it requires a temporary workaround?",
+    "options": [
+      {"text": "Problem Management", "feedback": "Incorrect. This focuses on the long-term 'Root Cause' analysis."},
+      {"text": "Change Management", "feedback": "Incorrect. This is about risk assessment for future modifications."},
+      {"text": "Incident Management", "feedback": "Correct! The priority here is 'Service Restoration' over 'Root Cause'."},
+      {"text": "Service Level Management", "feedback": "Incorrect. This defines the 'Targets' (SLAs), but doesn't perform the restoration."}
+    ],
+    "answer": 2,
+    "hint": "Think about the 'Speed' of restoration vs the 'Reason' for failure.",
+    "explanation": "Incident Management aims to minimize business impact by restoring normal service operation as fast as possible."
   }
 ]
