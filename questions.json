@@ -1,35 +1,38 @@
 [
   {
-    "question": "A WebLogic Server is in 'STUCK' thread state. What is the best non-disruptive diagnostic action?",
+    "question": "A WebLogic Server instance is stuck in a 'STUCK' thread state. Which diagnostic action should be prioritized?",
     "options": [
-      "Restart the Managed Server",
-      "Generate 3-5 Thread Dumps",
-      "Clear the tmp/cache folders",
-      "Increase JVM Heap Size"
+      "Immediately restart the managed server",
+      "Generate 3-5 Thread Dumps at 10-second intervals",
+      "Increase the JVM Heap Size",
+      "Check the OS CPU utilization"
     ],
     "answer": 1,
-    "hint": "You need to see what the code is doing at a specific moment."
+    "hint": "Think about capturing the execution state of the threads.",
+    "description": "Thread dumps (3-5 iterations) allow you to see exactly what execution threads are waiting on (e.g., DB locks or API waits) without killing the process. Restarting is a 'last resort' and destroys diagnostic evidence."
   },
   {
-    "question": "Which Oracle view identifies blocking sessions in real-time?",
+    "question": "In Oracle DB, which view is most direct for finding the 'Blocking Session' ID?",
     "options": [
       "DBA_TABLES",
-      "V$DATABASE",
       "V$SESSION",
-      "USER_INDEXES"
-    ],
-    "answer": 2,
-    "hint": "Look for a Dynamic Performance View starting with V$."
-  },
-  {
-    "question": "In ITIL, what is the primary goal of Problem Management?",
-    "options": [
-      "Fix the Incident as fast as possible",
-      "Identify the Root Cause and prevent recurrence",
-      "Log user complaints",
-      "Install new hardware"
+      "V$DATABASE",
+      "V$PARAMETER"
     ],
     "answer": 1,
-    "hint": "It's about the 'Why', not just the 'Now'."
+    "hint": "You need a dynamic performance view tracking active connections.",
+    "description": "V$SESSION contains the 'BLOCKING_SESSION' column. Querying this allows you to identify which SID is holding a lock that others are waiting for, essential for resolving database contention."
+  },
+  {
+    "question": "Under ITIL, what is the primary goal of Problem Management?",
+    "options": [
+      "Restore service as quickly as possible",
+      "Identify the root cause and prevent recurrence",
+      "Log user incidents in the ticketing tool",
+      "Manage hardware deployments"
+    ],
+    "answer": 1,
+    "hint": "Think about long-term stability versus a quick fix.",
+    "description": "While Incident Management focuses on speed (workarounds), Problem Management focuses on finding the underlying 'Root Cause' to prevent the issue from ever happening again."
   }
 ]
