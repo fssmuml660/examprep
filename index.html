@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBI Scale II - Prod Support Quiz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>CBI Scale II Study Portal</title>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f9; color: #333; display: flex; justify-content: center; padding: 20px; }
-        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { font-size: 1.5rem; color: #004a99; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        #question-text { font-size: 1.1rem; margin-bottom: 20px; font-weight: 600; line-height: 1.4; }
-        .option-btn { display: block; width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: 0.2s; }
-        .option-btn:hover { background: #eef6ff; border-color: #004a99; }
-        #hint-box { display: none; background: #fff8e1; border-left: 4px solid #ffc107; padding: 10px; margin-top: 15px; font-size: 0.9rem; }
-        #feedback { margin-top: 15px; font-weight: 600; }
-        .next-btn { display: none; width: 100%; padding: 12px; background: #004a99; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px; font-size: 1rem; }
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
+        #status { font-weight: bold; color: #004a99; }
+        .option-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; text-align: left; background: white; }
+        .option-btn:hover { background: #f8f9fa; }
+        #feedback-box { padding: 15px; border-radius: 8px; margin-top: 15px; display: none; background: #f9f9f9; }
+        #hint-box { padding: 10px; background: #fffde7; border-left: 5px solid #fbc02d; margin-top: 10px; display: none; }
+        .controls { display: flex; gap: 10px; margin-top: 20px; }
+        .hint-btn { background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .next-btn { background: #004a99; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; flex-grow: 1; }
     </style>
-    <style>
-    
-    .option-btn:disabled { cursor: not-allowed; opacity: 0.7; border-color: #004a99; background: #f0f0f0; }
-    </style>
-    
 </head>
 <body>
 
 <div class="quiz-container" id="quiz-app">
-    <h1>CBI Scale II Prep</h1>
-    <div id="quiz-content">
-        <p id="question-text">Loading questions...</p>
-        <div id="options-container"></div>
-        <div id="hint-box"></div>
-        <div id="feedback"></div>
-        <button class="next-btn" id="next-button" onclick="loadNextQuestion()">Next Question ➜</button>
+    <div class="header">
+        <span>CBI Scale II Prep</span>
+        <span id="status">Question 1 of ...</span>
+    </div>
+    <p id="question-text" style="font-size: 1.2rem; font-weight: 600;"></p>
+    <div id="options-container"></div>
+    <div id="hint-box"></div>
+    <div id="feedback-box"></div>
+    <div class="controls">
+        <button class="hint-btn" onclick="showHint()">Get Hint 💡</button>
+        <button class="next-btn" id="next-button" onclick="loadNextQuestion()" style="display:none;">Next Question ➜</button>
     </div>
 </div>
 
