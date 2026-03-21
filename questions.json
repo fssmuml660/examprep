@@ -1,0 +1,35 @@
+[
+  {
+    "question": "A WebLogic Server is in 'STUCK' thread state. What is the best non-disruptive diagnostic action?",
+    "options": [
+      "Restart the Managed Server",
+      "Generate 3-5 Thread Dumps",
+      "Clear the tmp/cache folders",
+      "Increase JVM Heap Size"
+    ],
+    "answer": 1,
+    "hint": "You need to see what the code is doing at a specific moment."
+  },
+  {
+    "question": "Which Oracle view identifies blocking sessions in real-time?",
+    "options": [
+      "DBA_TABLES",
+      "V$DATABASE",
+      "V$SESSION",
+      "USER_INDEXES"
+    ],
+    "answer": 2,
+    "hint": "Look for a Dynamic Performance View starting with V$."
+  },
+  {
+    "question": "In ITIL, what is the primary goal of Problem Management?",
+    "options": [
+      "Fix the Incident as fast as possible",
+      "Identify the Root Cause and prevent recurrence",
+      "Log user complaints",
+      "Install new hardware"
+    ],
+    "answer": 1,
+    "hint": "It's about the 'Why', not just the 'Now'."
+  }
+]
