@@ -1,147 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBI Scale II Study Portal</title>
     <style>
-        :root { --primary: #004a99; --success: #2e7d32; --error: #d32f2f; --bg: #f0f2f5; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .quiz-container { background: white; width: 100%; max-width: 650px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; margin-bottom: 25px; padding-bottom: 15px; }
-        #status { font-weight: 600; color: var(--primary); font-size: 0.9rem; }
-        .app-title { font-weight: bold; font-size: 1.2rem; color: #444; }
-
-        #question-text { font-size: 1.25rem; font-weight: 600; line-height: 1.5; margin-bottom: 20px; color: #222; }
-        
-        .option-btn { display: block; width: 100%; padding: 15px; margin: 12px 0; border: 1.5px solid #dfe3e8; border-radius: 10px; cursor: pointer; text-align: left; background: white; font-size: 1rem; transition: all 0.2s; }
-        .option-btn:hover:not(:disabled) { background: #f8faff; border-color: var(--primary); transform: translateY(-1px); }
-        .option-btn:disabled { cursor: not-allowed; opacity: 0.8; }
-
-        #feedback-box { padding: 15px; border-radius: 10px; margin-top: 20px; display: none; line-height: 1.5; font-size: 0.95rem; border: 1px solid transparent; }
-        .feedback-correct { background: #e8f5e9; border-color: #c8e6c9; color: var(--success); }
-        .feedback-wrong { background: #ffebee; border-color: #ffcdd2; color: var(--error); }
-
-        #hint-box { padding: 15px; background: #fffde7; border-left: 5px solid #fbc02d; margin-top: 15px; display: none; border-radius: 5px; font-style: italic; color: #555; }
-        
-        .controls { display: flex; gap: 15px; margin-top: 25px; }
-        .btn { padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 1rem; transition: 0.2s; }
-        .hint-btn { background: #6c757d; color: white; }
-        .next-btn { background: var(--primary); color: white; flex-grow: 1; display: none; }
-        .btn:hover { opacity: 0.9; }
-    </style>
-</head>
-<body>
-
-<div class="quiz-container" id="quiz-app">
-    <div class="header">
-        <span class="app-title">CBI Production Support</span>
-        <span id="status">Loading...</span>
-    </div>
-
-    <div id="quiz-content">
-        <p id="question-text">Connecting to question bank...</p>
-        <div id="options-container"></div>
-        
-        <div id="hint-box"></div>
-        <div id="feedback-box"></div>
-
-        <div class="controls" style="display: flex; justify-content: space-between; gap: 10px; margin-top: 25px;">
-    <button class="btn hint-btn" id="back-button" onclick="loadPrevQuestion()" style="background:#6c757d; visibility:hidden;">⬅ Back</button>
-    <button class="btn hint-btn" id="hint-button" onclick="showHint()" style="background:#fbc02d; color:#000;">Hint 💡</button>
-    <button class="btn next-btn" id="next-button" onclick="loadNextQuestion()" style="background:#004a99; color:white; flex-grow:1; display:none;">Next ➜</button>
-</div>
-
-    </div>
-</div>
-
-<script>
-    let questions = [];
-    let currentIndex = 0;
-    let score = 0;
-
-    // Load data from JSON
-    async function initQuiz() {
-        try {
-            const response = await fetch('questions.json');
-            if (!response.ok) throw new Error("Could not find questions.json");
-            questions = await response.json();
-            displayQuestion();
-        } catch (error) {
-            document.getElementById('question-text').innerHTML = 
-                `<span style="color:red">Error: ${error.message}</span><br><small>Make sure questions.json is in the same folder and you are viewing through a server (GitHub Pages or VS Code Live Server).</small>`;
+        :root {
+            --primary: #4f6ef7;
+            --primary-dark: #3a57d4;
+            --primary-glow: rgba(79,110,247,0.22);
+            --success: #22c55e;
+            --success-bg: #f0fdf4;
+            --success-border: #bbf7d0;
+            --error: #ef4444;
+            --error-bg: #fef2f2;
+            --error-border: #fecaca;
+            --warning: #f59e0b;
+            --skip-color: #8b5cf6;
+            --bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 6px -1px rgba(0,0,0,0.07),0 20px 50px -10px rgba(0,0,0,0.12);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --option-bg: #ffffff;
+            --option-hover-bg: #f8faff;
+            --hint-bg: #fffbeb;
+            --hint-border: #fcd34d;
+            --progress-bg: #e2e8f0;
+            --progress-fill: linear-gradient(90deg,#4f6ef7,#7c3aed);
+            --header-gradient: linear-gradient(135deg,#4f6ef7 0%,#7c3aed 100%);
+            --toggle-bg: #e2e8f0;
+            --transition: 0.22s ease;
         }
-    }
-
-    function displayQuestion() {
-        const q = questions[currentIndex];
-        
-        // Update UI
-        document.getElementById('status').innerText = `Progress: ${currentIndex + 1} / ${questions.length}`;
-        document.getElementById('question-text').innerText = q.question;
-        
-        const container = document.getElementById('options-container');
-        container.innerHTML = "";
-        
-        document.getElementById('hint-box').style.display = "none";
-        document.getElementById('feedback-box').style.display = "none";
-        document.getElementById('next-button').style.display = "none";
-        document.getElementById('hint-button').style.display = "block";
-
-        q.options.forEach((opt, index) => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerText = opt.text;
-            btn.onclick = () => checkAnswer(index);
-            container.appendChild(btn);
-        });
-    }
-
-    function showHint() {
-        const hb = document.getElementById('hint-box');
-        hb.innerText = "💡 Hint: " + questions[currentIndex].hint;
-        hb.style.display = "block";
-    }
-
-    function checkAnswer(selectedIndex) {
-        const q = questions[currentIndex];
-        const fb = document.getElementById('feedback-box');
-        const nextBtn = document.getElementById('next-button');
-        const btns = document.querySelectorAll('.option-btn');
-
-        fb.style.display = "block";
-        
-        if (selectedIndex === q.answer) {
-            fb.className = "feedback-correct";
-            fb.innerHTML = `<strong>Correct! ✅</strong><br>${q.options[selectedIndex].feedback}<br><br><strong>Explanation:</strong> ${q.explanation}`;
-            nextBtn.style.display = "block";
-            document.getElementById('hint-button').style.display = "none";
-            btns.forEach(b => b.disabled = true);
-            score++;
-        } else {
-            fb.className = "feedback-wrong";
-            fb.innerHTML = `<strong>Not quite. ❌</strong><br>${q.options[selectedIndex].feedback}`;
+        [data-theme="dark"] {
+            --primary: #6b8aff;
+            --primary-glow: rgba(107,138,255,0.28);
+            --success: #4ade80;
+            --success-bg: #052e16;
+            --success-border: #166534;
+            --error: #f87171;
+            --error-bg: #2d0d0d;
+            --error-border: #7f1d1d;
+            --warning: #fbbf24;
+            --skip-color: #a78bfa;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-shadow: 0 4px 6px -1px rgba(0,0,0,0.4),0 20px 50px -10px rgba(0,0,0,0.5);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #334155;
+            --option-bg: #1e293b;
+            --option-hover-bg: #263048;
+            --hint-bg: #1c1a07;
+            --hint-border: #854d0e;
+            --progress-bg: #334155;
+            --progress-fill: linear-gradient(90deg,#6b8aff,#a78bfa);
+            --header-gradient: linear-gradient(135deg,#3b4fd4 0%,#6d28d9 100%);
+            --toggle-bg: #4f6ef7;
         }
-    }
 
-    function loadNextQuestion() {
-        currentIndex++;
-        if (currentIndex < questions.length) {
-            displayQuestion();
-        } else {
-            document.getElementById('quiz-app').innerHTML = `
-                <div style="text-align:center; padding: 20px;">
-                    <h2 style="color:var(--primary)">Batch Complete! 🎓</h2>
-                    <p style="font-size:1.2rem">Final Score: <strong>${score} / ${questions.length}</strong></p>
-                    <button class="btn next-btn" style="display:inline-block" onclick="location.reload()">Restart Quiz</button>
-                </div>`;
-        }
-    }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 16px 60px;transition:background var(--transition),color var(--transition);color:var(--text-primary)}
+        .app-wrapper{width:100%;max-width:740px}
 
-    // Start
-    initQuiz();
-</script>
+        /* TOP BAR */
+        .top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 2px}
+        .app-brand{display:flex;align-items:center;gap:10px}
+        .brand-icon{width:40px;height:40px;background:var(--header-gradient);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 4px 12px var(--primary-glow);flex-shrink:0}
+        .brand-text{font-size:1.05rem;font-weight:800;color:var(--text-primary);line-height:1.2}
+        .brand-sub{font-size:0.7rem;color:var(--text-muted);font-weight:400}
+        .top-controls{display:flex;align-items:center;gap:8px}
 
-</body>
-</html>
+        /* ICON BUTTONS */
