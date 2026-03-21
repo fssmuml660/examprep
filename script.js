@@ -1,5 +1,6 @@
 let questions = [];
 let currentIndex = 0;
+let score = 0;
 
 fetch('questions.json')
     .then(response => response.json())
@@ -10,47 +11,51 @@ fetch('questions.json')
 
 function displayQuestion() {
     const q = questions[currentIndex];
+    
+    // Update Exam Status (Progress)
+    document.getElementById('status').innerText = `Question ${currentIndex + 1} of ${questions.length}`;
+    
+    document.getElementById('question-text').innerText = q.question;
     const optionsContainer = document.getElementById('options-container');
-    const hintBox = document.getElementById('hint-box');
-    const feedback = document.getElementById('feedback');
-    const nextBtn = document.getElementById('next-button');
-
-    // Reset UI for new question
-    feedback.innerHTML = "";
-    hintBox.style.display = "none";
-    nextBtn.style.display = "none";
     optionsContainer.innerHTML = "";
-
-    document.getElementById('question-text').innerText = `${currentIndex + 1}. ${q.question}`;
+    
+    document.getElementById('hint-box').style.display = "none";
+    document.getElementById('feedback-box').style.display = "none";
+    document.getElementById('next-button').style.display = "none";
 
     q.options.forEach((opt, index) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.innerText = opt;
-        btn.onclick = () => checkAnswer(index, q);
+        btn.innerText = opt.text;
+        btn.onclick = () => checkAnswer(index);
         optionsContainer.appendChild(btn);
     });
 }
 
-function checkAnswer(selectedIndex, questionObj) {
-    const feedback = document.getElementById('feedback');
+function showHint() {
     const hintBox = document.getElementById('hint-box');
-    const nextBtn = document.getElementById('next-button');
+    hintBox.innerText = "💡 Hint: " + questions[currentIndex].hint;
+    hintBox.style.display = "block";
+}
 
-    if (selectedIndex === questionObj.answer) {
-        // Correct Answer Logic
-        feedback.innerHTML = `<span style="color: green;">Correct! ✅</span><br><div style="margin-top:10px; font-weight:normal; font-size:0.9rem; background:#e8f5e9; padding:10px; border-radius:5px;"><strong>Analysis:</strong> ${questionObj.description}</div>`;
+function checkAnswer(selectedIndex) {
+    const q = questions[currentIndex];
+    const feedbackBox = document.getElementById('feedback-box');
+    const nextBtn = document.getElementById('next-button');
+    const buttons = document.querySelectorAll('.option-btn');
+
+    // Show option-specific feedback
+    feedbackBox.style.display = "block";
+    feedbackBox.innerHTML = `<strong>Result:</strong> ${q.options[selectedIndex].feedback}`;
+    
+    if (selectedIndex === q.answer) {
+        feedbackBox.style.color = "#2e7d32";
+        feedbackBox.innerHTML += `<br><br><strong>Deep Dive:</strong> ${q.explanation}`;
         nextBtn.style.display = "block";
-        hintBox.style.display = "none";
-        
-        // Disable buttons after correct answer
-        const buttons = document.querySelectorAll('.option-btn');
         buttons.forEach(b => b.disabled = true);
+        score++;
     } else {
-        // Incorrect Answer Logic
-        feedback.innerHTML = `<span style="color: red;">Not quite. Try again! ❌</span>`;
-        hintBox.innerHTML = `<strong>💡 Hint:</strong> ${questionObj.hint}`;
-        hintBox.style.display = "block";
+        feedbackBox.style.color = "#d32f2f";
     }
 }
 
@@ -59,6 +64,6 @@ function loadNextQuestion() {
     if (currentIndex < questions.length) {
         displayQuestion();
     } else {
-        document.getElementById('quiz-content').innerHTML = "<h2>Batch Complete! 🎓</h2><p>Excellent progress for the Central Bank of India Scale II exam.</p>";
+        document.getElementById('quiz-app').innerHTML = `<h2>Exam Finished! 🎓</h2><p>Your Final Score: ${score} / ${questions.length}</p>`;
     }
 }
