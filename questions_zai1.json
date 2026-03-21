@@ -1,0 +1,1022 @@
+[
+  {
+    "question": "A banking application hosted on WebLogic shows intermittent slowness during peak hours. Thread dumps indicate multiple threads in WAITING state, and DB shows high active sessions. What is the most probable root cause?",
+    "options": [
+      {"text": "High JVM heap usage", "feedback": "While high heap usage can cause slowness, the thread state and DB sessions point elsewhere."},
+      {"text": "Database connection pool exhaustion", "feedback": "Correct! This matches the symptoms: waiting threads and high DB sessions."},
+      {"text": "SSL misconfiguration", "feedback": "SSL issues would likely cause connection failures, not this specific pattern."},
+      {"text": "Disk space issue", "feedback": "Disk space problems typically cause errors rather than slowness."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes threads to wait and increases database sessions simultaneously.",
+    "explanation": "When the connection pool is exhausted, application threads wait for connections, causing the WAITING state in thread dumps. Meanwhile, the database shows high active sessions because connections aren't being properly released back to the pool."
+  },
+  {
+    "question": "During a critical transaction processing period, a WebLogic cluster shows that only one node is handling 90% of the load while others are nearly idle. The load balancer appears to be functioning correctly. What is the most likely cause?",
+    "options": [
+      {"text": "Network partition between nodes", "feedback": "This would likely cause complete unavailability of some nodes, not uneven load distribution."},
+      {"text": "Sticky session configuration without session replication", "feedback": "Correct! This explains why sessions stick to one node and others remain idle."},
+      {"text": "JVM heap size difference between nodes", "feedback": "While this could affect performance, it wouldn't cause such extreme load imbalance."},
+      {"text": "Database connection pool size mismatch", "feedback": "This would affect all nodes similarly, not cause load imbalance."}
+    ],
+    "answer": 1,
+    "hint": "Consider session management in a clustered environment.",
+    "explanation": "When sticky sessions are enabled without proper session replication, all requests for a given session are directed to the same server. If a large percentage of active sessions were initially established on one node, that node would continue handling most of the load."
+  },
+  {
+    "question": "A production Oracle RAC database is experiencing intermittent node evictions during nightly batch jobs. The alert log shows 'ORA-29770: global enqueue process died' errors. What is the most appropriate first action?",
+    "options": [
+      {"text": "Increase the size of the SGA on all nodes", "feedback": "While SGA size can affect performance, it's unlikely to cause node evictions."},
+      {"text": "Check the interconnect network configuration and latency", "feedback": "Correct! Interconnect issues are a common cause of node evictions in RAC."},
+      {"text": "Immediately restart the failed node", "feedback": "This is a temporary fix that doesn't address the root cause."},
+      {"text": "Disable the nightly batch jobs", "feedback": "This would avoid the issue but doesn't solve the underlying problem."}
+    ],
+    "answer": 1,
+    "hint": "RAC nodes communicate through a specific network path that's critical for cluster operations.",
+    "explanation": "ORA-29770 errors typically indicate problems with the global enqueue service (GES), which relies heavily on the interconnect network. Checking network latency, packet loss, and configuration should be the first step in troubleshooting RAC node evictions."
+  },
+  {
+    "question": "After deploying a new application version to WebLogic, users report that the application fails to start with 'ClassNotFoundException' for a third-party library. The library is present in the deployed WAR file's WEB-INF/lib directory. What is the most likely cause?",
+    "options": [
+      {"text": "Corrupted WAR file during deployment", "feedback": "This would likely cause multiple errors, not just a specific class not found."},
+      {"text": "Class loading conflict with WebLogic system libraries", "feedback": "Correct! WebLogic's class loading hierarchy can cause conflicts with application libraries."},
+      {"text": "Incorrect Java version compatibility", "feedback": "This would typically cause different error messages like UnsupportedClassVersionError."},
+      {"text": "Missing manifest Class-Path entry", "feedback": "For libraries in WEB-INF/lib, this isn't required for class loading."}
+    ],
+    "answer": 1,
+    "hint": "WebLogic has a specific class loading order that can cause conflicts.",
+    "explanation": "WebLogic's class loading hierarchy loads system classes before application classes. If a class with the same name exists in WebLogic's system libraries but with different implementation, it can cause ClassNotFoundException even when the correct JAR is in the application's lib directory."
+  },
+  {
+    "question": "A production database is experiencing 'ORA-00054: resource busy and acquire with NOWAIT specified' errors during peak hours. The AWR report shows numerous row-level locks on the ACCOUNTS table. What is the most effective long-term solution?",
+    "options": [
+      {"text": "Increase the undo tablespace size", "feedback": "This would help with long-running queries, not lock contention."},
+      {"text": "Implement application-level row-level locking", "feedback": "This would likely increase contention, not reduce it."},
+      {"text": "Reduce transaction scope and duration in the application", "feedback": "Correct! Shorter transactions reduce lock contention."},
+      {"text": "Kill the blocking sessions immediately", "feedback": "This is a reactive measure, not a long-term solution."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes lock contention in the first place.",
+    "explanation": "ORA-00054 errors occur when sessions try to access resources locked by other sessions. The most effective long-term solution is to reduce transaction scope and duration in the application, minimizing the time locks are held and thus reducing contention."
+  },
+  {
+    "question": "A WebLogic server is experiencing frequent 'Stuck Thread' alerts during business hours. Thread analysis shows these threads are consistently blocked on I/O operations to a legacy mainframe system. What is the most appropriate immediate action?",
+    "options": [
+      {"text": "Increase the StuckThreadMaxTime value", "feedback": "This only masks the symptom without addressing the root cause."},
+      {"text": "Implement timeout mechanisms for mainframe calls", "feedback": "Correct! This prevents threads from waiting indefinitely."},
+      {"text": "Restart the WebLogic server during the next maintenance window", "feedback": "This is a temporary fix that doesn't prevent recurrence."},
+      {"text": "Allocate more threads to the execute queue", "feedback": "This would likely increase the number of stuck threads, not solve the issue."}
+    ],
+    "answer": 1,
+    "hint": "Consider how to prevent threads from waiting indefinitely on external systems.",
+    "explanation": "When threads are blocked on I/O to external systems, implementing appropriate timeout mechanisms prevents them from becoming stuck. This allows the application to handle the situation gracefully rather than having threads wait indefinitely."
+  },
+  {
+    "question": "A production Oracle Data Guard setup shows that the standby database is lagging behind the primary by several hours during peak load. The alert log on the primary shows 'ARCH: Archival stopped, error encountered. LGWR: Continuing' messages. What is the most likely cause?",
+    "options": [
+      {"text": "Network bandwidth limitation between primary and standby", "feedback": "This would typically cause consistent lag, not error messages."},
+      {"text": "Insufficient space in the archive log destination", "feedback": "Correct! This explains why archival stopped but LGWR continues."},
+      {"text": "Standby database in mount state instead of read-only", "feedback": "This would prevent log application but wouldn't cause archival errors on primary."},
+      {"text": "Maximum number of archiver processes reached", "feedback": "This would show different error messages like 'ARCH: Unable to archive log'."}
+    ],
+    "answer": 1,
+    "hint": "The error message indicates a problem with the archiving process itself.",
+    "explanation": "When the archive log destination runs out of space, the archiver process (ARCH) cannot write new archive logs, causing it to stop. However, LGWR continues writing to the online redo logs, which explains why the primary database continues functioning but the standby falls behind."
+  },
+  {
+    "question": "A WebLogic managed server fails to start with the error 'Server failed to bind to the requested port'. The admin server is running normally, and other managed servers in the cluster start successfully. What is the most likely cause?",
+    "options": [
+      {"text": "Corrupted server configuration file", "feedback": "This would likely cause different error messages during startup."},
+      {"text": "Another process is already using the server's port", "feedback": "Correct! This directly explains the binding failure."},
+      {"text": "Network interface card failure", "feedback": "This would likely affect other servers on the same machine as well."},
+      {"text": "Insufficient memory allocation", "feedback": "This would cause OutOfMemoryError, not port binding issues."}
+    ],
+    "answer": 1,
+    "hint": "Consider what prevents a process from binding to a specific port.",
+    "explanation": "The error 'Server failed to bind to the requested port' typically occurs when another process is already using that port. This could be a previous instance of the server that didn't shut down properly or a completely different application that happens to use the same port."
+  },
+  {
+    "question": "An Oracle database is experiencing high redo generation during batch processing, causing archive log destination to fill up quickly. The batch processes perform numerous small updates rather than bulk operations. What is the most effective optimization?",
+    "options": [
+      {"text": "Increase the size of the redo log buffer", "feedback": "This might help slightly but won't address the root cause of excessive redo generation."},
+      {"text": "Implement NOLOGGING for the batch operations", "feedback": "This would reduce redo but at the cost of recoverability, which is unacceptable for banking systems."},
+      {"text": "Modify the batch processes to use bulk operations", "feedback": "Correct! Bulk operations generate significantly less redo than many small updates."},
+      {"text": "Increase the archive log destination size", "feedback": "This only postpones the problem rather than solving it."}
+    ],
+    "answer": 2,
+    "hint": "Consider how different types of DML operations affect redo generation.",
+    "explanation": "Bulk operations (like FORALL in PL/SQL or array inserts) generate significantly less redo than many individual small updates. Modifying the batch processes to use bulk operations would reduce redo generation at the source, addressing the root cause of the issue."
+  },
+  {
+    "question": "A WebLogic application shows 'java.sql.SQLException: No more data to read from socket' errors intermittently during peak hours. The database server shows no issues, and network connectivity tests are successful. What is the most likely cause?",
+    "options": [
+      {"text": "Database connection pool exhaustion", "feedback": "This would typically cause 'Cannot get connection' errors, not socket errors."},
+      {"text": "Firewall session timeout on idle connections", "feedback": "Correct! This explains why connections work initially but fail later."},
+      {"text": "Oracle shared server configuration issue", "feedback": "This would typically show different error messages."},
+      {"text": "JDBC driver incompatibility", "feedback": "This would likely cause consistent errors, not intermittent ones."}
+    ],
+    "answer": 1,
+    "hint": "Consider what happens to idle connections in a network environment with security devices.",
+    "explanation": "Firewalls often have session timeout policies that terminate idle TCP connections. When the application tries to use a connection that has been terminated by the firewall, it results in 'No more data to read from socket' errors. This typically happens during peak hours when connections are established but then idle between transactions."
+  },
+  {
+    "question": "A production Oracle database is experiencing 'ORA-01555: snapshot too old' errors during long-running reports. The UNDO tablespace has 50GB of space with autoextend enabled. What is the most appropriate solution?",
+    "options": [
+      {"text": "Increase the UNDO tablespace size further", "feedback": "This is a temporary fix that may not address the root cause."},
+      {"text": "Increase the UNDO_RETENTION parameter", "feedback": "This would help but requires sufficient undo space to be effective."},
+      {"text": "Optimize the long-running queries to use less undo", "feedback": "Correct! This addresses the root cause by reducing undo consumption."},
+      {"text": "Schedule the reports during off-peak hours", "feedback": "This avoids the issue but doesn't fix the underlying problem."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes 'snapshot too old' errors beyond just undo space.",
+    "explanation": "ORA-01555 errors occur when a transaction needs undo information that has been overwritten. While increasing undo space or retention can help, the most effective solution is to optimize the queries to consume less undo, either by reducing execution time or by accessing data more efficiently."
+  },
+  {
+    "question": "A WebLogic cluster shows that sessions are frequently failing over to other nodes during normal operation, causing users to lose their work. The application doesn't use session replication. What is the most likely cause?",
+    "options": [
+      {"text": "Network connectivity issues between nodes", "feedback": "This would cause complete node failure, not just session failover."},
+      {"text": "Frequent garbage collection pauses", "feedback": "This would cause temporary unresponsiveness but not session failover."},
+      {"text": "Health check misconfiguration in the load balancer", "feedback": "Correct! This explains why nodes are marked as unhealthy unnecessarily."},
+      {"text": "Application deployment in progress", "feedback": "This would cause planned failover, not frequent unexpected failovers."}
+    ],
+    "answer": 2,
+    "hint": "Consider what determines if a node is considered healthy by the load balancer.",
+    "explanation": "If the health check configuration in the load balancer is too aggressive or checks for conditions that temporarily fail during normal operation, it might incorrectly mark nodes as unhealthy, causing unnecessary session failover."
+  },
+  {
+    "question": "An Oracle RAC database shows that one node is consistently handling 80% of the workload despite having identical hardware configuration. The AWR report shows higher service times on the other nodes. What is the most likely cause?",
+    "options": [
+      {"text": "Incorrect load balancer configuration", "feedback": "Database load balancing is handled by the RAC cluster, not an external load balancer."},
+      {"text": "Service configuration with preferred instances", "feedback": "Correct! This explains why workload is directed to specific nodes."},
+      {"text": "Network connectivity issues on less utilized nodes", "feedback": "This would likely cause node eviction, not just reduced utilization."},
+      {"text": "SGA size differences between nodes", "feedback": "The scenario states nodes have identical hardware, implying similar configuration."}
+    ],
+    "answer": 1,
+    "hint": "Oracle RAC has specific mechanisms for directing workload to certain nodes.",
+    "explanation": "In Oracle RAC, services can be configured with preferred instances, which directs connections primarily to those instances. If a service is configured with preferred instances that don't include all nodes, workload will be unevenly distributed regardless of hardware capabilities."
+  },
+  {
+    "question": "A WebLogic application is experiencing 'java.lang.OutOfMemoryError: PermGen space' errors after several days of uptime. The heap usage appears normal, and the application doesn't use excessive static classes. What is the most likely cause?",
+    "options": [
+      {"text": "Memory leak in the application code", "feedback": "Memory leaks typically affect heap space, not PermGen."},
+      {"text": "Frequent hot deployments without server restart", "feedback": "Correct! This is a common cause of PermGen exhaustion."},
+      {"text": "Insufficient initial PermGen size", "feedback": "While this could cause issues, it would typically manifest earlier, not after several days."},
+      {"text": "Excessive use of string concatenation", "feedback": "This affects heap space, not PermGen."}
+    ],
+    "answer": 1,
+    "hint": "Consider what happens to class metadata during redeployments.",
+    "explanation": "When applications are redeployed without restarting the server, the old class metadata remains in PermGen space while new classes are loaded. Over multiple deployments, this can exhaust PermGen space even if the application itself doesn't have memory leaks."
+  },
+  {
+    "question": "A production Oracle database shows high 'log file sync' wait times during peak transaction processing. The application commits frequently after small transactions. What is the most effective optimization?",
+    "options": [
+      {"text": "Increase the size of the redo log files", "feedback": "This would help with log file parallel write waits, not log file sync."},
+      {"text": "Move redo logs to faster storage", "feedback": "This would help but may not be the most effective solution."},
+      {"text": "Implement batch commits in the application", "feedback": "Correct! This reduces the frequency of log sync operations."},
+      {"text": "Increase the COMMIT_WRITE parameter to 'BATCH'", "feedback": "This could improve performance but at the risk of data loss, which is unacceptable for banking systems."}
+    ],
+    "answer": 2,
+    "hint": "Consider what triggers 'log file sync' waits and how to reduce their frequency.",
+    "explanation": "'Log file sync' waits occur when LGWR must flush redo to disk during commits. By implementing batch commits in the application, the frequency of these operations is reduced, significantly improving performance during high transaction periods."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.net.SocketException: Too many open files' errors during peak hours. The server process shows an increasing number of open file descriptors over time. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient file descriptor limit at the OS level", "feedback": "This would cause immediate errors, not a gradual increase."},
+      {"text": "File handle leak in the application code", "feedback": "Correct! This explains the gradual increase in open file descriptors."},
+      {"text": "Excessive logging configuration", "feedback": "This would consume disk space, not necessarily file descriptors."},
+      {"text": "Database connection leak", "feedback": "This would cause connection pool exhaustion, not file descriptor issues."}
+    ],
+    "answer": 1,
+    "hint": "Consider what consumes file descriptors in a Java application.",
+    "explanation": "When application code opens files or sockets but doesn't properly close them, file descriptors are leaked. Over time, this increases the number of open file descriptors until the OS limit is reached, causing 'Too many open files' errors."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-00060: deadlock detected' errors during batch processing. The deadlock graph shows conflicting row-level locks on the TRANSACTIONS table. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the deadlock detection timeout", "feedback": "This would only delay error detection, not prevent deadlocks."},
+      {"text": "Kill the blocking sessions immediately", "feedback": "This is a reactive measure, not a preventive solution."},
+      {"text": "Ensure consistent order of table access in all transactions", "feedback": "Correct! This prevents deadlocks by eliminating circular wait conditions."},
+      {"text": "Increase the size of the undo tablespace", "feedback": "This would help with long-running queries, not deadlocks."}
+    ],
+    "answer": 2,
+    "hint": "Consider what conditions are necessary for a deadlock to occur.",
+    "explanation": "Deadlocks occur when transactions wait for each other in a circular chain. By ensuring that all transactions access tables in the same order, the circular wait condition is eliminated, preventing deadlocks from occurring."
+  },
+  {
+    "question": "A WebLogic cluster shows that managed servers are frequently shutting down with 'Out of memory' errors during peak hours. Heap analysis shows a large number of java.lang.String objects that cannot be garbage collected. What is the most likely cause?",
+    "options": [
+      {"text": "Excessive logging in the application", "feedback": "While logging can create strings, they typically don't cause memory leaks."},
+      {"text": "String concatenation in a long-running loop", "feedback": "This creates temporary strings that are eligible for garbage collection."},
+      {"text": "Substring usage on large strings", "feedback": "Before Java 7u6, this could cause memory leaks by holding references to the original string."},
+      {"text": "String intern() usage in the application", "feedback": "Correct! This can cause memory leaks as interned strings are never garbage collected."}
+    ],
+    "answer": 3,
+    "hint": "Consider which String operations can prevent garbage collection.",
+    "explanation": "The String.intern() method adds strings to the string pool, where they remain for the lifetime of the JVM. Excessive use of String.intern(), especially with dynamically generated strings, can cause memory leaks as these strings cannot be garbage collected."
+  },
+  {
+    "question": "A production Oracle database shows increasing 'library cache pin' wait times during peak hours. The AWR report shows high hard parse rates. What is the most effective optimization?",
+    "options": [
+      {"text": "Increase the SHARED_POOL_SIZE parameter", "feedback": "This might help but doesn't address the root cause of high hard parses."},
+      {"text": "Increase the SESSION_CACHED_CURSORS parameter", "feedback": "This helps with soft parses, not hard parses."},
+      {"text": "Implement bind variables in the application", "feedback": "Correct! This reduces hard parsing by reusing execution plans."},
+      {"text": "Increase the CURSOR_SHARING parameter to 'FORCE'", "feedback": "This is a workaround that can cause suboptimal execution plans."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes high hard parse rates in Oracle.",
+    "explanation": "High hard parse rates typically occur when the application doesn't use bind variables, causing each SQL statement with different literal values to be parsed separately. Implementing bind variables allows Oracle to reuse execution plans, significantly reducing hard parsing and library cache pin waits."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'BEA-000386: Server subsystem failed. Reason: java.lang.OutOfMemoryError: unable to create new native thread' errors. The JVM heap shows only 60% utilization. What is the most likely cause?",
+    "options": [
+      {"text": "Memory leak in native code", "feedback": "While possible, this is less common than thread-related issues."},
+      {"text": "Thread leak in the application", "feedback": "Correct! This explains why heap is normal but threads are exhausted."},
+      {"text": "Insufficient swap space at the OS level", "feedback": "This would likely cause different types of errors."},
+      {"text": "Excessive thread stack size configuration", "feedback": "This would consume memory, not prevent thread creation."}
+    ],
+    "answer": 1,
+    "hint": "Consider what consumes memory outside the heap in a Java process.",
+    "explanation": "When applications create threads but don't properly terminate them, a thread leak occurs. Each thread consumes native memory for its stack, and when the OS limit for thread creation is reached, new threads cannot be created even if heap space is available."
+  },
+  {
+    "question": "An Oracle Data Guard configuration shows that the primary database is functioning normally, but the standby database has not applied logs for several hours. The alert log on the standby shows 'RFS[1]: Selected log 5 for thread 1 sequence 1234' but no further apply activity. What is the most likely cause?",
+    "options": [
+      {"text": "Network connectivity issue between primary and standby", "feedback": "This would prevent log shipping, not log application."},
+      {"text": "Managed recovery process (MRP) is not running on standby", "feedback": "Correct! This explains why logs are received but not applied."},
+      {"text": "Standby database in read-only mode instead of recovery mode", "feedback": "This would prevent log application but show different status messages."},
+      {"text": "Insufficient space in the standby archive destination", "feedback": "This would prevent log receipt, not just application."}
+    ],
+    "answer": 1,
+    "hint": "Consider the two distinct processes in Data Guard: receiving logs and applying them.",
+    "explanation": "In Data Guard, the RFS (Remote File Server) process receives logs from the primary, while the MRP (Managed Recovery Process) applies them to the standby database. If MRP is not running, logs will be received but not applied, causing the standby to fall behind."
+  },
+  {
+    "question": "A WebLogic application shows 'java.sql.SQLException: Closed Connection' errors intermittently. The database connection pool is configured with a test connection on reserve, and the database shows no connectivity issues. What is the most likely cause?",
+    "options": [
+      {"text": "Firewall terminating idle connections", "feedback": "This would be caught by the test connection on reserve."},
+      {"text": "Application code closing connections and continuing to use them", "feedback": "Correct! This explains why connections appear closed when the application tries to use them."},
+      {"text": "Database server terminating idle connections", "feedback": "This would be caught by the test connection on reserve."},
+      {"text": "Connection pool shrink configuration too aggressive", "feedback": "This would affect connections being returned to the pool, not those in use."}
+    ],
+    "answer": 1,
+    "hint": "Consider what could cause a connection to be closed while the application is still using it.",
+    "explanation": "When application code explicitly closes a connection but continues to use the reference, subsequent operations will fail with 'Closed Connection' errors. This is a common programming error that isn't caught by connection pool testing since the connection is intentionally closed by the application."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'buffer busy waits' on the TRANSACTIONS table during peak hours. The AWR report shows numerous DML operations on the same blocks. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the DB_CACHE_SIZE parameter", "feedback": "This would help with general buffer cache performance but not specifically with buffer busy waits."},
+      {"text": "Increase the INITRANS parameter for the TRANSACTIONS table", "feedback": "Correct! This allows more concurrent transactions to access the same blocks."},
+      {"text": "Implement table partitioning", "feedback": "This would help if different partitions were accessed, but not for the same blocks."},
+      {"text": "Increase the PCTFREE parameter for the TRANSACTIONS table", "feedback": "This would reduce row migration but not buffer busy waits."}
+    ],
+    "answer": 1,
+    "hint": "Consider what controls concurrent access to the same data blocks in Oracle.",
+    "explanation": "Buffer busy waits occur when multiple sessions try to access the same block simultaneously. The INITRANS parameter controls the number of transaction slots initially allocated for each block. Increasing this value allows more concurrent transactions to access the same blocks without waiting."
+  },
+  {
+    "question": "A WebLogic cluster shows that one managed server is consistently using 95% CPU while others are at 30% during normal operations. All servers have identical configuration and handle similar request types. What is the most likely cause?",
+    "options": [
+      {"text": "JVM garbage collection issue on the high-CPU server", "feedback": "This would typically cause CPU spikes, not sustained high usage."},
+      {"text": "Infinite loop in application code on the high-CPU server", "feedback": "Correct! This explains the sustained high CPU usage on one server."},
+      {"text": "Load balancer sending more complex requests to one server", "feedback": "Load balancers typically distribute load evenly unless configured otherwise."},
+      {"text": "OS-level process contention on the high-CPU server", "feedback": "This would likely affect overall system performance, not just WebLogic."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes sustained high CPU usage in a Java application.",
+    "explanation": "An infinite loop in application code would cause continuous CPU consumption without blocking or waiting for resources. Since this is a code issue, it would only affect the specific server instance where the problematic code is executing, explaining the uneven CPU usage across the cluster."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01652: unable to extend temp segment by 128 in tablespace TEMP' errors during complex reporting queries. The temporary tablespace has 100GB of space with autoextend enabled. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the size of the temporary tablespace further", "feedback": "This is a temporary fix that may not address the root cause."},
+      {"text": "Add multiple temporary files to the temporary tablespace", "feedback": "This can improve performance but doesn't reduce space consumption."},
+      {"text": "Optimize the reporting queries to use less temporary space", "feedback": "Correct! This addresses the root cause by reducing temporary space requirements."},
+      {"text": "Increase the PGA_AGGREGATE_TARGET parameter", "feedback": "This can reduce temporary space usage but may not be sufficient for poorly optimized queries."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes excessive temporary space usage in Oracle.",
+    "explanation": "Excessive temporary space usage is typically caused by inefficient query execution plans that require large sorts or hash operations. By optimizing the queries to use more efficient execution paths, the temporary space requirements can be significantly reduced, addressing the root cause of the issue."
+  },
+  {
+    "question": "A WebLogic application shows 'javax.transaction.RollbackException: Transaction timed out' errors during certain operations. The transaction timeout is set to 300 seconds, and the operations typically complete within 30 seconds. What is the most likely cause?",
+    "options": [
+      {"text": "Database lock contention", "feedback": "This would cause the operation to take longer, not timeout when it should complete quickly."},
+      {"text": "Nested transactions without proper configuration", "feedback": "Correct! This can cause unexpected transaction behavior and timeouts."},
+      {"text": "Network latency between application and database", "feedback": "This would consistently affect performance, not cause intermittent timeouts."},
+      {"text": "JVM garbage collection pauses", "feedback": "While GC pauses can affect timing, they wouldn't typically cause transaction timeouts of this magnitude."}
+    ],
+    "answer": 1,
+    "hint": "Consider what can cause unexpected transaction behavior in a Java EE environment.",
+    "explanation": "When nested transactions are used without proper configuration, the inner transaction might not properly commit or rollback, causing the outer transaction to wait indefinitely until it times out. This can happen even when the actual operation should complete quickly."
+  },
+  {
+    "question": "An Oracle RAC database shows that one node is frequently experiencing 'GC cr block busy' waits during peak hours, while other nodes show normal performance. What is the most likely cause?",
+    "options": [
+      {"text": "Network latency on the interconnect for the affected node", "feedback": "Correct! This explains why only one node experiences these specific waits."},
+      {"text": "Storage performance issue affecting only one node", "feedback": "This would cause different wait events like 'db file sequential read'."},
+      {"text": "CPU contention on the affected node", "feedback": "This would cause general performance issues, not specific RAC wait events."},
+      {"text": "SGA size mismatch between nodes", "feedback": "This would affect memory management, not specifically global cache waits."}
+    ],
+    "answer": 0,
+    "hint": "Consider what 'GC cr block busy' waits indicate in a RAC environment.",
+    "explanation": "'GC cr block busy' waits occur when a node requests a block from another node but the block is busy. This is often caused by network latency on the interconnect, specifically affecting the node experiencing these waits. The interconnect is critical for RAC operations, and performance issues there manifest as global cache waits."
+  },
+  {
+    "question": "A WebLogic application is experiencing 'javax.naming.NamingException: Lookup failed for 'jdbc/DataSource' in SerialContext' errors after a recent deployment. The datasource is configured correctly in the console. What is the most likely cause?",
+    "options": [
+      {"text": "JNDI name mismatch in the application code", "feedback": "This would cause consistent errors, not just after a recent deployment."},
+      {"text": "Missing resource reference in web.xml or ejb-jar.xml", "feedback": "Correct! This explains why the lookup fails after deployment."},
+      {"text": "Database connectivity issue", "feedback": "This would cause connection errors, not JNDI lookup failures."},
+      {"text": "Class loading issue with JDBC driver", "feedback": "This would cause ClassNotFoundError, not NamingException."}
+    ],
+    "answer": 1,
+    "hint": "Consider what's required for an application to access a configured resource.",
+    "explanation": "For an application to access a configured resource like a datasource, it must have the appropriate resource reference declared in its deployment descriptor (web.xml or ejb-jar.xml). Without this reference, the JNDI lookup will fail even if the resource is correctly configured in WebLogic."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'enq: TX - row lock contention' waits during batch processing. The AWR report shows that the waits are primarily on the ACCOUNT_BALANCE table. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the INITRANS parameter for the ACCOUNT_BALANCE table", "feedback": "This helps with block-level contention, not row-level locks."},
+      {"text": "Implement row-level locking instead of table-level locking", "feedback": "Oracle already uses row-level locking by default."},
+      {"text": "Reduce transaction scope and optimize the batch process", "feedback": "Correct! This minimizes the time locks are held."},
+      {"text": "Increase the DML_LOCKS parameter", "feedback": "This controls the maximum number of locks, not lock contention."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes row lock contention and how to minimize it.",
+    "explanation": "Row lock contention occurs when multiple transactions try to modify the same rows. The most effective solution is to reduce transaction scope and optimize the batch process to minimize the time locks are held, either by processing data in smaller batches or by restructuring the logic to reduce overlapping access to the same rows."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'BEA-101020: [ServletContext@...]-Application not found' errors for a deployed application. The application appears in the console with a 'Failed' state. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient memory for the application", "feedback": "This would cause OutOfMemoryError, not 'Application not found'."},
+      {"text": "Missing or corrupted deployment plan", "feedback": "This would typically cause different error messages."},
+      {"text": "Application dependency not available in the server classpath", "feedback": "Correct! This explains why the application cannot be properly initialized."},
+      {"text": "Incorrect context root configuration", "feedback": "This would cause routing issues, not application startup failures."}
+    ],
+    "answer": 2,
+    "hint": "Consider what prevents an application from being properly initialized after deployment.",
+    "explanation": "When an application has dependencies that are not available in the server classpath, it cannot be properly initialized during deployment. This causes the application to enter a 'Failed' state, and subsequent requests result in 'Application not found' errors."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01691: unable to extend lob segment' errors during document upload operations. The tablespace has autoextend enabled with sufficient disk space. What is the most likely cause?",
+    "options": [
+      {"text": "Maximum number of extents reached for the LOB segment", "feedback": "Correct! This explains why autoextend isn't working despite available space."},
+      {"text": "Tablespace quota limit for the schema owner", "feedback": "This would cause different error messages about quota exceeded."},
+      {"text": "Fragmented tablespace with insufficient contiguous space", "feedback": "Autoextend would add new datafiles to overcome fragmentation."},
+      {"text": "Incorrect LOB storage configuration", "feedback": "This would affect performance, not cause space errors."}
+    ],
+    "answer": 0,
+    "hint": "Consider what limits segment growth beyond tablespace space.",
+    "explanation": "Oracle segments have a maximum number of extents they can reach. When this limit is reached, the segment cannot extend further even if the tablespace has autoextend enabled and disk space is available. This requires increasing the MAXEXTENTS parameter or using unlimited extents."
+  },
+  {
+    "question": "A WebLogic cluster shows that sessions are not being replicated properly, causing users to lose their state when failover occurs. The application has session replication enabled in the weblogic.xml configuration. What is the most likely cause?",
+    "options": [
+      {"text": "Network connectivity issues between cluster nodes", "feedback": "This would cause complete replication failures, not partial ones."},
+      {"text": "Objects in session not implementing Serializable", "feedback": "Correct! This prevents specific objects from being replicated."},
+      {"text": "Insufficient memory for session replication", "feedback": "This would cause OutOfMemoryError, not selective replication failures."},
+      {"text": "Incorrect replication channel configuration", "feedback": "This would prevent all replication, not just for certain objects."}
+    ],
+    "answer": 1,
+    "hint": "Consider what's required for objects to be replicated in a WebLogic cluster.",
+    "explanation": "For objects to be replicated in a WebLogic cluster, they must implement the Serializable interface. When non-serializable objects are stored in the session, they cannot be replicated, causing users to lose that specific state during failover even though session replication is enabled."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'latch free' waits on the 'cache buffers chains' latch during peak hours. The AWR report shows high buffer cache hit ratio. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the DB_CACHE_SIZE parameter", "feedback": "This would increase the buffer cache size but might worsen the latch contention."},
+      {"text": "Decrease the DB_BLOCK_SIZE parameter", "feedback": "This would require recreating the database and isn't a practical solution."},
+      {"text": "Reduce hot blocks by implementing partitioning or hash clustering", "feedback": "Correct! This distributes access across more blocks, reducing latch contention."},
+      {"text": "Increase the number of CPU processes", "feedback": "This would allow more parallelism but doesn't address the root latch contention."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes 'cache buffers chains' latch contention and how to reduce it.",
+    "explanation": "'Cache buffers chains' latch contention occurs when multiple processes frequently access the same blocks (hot blocks). By implementing partitioning or hash clustering, access is distributed across more blocks, reducing the contention on specific cache buffers chains and thus reducing latch waits."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: GC overhead limit exceeded' errors during peak hours. The heap utilization is at 85% when the error occurs. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient heap size for the application workload", "feedback": "This would cause OutOfMemoryError without the GC overhead message."},
+      {"text": "Memory leak in the application", "feedback": "Correct! This explains why GC is spending excessive time without freeing much memory."},
+      {"text": "Inefficient garbage collection configuration", "feedback": "This would cause poor performance but not necessarily the GC overhead limit error."},
+      {"text": "Excessive creation of temporary objects", "feedback": "This would cause frequent GC but not necessarily the overhead limit error."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes the 'GC overhead limit exceeded' error specifically.",
+    "explanation": "The 'GC overhead limit exceeded' error occurs when the garbage collector is spending too much time (over 98% of total time) collecting too little memory (less than 2% of the heap). This typically indicates a memory leak where objects are being created but not properly released, forcing the GC to work excessively without freeing much memory."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01591: lock held by in-doubt distributed transaction' errors after a network partition between two database nodes. What is the most appropriate action?",
+    "options": [
+      {"text": "Restart the database instance", "feedback": "This might not resolve the in-doubt transaction and could cause additional issues."},
+      {"text": "Commit or rollback the in-doubt transaction manually", "feedback": "Correct! This is the standard way to resolve in-doubt transactions."},
+      {"text": "Wait for the network partition to resolve automatically", "feedback": "The transaction might remain in-doubt indefinitely without manual intervention."},
+      {"text": "Increase the DISTRIBUTED_LOCK_TIMEOUT parameter", "feedback": "This only affects new transactions, not existing in-doubt ones."}
+    ],
+    "answer": 1,
+    "hint": "Consider how to resolve distributed transactions that become in-doubt.",
+    "explanation": "When a network partition occurs during a distributed transaction, the transaction can become in-doubt, holding locks that prevent other operations. The standard way to resolve this is to manually commit or rollback the in-doubt transaction using DBMS_TRANSACTION or by querying DBA_2PC_PENDING and taking appropriate action."
+  },
+  {
+    "question": "A WebLogic application shows 'java.sql.SQLException: ORA-01000: maximum open cursors exceeded' errors during batch processing. The application closes all ResultSet and Statement objects in finally blocks. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient OPEN_CURSORS parameter in Oracle", "feedback": "While this could be a factor, the root cause is likely elsewhere."},
+      {"text": "Connection leak in the application", "feedback": "This would cause connection pool exhaustion, not cursor issues."},
+      {"text": "Implicit cursor creation in stored procedures", "feedback": "Correct! This explains why cursors are opened but not closed by the application."},
+      {"text": "JDBC driver bug", "feedback": "While possible, this is less likely than application or database issues."}
+    ],
+    "answer": 2,
+    "hint": "Consider what can open cursors without the application explicitly doing so.",
+    "explanation": "When stored procedures open cursors implicitly (e.g., for SELECT statements) but don't explicitly close them, these cursors remain open even though the application has closed its ResultSet and Statement objects. This can lead to the 'maximum open cursors exceeded' error even when the application appears to be managing resources correctly."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'library cache lock' waits during application deployment. The deployment involves invalidating and recompiling numerous PL/SQL objects. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the SHARED_POOL_SIZE parameter", "feedback": "This might help slightly but doesn't address the root cause of the locks."},
+      {"text": "Stagger the object compilation during deployment", "feedback": "Correct! This reduces concurrent compilation and lock contention."},
+      {"text": "Use DBMS_SHARED_POOL.KEEP to pin frequently used objects", "feedback": "This would prevent aging out of objects but doesn't address compilation locks."},
+      {"text": "Restart the database after deployment", "feedback": "This is a reactive measure, not a solution to the deployment process."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes library cache locks during deployment and how to minimize them.",
+    "explanation": "Library cache locks occur during object compilation and invalidation. When many objects are invalidated and recompiled simultaneously during deployment, it creates intense lock contention. By staggering the compilation process, fewer objects are being compiled at the same time, reducing lock contention and improving deployment performance."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: Requested array size exceeds VM limit' errors when processing large files. The JVM has 8GB heap allocated, and the application is using only 2GB. What is the most likely cause?",
+    "options": [
+      {"text": "Fragmented heap preventing large contiguous allocation", "feedback": "This would typically cause different OutOfMemoryError messages."},
+      {"text": "Attempting to allocate an array larger than Integer.MAX_VALUE elements", "feedback": "Correct! This is a specific Java limitation that's not related to heap size."},
+      {"text": "Memory leak in the file processing code", "feedback": "This would cause gradual memory consumption, not a specific array size error."},
+      {"text": "Incorrect JVM configuration for 64-bit mode", "feedback": "This would cause different types of memory allocation issues."}
+    ],
+    "answer": 1,
+    "hint": "Consider the specific limitations of Java arrays regardless of heap size.",
+    "explanation": "Java arrays have a maximum size of Integer.MAX_VALUE elements, regardless of the available heap space. When an application attempts to allocate an array larger than this limit, it results in 'Requested array size exceeds VM limit' errors even when plenty of heap space is available."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-02049: timeout: distributed transaction waiting for lock' errors during cross-database operations. The DISTRIBUTED_LOCK_TIMEOUT is set to 60 seconds. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the DISTRIBUTED_LOCK_TIMEOUT parameter", "feedback": "This only delays the error, doesn't solve the underlying contention."},
+      {"text": "Optimize the distributed transaction to reduce lock duration", "feedback": "Correct! This addresses the root cause by minimizing lock contention."},
+      {"text": "Use database links with the SHARED parameter", "feedback": "This affects connection management, not lock contention."},
+      {"text": "Implement retry logic in the application", "feedback": "This handles the error but doesn't prevent it from occurring."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes distributed transaction timeouts and how to prevent them.",
+    "explanation": "Distributed transaction timeouts occur when a transaction waits too long for a lock held by another transaction in a different database. The most effective solution is to optimize the distributed transaction to reduce the time locks are held, either by restructuring the logic or by reducing the transaction scope."
+  },
+  {
+    "question": "A WebLogic cluster shows that managed servers are frequently shutting down with 'BEA-000337: [STUCK] ExecuteThread: '0' for queue: 'weblogic.kernel.Default (self-tuning)' has been busy for '691' seconds working on the request" messages. What is the most likely cause?",
+    "options": [
+      {"text": "Long-running database queries", "feedback": "This would cause database waits, not stuck threads."},
+      {"text": "Infinite loop in application code", "feedback": "Correct! This explains why threads are busy for extended periods."},
+      {"text": "Insufficient thread pool size", "feedback": "This would cause queueing, not stuck threads."},
+      {"text": "Network connectivity issues", "feedback": "This would cause connection timeouts, not continuous processing."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes a thread to be continuously busy without waiting.",
+    "explanation": "When application code contains an infinite loop, the thread continuously executes without waiting for external resources. This causes the thread to be marked as 'stuck' after the configured timeout period, as it's been busy processing the same request for an extended time."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01445: cannot select ROWID from a join view without a key-preserved table' errors when executing certain reports. The reports were working correctly before a recent database upgrade. What is the most likely cause?",
+    "options": [
+      {"text": "Optimizer change after the database upgrade", "feedback": "This could affect execution plans but not cause this specific error."},
+      {"text": "Missing primary key or unique constraint on the base tables", "feedback": "Correct! This explains why the tables are not considered key-preserved."},
+      {"text": "View definition change during the upgrade", "feedback": "This would cause different error messages about invalid objects."},
+      {"text": "Insufficient privileges on the base tables", "feedback": "This would cause permission errors, not ROWID errors."}
+    ],
+    "answer": 1,
+    "hint": "Consider what makes a table 'key-preserved' in a view.",
+    "explanation": "A table is key-preserved in a view if its primary key or unique constraint is preserved through the view. If the base tables are missing these constraints, Oracle cannot guarantee that the ROWID uniquely identifies a row in the view, resulting in the ORA-01445 error."
+  },
+  {
+    "question": "A WebLogic application shows 'java.lang.ClassCastException: com.sun.proxy.$Proxy cannot be cast to' errors when looking up EJBs. The application was recently migrated from WebLogic 10g to 12c. What is the most likely cause?",
+    "options": [
+      {"text": "Class loading changes between WebLogic versions", "feedback": "While class loading changed, this wouldn't cause ClassCastException for EJB lookups."},
+      {"text": "EJB interface changes during migration", "feedback": "This would cause compilation errors, not runtime ClassCastException."},
+      {"text": "Missing business interface in the EJB lookup", "feedback": "Correct! This explains why a proxy cannot be cast to the expected type."},
+      {"text": "JNDI name change between WebLogic versions", "feedback": "This would cause NamingException, not ClassCastException."}
+    ],
+    "answer": 2,
+    "hint": "Consider how EJB lookups work in newer versions of WebLogic.",
+    "explanation": "In newer versions of WebLogic, when looking up EJBs, it's important to specify the business interface in the lookup. Without specifying the interface, the lookup returns a generic proxy that cannot be cast to the specific business interface, resulting in ClassCastException."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'enq: TX - index contention' waits during batch processing. The AWR report shows that the waits are primarily on indexes with sequence-generated keys. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the INITRANS parameter for the affected indexes", "feedback": "This helps with block-level contention, not specifically index contention."},
+      {"text": "Use reverse key indexes for the sequence-generated keys", "feedback": "Correct! This distributes index modifications across different leaf blocks."},
+      {"text": "Increase the cache size for the sequences", "feedback": "This reduces sequence contention but not index contention."},
+      {"text": "Increase the PCTFREE parameter for the affected indexes", "feedback": "This affects space utilization, not contention."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes index contention with sequence-generated keys and how to reduce it.",
+    "explanation": "When using sequence-generated keys, concurrent inserts tend to modify the same right-most index leaf blocks, causing contention. Reverse key indexes reverse the bytes of the key, distributing inserts across different leaf blocks and reducing contention."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: Metaspace' errors after multiple application redeployments. The application uses numerous third-party libraries. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient Metaspace size configuration", "feedback": "While this could be a factor, the root cause is likely elsewhere."},
+      {"text": "Class metadata leak during redeployment", "feedback": "Correct! This explains why Metaspace grows with each redeployment."},
+      {"text": "Memory leak in the application code", "feedback": "This would affect heap space, not Metaspace."},
+      {"text": "Excessive use of reflection in the application", "feedback": "While reflection uses Metaspace, it wouldn't specifically grow with redeployments."}
+    ],
+    "answer": 1,
+    "hint": "Consider what occupies Metaspace and how it's affected by redeployments.",
+    "explanation": "Metaspace stores class metadata. When applications are redeployed, the old class metadata should be garbage collected. However, in some cases, references to the old classes remain, preventing garbage collection and causing Metaspace to grow with each redeployment until it's exhausted."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01555: snapshot too old' errors during long-running reports, even with an UNDO tablespace of 100GB and UNDO_RETENTION of 3600 seconds. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the UNDO tablespace size further", "feedback": "This might not help if the issue is with undo reuse rather than total space."},
+      {"text": "Increase the UNDO_RETENTION parameter further", "feedback": "This requires sufficient undo space to be effective."},
+      {"text": "Optimize the long-running queries to use Flashback Query", "feedback": "Correct! This allows queries to get consistent data without relying on undo."},
+      {"text": "Implement Automatic Undo Management (AUM)", "feedback": "This is already in use given the UNDO_RETENTION parameter."}
+    ],
+    "answer": 2,
+    "hint": "Consider alternatives to traditional undo for maintaining read consistency.",
+    "explanation": "Flashback Query allows queries to access data as of a specific point in time without relying on undo retention. By optimizing the long-running queries to use Flashback Query, they can maintain read consistency even when undo information is no longer available, avoiding ORA-01555 errors."
+  },
+  {
+    "question": "A WebLogic application shows 'javax.ejb.EJBException: Transaction rolled back: EJB Exception: nested exception is: javax.transaction.TransactionRolledbackException: Transaction timed out after 300 seconds' errors during specific operations. The operations typically complete within 30 seconds in development. What is the most likely cause?",
+    "options": [
+      {"text": "Database performance issue in production", "feedback": "This would cause the operation to take longer, not timeout when it should be quick."},
+      {"text": "Lock contention on database resources", "feedback": "This would cause the operation to wait, not timeout when it should be quick."},
+      {"text": "Infinite loop in the application code", "feedback": "Correct! This explains why the operation doesn't complete and times out."},
+      {"text": "Network latency between application and database", "feedback": "This would consistently affect performance, not cause intermittent timeouts."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes an operation that should be quick to run until it times out.",
+    "explanation": "When application code contains an infinite loop, the operation never completes naturally, causing it to run until the transaction timeout is reached. This explains why the operation times out even though it should complete quickly under normal circumstances."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'log file parallel write' waits during peak transaction processing. The redo logs are on dedicated high-performance storage. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the size of the redo log files", "feedback": "This would help with log switching, not parallel write performance."},
+      {"text": "Increase the number of redo log groups", "feedback": "This would help with log switching, not parallel write performance."},
+      {"text": "Implement batch commits in the application", "feedback": "Correct! This reduces the frequency of redo generation and writes."},
+      {"text": "Increase the LOG_BUFFER parameter", "feedback": "This would help with log buffer space, not write performance."}
+    ],
+    "answer": 2,
+    "hint": "Consider what triggers 'log file parallel write' waits and how to reduce their frequency.",
+    "explanation": "'Log file parallel write' waits occur when LGWR writes redo buffers to the redo log files. By implementing batch commits in the application, the frequency of redo generation and subsequent writes is reduced, significantly improving performance during high transaction periods."
+  },
+  {
+    "question": "A WebLogic cluster shows that managed servers are frequently restarting with 'java.lang.OutOfMemoryError: Java heap space' errors. Heap analysis shows a large number of java.util.HashMap$Entry objects that cannot be garbage collected. What is the most likely cause?",
+    "options": [
+      {"text": "Excessive caching in the application", "feedback": "While this could cause memory issues, it would typically show different object types."},
+      {"text": "Static collection that grows without bounds", "feedback": "Correct! This explains why HashMap entries cannot be garbage collected."},
+      {"text": "Memory leak in the JDBC driver", "feedback": "This would show different object types in the heap dump."},
+      {"text": "Insufficient heap size for the application workload", "feedback": "This would cause general memory pressure, not specific object accumulation."}
+    ],
+    "answer": 1,
+    "hint": "Consider what prevents HashMap entries from being garbage collected.",
+    "explanation": "When a static collection (like a HashMap) grows without bounds, its entries remain in memory for the lifetime of the JVM because the static reference prevents garbage collection. This is a common cause of memory leaks in Java applications."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-04031: unable to allocate 4096 bytes of shared memory' errors during peak hours. The shared pool size is 2GB, and the library cache hit ratio is 95%. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the SHARED_POOL_SIZE parameter further", "feedback": "This might help temporarily but doesn't address the root cause."},
+      {"text": "Flush the shared pool periodically", "feedback": "This is a temporary fix that can cause performance issues."},
+      {"text": "Use bind variables in the application", "feedback": "Correct! This reduces shared pool fragmentation and memory usage."},
+      {"text": "Pin frequently used objects using DBMS_SHARED_POOL.KEEP", "feedback": "This prevents aging out of objects but doesn't address fragmentation."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes shared pool fragmentation and how to prevent it.",
+    "explanation": "ORA-04031 errors often occur due to shared pool fragmentation, which happens when the application doesn't use bind variables. Without bind variables, each SQL statement with different literal values requires separate shared pool space, leading to fragmentation. Using bind variables allows SQL statements to be shared, reducing fragmentation and memory usage."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'BEA-000386: Server subsystem failed. Reason: weblogic.utils.AssertionError: ***** ASSERTION FAILED *****' errors during startup. The server was working correctly before a recent configuration change. What is the most likely cause?",
+    "options": [
+      {"text": "Corrupted configuration file", "feedback": "This would likely cause different error messages about parsing issues."},
+      {"text": "Incompatible configuration parameters", "feedback": "Correct! This explains why the assertion fails during startup validation."},
+      {"text": "Insufficient memory for the configured resources", "feedback": "This would cause OutOfMemoryError, not assertion failures."},
+      {"text": "Missing class in the server classpath", "feedback": "This would cause ClassNotFoundException, not assertion failures."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes assertion failures in WebLogic.",
+    "explanation": "Assertion failures in WebLogic typically occur when configuration parameters are incompatible or violate expected constraints. This can happen after configuration changes when parameters that should be related or consistent are set to conflicting values."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'direct path read' waits during batch processing. The batch operations involve full table scans of large tables. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the DB_CACHE_SIZE parameter", "feedback": "Direct path reads bypass the buffer cache, so this wouldn't help."},
+      {"text": "Implement partitioning for the large tables", "feedback": "Correct! This allows partition pruning and reduces the amount of data scanned."},
+      {"text": "Increase the PGA_AGGREGATE_TARGET parameter", "feedback": "This would help with memory for direct path reads but not reduce the amount of data read."},
+      {"text": "Gather fresh statistics on the tables", "feedback": "This would help the optimizer but might not change the access path for full table scans."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes direct path reads and how to reduce the amount of data read.",
+    "explanation": "Direct path reads occur during full table scans of large tables. By implementing partitioning, the optimizer can use partition pruning to read only the relevant partitions, significantly reducing the amount of data read and thus improving performance."
+  },
+  {
+    "question": "A WebLogic application shows 'java.sql.SQLException: ORA-01034: ORACLE not available' errors intermittently during peak hours. The database server shows no connectivity issues, and the database is up and running. What is the most likely cause?",
+    "options": [
+      {"text": "Database connection pool exhaustion", "feedback": "This would cause 'Cannot get connection' errors, not 'ORACLE not available'."},
+      {"text": "Oracle shared server process exhaustion", "feedback": "Correct! This explains why the database appears unavailable intermittently."},
+      {"text": "Network connectivity issue between application and database", "feedback": "This would cause connection errors, not specific Oracle availability errors."},
+      {"text": "Database listener configuration issue", "feedback": "This would prevent all connections, not just intermittent ones."}
+    ],
+    "answer": 1,
+    "hint": "Consider what can make an available database appear unavailable intermittently.",
+    "explanation": "When using Oracle shared server architecture, if the number of shared server processes is insufficient for the workload, new connections may be rejected with 'ORACLE not available' errors even though the database is running. This happens intermittently during peak load when all shared server processes are busy."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'enq: HW - contention' waits during batch processing. The AWR report shows that the waits are primarily on tables with frequent inserts. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the PCTFREE parameter for the affected tables", "feedback": "This affects space for updates, not High Water Mark contention."},
+      {"text": "Use ASSM (Automatic Segment Space Management)", "feedback": "Correct! This reduces High Water Mark contention by using bitmaps."},
+      {"text": "Increase the INITRANS parameter for the affected tables", "feedback": "This helps with transaction slots, not High Water Mark contention."},
+      {"text": "Pre-allocate extents for the tables", "feedback": "This reduces extent allocation but not High Water Mark contention."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes High Water Mark contention and how to reduce it.",
+    "explanation": "'enq: HW - contention' waits occur when multiple sessions try to move the High Water Mark simultaneously to allocate space for new rows. Automatic Segment Space Management (ASSM) uses bitmaps instead of freelists to manage space, significantly reducing High Water Mark contention during inserts."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: unable to create new native thread' errors during peak hours. The JVM has 8GB heap allocated, and the application is using only 3GB. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient swap space at the OS level", "feedback": "This would likely cause different types of errors."},
+      {"text": "Thread leak in the application", "feedback": "Correct! This explains why threads are exhausted despite available heap."},
+      {"text": "Excessive thread stack size configuration", "feedback": "This would consume memory, not prevent thread creation."},
+      {"text": "OS limit on user processes", "feedback": "This would prevent process creation, not just thread creation."}
+    ],
+    "answer": 1,
+    "hint": "Consider what consumes memory outside the heap in a Java process.",
+    "explanation": "When applications create threads but don't properly terminate them, a thread leak occurs. Each thread consumes native memory for its stack, and when the OS limit for thread creation is reached, new threads cannot be created even if heap space is available."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-00060: deadlock detected' errors during batch processing. The deadlock graph shows conflicting row-level locks on the same table. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the deadlock detection timeout", "feedback": "This would only delay error detection, not prevent deadlocks."},
+      {"text": "Kill the blocking sessions immediately", "feedback": "This is a reactive measure, not a preventive solution."},
+      {"text": "Ensure consistent order of row access in all transactions", "feedback": "Correct! This prevents deadlocks by eliminating circular wait conditions."},
+      {"text": "Increase the size of the undo tablespace", "feedback": "This would help with long-running queries, not deadlocks."}
+    ],
+    "answer": 2,
+    "hint": "Consider what conditions are necessary for a deadlock to occur.",
+    "explanation": "Deadlocks occur when transactions wait for each other in a circular chain. By ensuring that all transactions access rows in the same order, the circular wait condition is eliminated, preventing deadlocks from occurring."
+  },
+  {
+    "question": "A WebLogic application shows 'javax.ejb.EJBException: Transaction rolled back: EJB Exception: nested exception is: javax.transaction.TransactionRolledbackException: Unable to enlist with the transaction' errors during certain operations. What is the most likely cause?",
+    "options": [
+      {"text": "Database connection pool exhaustion", "feedback": "This would cause 'Cannot get connection' errors, not enlistment issues."},
+      {"text": "Multiple resources in the transaction without XA configuration", "feedback": "Correct! This explains why the transaction manager cannot enlist all resources."},
+      {"text": "Transaction timeout configuration too low", "feedback": "This would cause 'Transaction timed out' errors, not enlistment issues."},
+      {"text": "Network connectivity issue between application and database", "feedback": "This would cause connection errors, not transaction enlistment issues."}
+    ],
+    "answer": 1,
+    "hint": "Consider what's required for a transaction to enlist multiple resources.",
+    "explanation": "When a transaction involves multiple resources (e.g., multiple databases or a JMS queue and a database), all resources must be configured as XA resources to participate in the same transaction. If any resource is not XA-capable or not configured as such, the transaction manager cannot enlist it, resulting in the 'Unable to enlist with the transaction' error."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'gc buffer busy' waits in a RAC environment during peak hours. The AWR report shows that the waits are primarily on a single hot block in an index. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the interconnect network bandwidth", "feedback": "This would help with general RAC performance but not specifically with hot block contention."},
+      {"text": "Implement reverse key indexes for the affected index", "feedback": "Correct! This distributes access across different blocks, reducing contention."},
+      {"text": "Increase the cache size for the affected objects", "feedback": "This would keep more data in memory but not reduce contention on the hot block."},
+      {"text": "Increase the number of RAC nodes", "feedback": "This would distribute workload but might increase contention on the hot block."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes hot block contention in a RAC environment and how to reduce it.",
+    "explanation": "In a RAC environment, 'gc buffer busy' waits occur when multiple nodes request access to the same block simultaneously. When this happens consistently with a single hot block in an index, implementing reverse key indexes can distribute access across different blocks, reducing contention."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'BEA-000386: Server subsystem failed. Reason: java.lang.ClassFormatError: Invalid method Code length' errors during application deployment. The application compiles successfully in the development environment. What is the most likely cause?",
+    "options": [
+      {"text": "Java version incompatibility between compilation and runtime", "feedback": "This would typically cause UnsupportedClassVersionError, not Code length errors."},
+      {"text": "Method size exceeding JVM limits", "feedback": "Correct! This explains the specific Code length error."},
+      {"text": "Corrupted class file during deployment", "feedback": "This would typically cause different class format errors."},
+      {"text": "JVM bug in the production environment", "feedback": "While possible, this is less likely than a code issue."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes the specific 'Invalid method Code length' error.",
+    "explanation": "The JVM has a limit on the size of a method's bytecode (64KB). When a method exceeds this limit, it results in 'Invalid method Code length' errors during class loading. This can happen with auto-generated code or very complex methods that work in development but exceed the limit in production."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'enq: TM - contention' waits during batch processing. The AWR report shows that the waits are primarily on tables with foreign key constraints. What is the most effective solution?",
+    "options": [
+      {"text": "Drop the foreign key constraints", "feedback": "This would compromise data integrity and is not recommended."},
+      {"text": "Index the foreign key columns", "feedback": "Correct! This reduces lock contention on the parent table."},
+      {"text": "Increase the INITRANS parameter for the affected tables", "feedback": "This helps with transaction slots, not table-level lock contention."},
+      {"text": "Process child table records before parent table records", "feedback": "This would violate foreign key constraints."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes TM (table-level) lock contention and how to reduce it.",
+    "explanation": "TM locks are table-level locks acquired during DML operations. When foreign key columns are not indexed, modifications to the parent table can cause table-level locks on the child table, leading to contention. Indexing the foreign key columns allows Oracle to use row-level locks instead, significantly reducing contention."
+  },
+  {
+    "question": "A WebLogic application shows 'java.sql.SQLException: ORA-03113: end-of-file on communication channel' errors intermittently during peak hours. The database server shows no connectivity issues, and the database is up and running. What is the most likely cause?",
+    "options": [
+      {"text": "Database connection pool exhaustion", "feedback": "This would cause 'Cannot get connection' errors, not communication channel errors."},
+      {"text": "Oracle shared server process crash", "feedback": "Correct! This explains why the communication channel is suddenly terminated."},
+      {"text": "Network connectivity issue between application and database", "feedback": "This would cause connection errors, but not specifically ORA-03113."},
+      {"text": "Database listener configuration issue", "feedback": "This would prevent new connections, not terminate existing ones."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes ORA-03113 errors specifically.",
+    "explanation": "ORA-03113 errors occur when the Oracle server process terminates unexpectedly, causing the communication channel to close. When using shared server architecture, if a shared server process crashes, all connections using that process will receive ORA-03113 errors even though the database itself remains available."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'latch free' waits on the 'shared pool' latch during peak hours. The AWR report shows high hard parse rate. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the SHARED_POOL_SIZE parameter", "feedback": "This might help but doesn't address the root cause of high hard parses."},
+      {"text": "Use bind variables in the application", "feedback": "Correct! This reduces hard parsing by reusing execution plans."},
+      {"text": "Increase the SESSION_CACHED_CURSORS parameter", "feedback": "This helps with soft parses, not hard parses."},
+      {"text": "Pin frequently used SQL statements using DBMS_SHARED_POOL.KEEP", "feedback": "This prevents aging out of cursors but doesn't reduce hard parsing."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes high hard parse rates in Oracle.",
+    "explanation": "High hard parse rates typically occur when the application doesn't use bind variables, causing each SQL statement with different literal values to be parsed separately. Using bind variables allows Oracle to reuse execution plans, significantly reducing hard parsing and shared pool latch contention."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: GC overhead limit exceeded' errors during peak hours. The heap utilization is at 90% when the error occurs. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient heap size for the application workload", "feedback": "This would cause OutOfMemoryError without the GC overhead message."},
+      {"text": "Memory leak in the application", "feedback": "Correct! This explains why GC is spending excessive time without freeing much memory."},
+      {"text": "Inefficient garbage collection configuration", "feedback": "This would cause poor performance but not necessarily the GC overhead limit error."},
+      {"text": "Excessive creation of temporary objects", "feedback": "This would cause frequent GC but not necessarily the overhead limit error."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes the 'GC overhead limit exceeded' error specifically.",
+    "explanation": "The 'GC overhead limit exceeded' error occurs when the garbage collector is spending too much time (over 98% of total time) collecting too little memory (less than 2% of the heap). This typically indicates a memory leak where objects are being created but not properly released, forcing the GC to work excessively without freeing much memory."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01591: lock held by in-doubt distributed transaction' errors after a network partition between two database nodes. What is the most appropriate action?",
+    "options": [
+      {"text": "Restart the database instance", "feedback": "This might not resolve the in-doubt transaction and could cause additional issues."},
+      {"text": "Commit or rollback the in-doubt transaction manually", "feedback": "Correct! This is the standard way to resolve in-doubt transactions."},
+      {"text": "Wait for the network partition to resolve automatically", "feedback": "The transaction might remain in-doubt indefinitely without manual intervention."},
+      {"text": "Increase the DISTRIBUTED_LOCK_TIMEOUT parameter", "feedback": "This only affects new transactions, not existing in-doubt ones."}
+    ],
+    "answer": 1,
+    "hint": "Consider how to resolve distributed transactions that become in-doubt.",
+    "explanation": "When a network partition occurs during a distributed transaction, the transaction can become in-doubt, holding locks that prevent other operations. The standard way to resolve this is to manually commit or rollback the in-doubt transaction using DBMS_TRANSACTION or by querying DBA_2PC_PENDING and taking appropriate action."
+  },
+  {
+    "question": "A WebLogic application shows 'java.sql.SQLException: ORA-01000: maximum open cursors exceeded' errors during batch processing. The application closes all ResultSet and Statement objects in finally blocks. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient OPEN_CURSORS parameter in Oracle", "feedback": "While this could be a factor, the root cause is likely elsewhere."},
+      {"text": "Connection leak in the application", "feedback": "This would cause connection pool exhaustion, not cursor issues."},
+      {"text": "Implicit cursor creation in stored procedures", "feedback": "Correct! This explains why cursors are opened but not closed by the application."},
+      {"text": "JDBC driver bug", "feedback": "While possible, this is less likely than application or database issues."}
+    ],
+    "answer": 2,
+    "hint": "Consider what can open cursors without the application explicitly doing so.",
+    "explanation": "When stored procedures open cursors implicitly (e.g., for SELECT statements) but don't explicitly close them, these cursors remain open even though the application has closed its ResultSet and Statement objects. This can lead to the 'maximum open cursors exceeded' error even when the application appears to be managing resources correctly."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'library cache lock' waits during application deployment. The deployment involves invalidating and recompiling numerous PL/SQL objects. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the SHARED_POOL_SIZE parameter", "feedback": "This might help slightly but doesn't address the root cause of the locks."},
+      {"text": "Stagger the object compilation during deployment", "feedback": "Correct! This reduces concurrent compilation and lock contention."},
+      {"text": "Use DBMS_SHARED_POOL.KEEP to pin frequently used objects", "feedback": "This would prevent aging out of objects but doesn't address compilation locks."},
+      {"text": "Restart the database after deployment", "feedback": "This is a reactive measure, not a solution to the deployment process."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes library cache locks during deployment and how to minimize them.",
+    "explanation": "Library cache locks occur during object compilation and invalidation. When many objects are invalidated and recompiled simultaneously during deployment, it creates intense lock contention. By staggering the compilation process, fewer objects are being compiled at the same time, reducing lock contention and improving deployment performance."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: Requested array size exceeds VM limit' errors when processing large files. The JVM has 8GB heap allocated, and the application is using only 2GB. What is the most likely cause?",
+    "options": [
+      {"text": "Fragmented heap preventing large contiguous allocation", "feedback": "This would typically cause different OutOfMemoryError messages."},
+      {"text": "Attempting to allocate an array larger than Integer.MAX_VALUE elements", "feedback": "Correct! This is a specific Java limitation that's not related to heap size."},
+      {"text": "Memory leak in the file processing code", "feedback": "This would cause gradual memory consumption, not a specific array size error."},
+      {"text": "Incorrect JVM configuration for 64-bit mode", "feedback": "This would cause different types of memory allocation issues."}
+    ],
+    "answer": 1,
+    "hint": "Consider the specific limitations of Java arrays regardless of heap size.",
+    "explanation": "Java arrays have a maximum size of Integer.MAX_VALUE elements, regardless of the available heap space. When an application attempts to allocate an array larger than this limit, it results in 'Requested array size exceeds VM limit' errors even when plenty of heap space is available."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-02049: timeout: distributed transaction waiting for lock' errors during cross-database operations. The DISTRIBUTED_LOCK_TIMEOUT is set to 60 seconds. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the DISTRIBUTED_LOCK_TIMEOUT parameter", "feedback": "This only delays the error, doesn't solve the underlying contention."},
+      {"text": "Optimize the distributed transaction to reduce lock duration", "feedback": "Correct! This addresses the root cause by minimizing lock contention."},
+      {"text": "Use database links with the SHARED parameter", "feedback": "This affects connection management, not lock contention."},
+      {"text": "Implement retry logic in the application", "feedback": "This handles the error but doesn't prevent it from occurring."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes distributed transaction timeouts and how to prevent them.",
+    "explanation": "Distributed transaction timeouts occur when a transaction waits too long for a lock held by another transaction in a different database. The most effective solution is to optimize the distributed transaction to reduce the time locks are held, either by restructuring the logic or by reducing the transaction scope."
+  },
+  {
+    "question": "A WebLogic cluster shows that managed servers are frequently shutting down with 'BEA-000337: [STUCK] ExecuteThread: '0' for queue: 'weblogic.kernel.Default (self-tuning)' has been busy for '691' seconds working on the request' messages. What is the most likely cause?",
+    "options": [
+      {"text": "Long-running database queries", "feedback": "This would cause database waits, not stuck threads."},
+      {"text": "Infinite loop in application code", "feedback": "Correct! This explains why threads are busy for extended periods."},
+      {"text": "Insufficient thread pool size", "feedback": "This would cause queueing, not stuck threads."},
+      {"text": "Network connectivity issues", "feedback": "This would cause connection timeouts, not continuous processing."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes a thread to be continuously busy without waiting.",
+    "explanation": "When application code contains an infinite loop, the thread continuously executes without waiting for external resources. This causes the thread to be marked as 'stuck' after the configured timeout period, as it's been busy processing the same request for an extended time."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01445: cannot select ROWID from a join view without a key-preserved table' errors when executing certain reports. The reports were working correctly before a recent database upgrade. What is the most likely cause?",
+    "options": [
+      {"text": "Optimizer change after the database upgrade", "feedback": "This could affect execution plans but not cause this specific error."},
+      {"text": "Missing primary key or unique constraint on the base tables", "feedback": "Correct! This explains why the tables are not considered key-preserved."},
+      {"text": "View definition change during the upgrade", "feedback": "This would cause different error messages about invalid objects."},
+      {"text": "Insufficient privileges on the base tables", "feedback": "This would cause permission errors, not ROWID errors."}
+    ],
+    "answer": 1,
+    "hint": "Consider what makes a table 'key-preserved' in a view.",
+    "explanation": "A table is key-preserved in a view if its primary key or unique constraint is preserved through the view. If the base tables are missing these constraints, Oracle cannot guarantee that the ROWID uniquely identifies a row in the view, resulting in the ORA-01445 error."
+  },
+  {
+    "question": "A WebLogic application shows 'java.lang.ClassCastException: com.sun.proxy.$Proxy cannot be cast to' errors when looking up EJBs. The application was recently migrated from WebLogic 10g to 12c. What is the most likely cause?",
+    "options": [
+      {"text": "Class loading changes between WebLogic versions", "feedback": "While class loading changed, this wouldn't cause ClassCastException for EJB lookups."},
+      {"text": "EJB interface changes during migration", "feedback": "This would cause compilation errors, not runtime ClassCastException."},
+      {"text": "Missing business interface in the EJB lookup", "feedback": "Correct! This explains why a proxy cannot be cast to the expected type."},
+      {"text": "JNDI name change between WebLogic versions", "feedback": "This would cause NamingException, not ClassCastException."}
+    ],
+    "answer": 2,
+    "hint": "Consider how EJB lookups work in newer versions of WebLogic.",
+    "explanation": "In newer versions of WebLogic, when looking up EJBs, it's important to specify the business interface in the lookup. Without specifying the interface, the lookup returns a generic proxy that cannot be cast to the specific business interface, resulting in ClassCastException."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'enq: TX - index contention' waits during batch processing. The AWR report shows that the waits are primarily on indexes with sequence-generated keys. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the INITRANS parameter for the affected indexes", "feedback": "This helps with block-level contention, not specifically index contention."},
+      {"text": "Use reverse key indexes for the sequence-generated keys", "feedback": "Correct! This distributes index modifications across different leaf blocks."},
+      {"text": "Increase the cache size for the sequences", "feedback": "This reduces sequence contention but not index contention."},
+      {"text": "Increase the PCTFREE parameter for the affected indexes", "feedback": "This affects space utilization, not contention."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes index contention with sequence-generated keys and how to reduce it.",
+    "explanation": "When using sequence-generated keys, concurrent inserts tend to modify the same right-most index leaf blocks, causing contention. Reverse key indexes reverse the bytes of the key, distributing inserts across different leaf blocks and reducing contention."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: Metaspace' errors after multiple application redeployments. The application uses numerous third-party libraries. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient Metaspace size configuration", "feedback": "While this could be a factor, the root cause is likely elsewhere."},
+      {"text": "Class metadata leak during redeployment", "feedback": "Correct! This explains why Metaspace grows with each redeployment."},
+      {"text": "Memory leak in the application code", "feedback": "This would affect heap space, not Metaspace."},
+      {"text": "Excessive use of reflection in the application", "feedback": "While reflection uses Metaspace, it wouldn't specifically grow with redeployments."}
+    ],
+    "answer": 1,
+    "hint": "Consider what occupies Metaspace and how it's affected by redeployments.",
+    "explanation": "Metaspace stores class metadata. When applications are redeployed, the old class metadata should be garbage collected. However, in some cases, references to the old classes remain, preventing garbage collection and causing Metaspace to grow with each redeployment until it's exhausted."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-01555: snapshot too old' errors during long-running reports, even with an UNDO tablespace of 100GB and UNDO_RETENTION of 3600 seconds. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the UNDO tablespace size further", "feedback": "This might not help if the issue is with undo reuse rather than total space."},
+      {"text": "Increase the UNDO_RETENTION parameter further", "feedback": "This requires sufficient undo space to be effective."},
+      {"text": "Optimize the long-running queries to use Flashback Query", "feedback": "Correct! This allows queries to get consistent data without relying on undo."},
+      {"text": "Implement Automatic Undo Management (AUM)", "feedback": "This is already in use given the UNDO_RETENTION parameter."}
+    ],
+    "answer": 2,
+    "hint": "Consider alternatives to traditional undo for maintaining read consistency.",
+    "explanation": "Flashback Query allows queries to access data as of a specific point in time without relying on undo retention. By optimizing the long-running queries to use Flashback Query, they can maintain read consistency even when undo information is no longer available, avoiding ORA-01555 errors."
+  },
+  {
+    "question": "A WebLogic application shows 'javax.ejb.EJBException: Transaction rolled back: EJB Exception: nested exception is: javax.transaction.TransactionRolledbackException: Transaction timed out after 300 seconds' errors during specific operations. The operations typically complete within 30 seconds in development. What is the most likely cause?",
+    "options": [
+      {"text": "Database performance issue in production", "feedback": "This would cause the operation to take longer, not timeout when it should be quick."},
+      {"text": "Lock contention on database resources", "feedback": "This would cause the operation to wait, not timeout when it should be quick."},
+      {"text": "Infinite loop in the application code", "feedback": "Correct! This explains why the operation doesn't complete and times out."},
+      {"text": "Network latency between application and database", "feedback": "This would consistently affect performance, not cause intermittent timeouts."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes an operation that should be quick to run until it times out.",
+    "explanation": "When application code contains an infinite loop, the operation never completes naturally, causing it to run until the transaction timeout is reached. This explains why the operation times out even though it should complete quickly under normal circumstances."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'log file parallel write' waits during peak transaction processing. The redo logs are on dedicated high-performance storage. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the size of the redo log files", "feedback": "This would help with log switching, not parallel write performance."},
+      {"text": "Increase the number of redo log groups", "feedback": "This would help with log switching, not parallel write performance."},
+      {"text": "Implement batch commits in the application", "feedback": "Correct! This reduces the frequency of redo generation and writes."},
+      {"text": "Increase the LOG_BUFFER parameter", "feedback": "This would help with log buffer space, not write performance."}
+    ],
+    "answer": 2,
+    "hint": "Consider what triggers 'log file parallel write' waits and how to reduce their frequency.",
+    "explanation": "'Log file parallel write' waits occur when LGWR writes redo buffers to the redo log files. By implementing batch commits in the application, the frequency of redo generation and subsequent writes is reduced, significantly improving performance during high transaction periods."
+  },
+  {
+    "question": "A WebLogic cluster shows that managed servers are frequently restarting with 'java.lang.OutOfMemoryError: Java heap space' errors. Heap analysis shows a large number of java.util.HashMap$Entry objects that cannot be garbage collected. What is the most likely cause?",
+    "options": [
+      {"text": "Excessive caching in the application", "feedback": "While this could cause memory issues, it would typically show different object types."},
+      {"text": "Static collection that grows without bounds", "feedback": "Correct! This explains why HashMap entries cannot be garbage collected."},
+      {"text": "Memory leak in the JDBC driver", "feedback": "This would show different object types in the heap dump."},
+      {"text": "Insufficient heap size for the application workload", "feedback": "This would cause general memory pressure, not specific object accumulation."}
+    ],
+    "answer": 1,
+    "hint": "Consider what prevents HashMap entries from being garbage collected.",
+    "explanation": "When a static collection (like a HashMap) grows without bounds, its entries remain in memory for the lifetime of the JVM because the static reference prevents garbage collection. This is a common cause of memory leaks in Java applications."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-04031: unable to allocate 4096 bytes of shared memory' errors during peak hours. The shared pool size is 2GB, and the library cache hit ratio is 95%. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the SHARED_POOL_SIZE parameter further", "feedback": "This might help temporarily but doesn't address the root cause."},
+      {"text": "Flush the shared pool periodically", "feedback": "This is a temporary fix that can cause performance issues."},
+      {"text": "Use bind variables in the application", "feedback": "Correct! This reduces shared pool fragmentation and memory usage."},
+      {"text": "Pin frequently used objects using DBMS_SHARED_POOL.KEEP", "feedback": "This prevents aging out of objects but doesn't address fragmentation."}
+    ],
+    "answer": 2,
+    "hint": "Consider what causes shared pool fragmentation and how to prevent it.",
+    "explanation": "ORA-04031 errors often occur due to shared pool fragmentation, which happens when the application doesn't use bind variables. Without bind variables, each SQL statement with different literal values requires separate shared pool space, leading to fragmentation. Using bind variables allows SQL statements to be shared, reducing fragmentation and memory usage."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'BEA-000386: Server subsystem failed. Reason: weblogic.utils.AssertionError: ***** ASSERTION FAILED *****' errors during startup. The server was working correctly before a recent configuration change. What is the most likely cause?",
+    "options": [
+      {"text": "Corrupted configuration file", "feedback": "This would likely cause different error messages about parsing issues."},
+      {"text": "Incompatible configuration parameters", "feedback": "Correct! This explains why the assertion fails during startup validation."},
+      {"text": "Insufficient memory for the configured resources", "feedback": "This would cause OutOfMemoryError, not assertion failures."},
+      {"text": "Missing class in the server classpath", "feedback": "This would cause ClassNotFoundException, not assertion failures."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes assertion failures in WebLogic.",
+    "explanation": "Assertion failures in WebLogic typically occur when configuration parameters are incompatible or violate expected constraints. This can happen after configuration changes when parameters that should be related or consistent are set to conflicting values."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'direct path read' waits during batch processing. The batch operations involve full table scans of large tables. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the DB_CACHE_SIZE parameter", "feedback": "Direct path reads bypass the buffer cache, so this wouldn't help."},
+      {"text": "Implement partitioning for the large tables", "feedback": "Correct! This allows partition pruning and reduces the amount of data scanned."},
+      {"text": "Increase the PGA_AGGREGATE_TARGET parameter", "feedback": "This would help with memory for direct path reads but not reduce the amount of data read."},
+      {"text": "Gather fresh statistics on the tables", "feedback": "This would help the optimizer but might not change the access path for full table scans."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes direct path reads and how to reduce the amount of data read.",
+    "explanation": "Direct path reads occur during full table scans of large tables. By implementing partitioning, the optimizer can use partition pruning to read only the relevant partitions, significantly reducing the amount of data read and thus improving performance."
+  },
+  {
+    "question": "A WebLogic application shows 'java.sql.SQLException: ORA-01034: ORACLE not available' errors intermittently during peak hours. The database server shows no connectivity issues, and the database is up and running. What is the most likely cause?",
+    "options": [
+      {"text": "Database connection pool exhaustion", "feedback": "This would cause 'Cannot get connection' errors, not 'ORACLE not available'."},
+      {"text": "Oracle shared server process exhaustion", "feedback": "Correct! This explains why the database appears unavailable intermittently."},
+      {"text": "Network connectivity issue between application and database", "feedback": "This would cause connection errors, not specific Oracle availability errors."},
+      {"text": "Database listener configuration issue", "feedback": "This would prevent all connections, not just intermittent ones."}
+    ],
+    "answer": 1,
+    "hint": "Consider what can make an available database appear unavailable intermittently.",
+    "explanation": "When using Oracle shared server architecture, if the number of shared server processes is insufficient for the workload, new connections may be rejected with 'ORACLE not available' errors even though the database is running. This happens intermittently during peak load when all shared server processes are busy."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'enq: HW - contention' waits during batch processing. The AWR report shows that the waits are primarily on tables with frequent inserts. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the PCTFREE parameter for the affected tables", "feedback": "This affects space for updates, not High Water Mark contention."},
+      {"text": "Use ASSM (Automatic Segment Space Management)", "feedback": "Correct! This reduces High Water Mark contention by using bitmaps."},
+      {"text": "Increase the INITRANS parameter for the affected tables", "feedback": "This helps with transaction slots, not High Water Mark contention."},
+      {"text": "Pre-allocate extents for the tables", "feedback": "This reduces extent allocation but not High Water Mark contention."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes High Water Mark contention and how to reduce it.",
+    "explanation": "'enq: HW - contention' waits occur when multiple sessions try to move the High Water Mark simultaneously to allocate space for new rows. Automatic Segment Space Management (ASSM) uses bitmaps instead of freelists to manage space, significantly reducing High Water Mark contention during inserts."
+  },
+  {
+    "question": "A WebLogic server is experiencing 'java.lang.OutOfMemoryError: unable to create new native thread' errors during peak hours. The JVM has 8GB heap allocated, and the application is using only 3GB. What is the most likely cause?",
+    "options": [
+      {"text": "Insufficient swap space at the OS level", "feedback": "This would likely cause different types of errors."},
+      {"text": "Thread leak in the application", "feedback": "Correct! This explains why threads are exhausted despite available heap."},
+      {"text": "Excessive thread stack size configuration", "feedback": "This would consume memory, not prevent thread creation."},
+      {"text": "OS limit on user processes", "feedback": "This would prevent process creation, not just thread creation."}
+    ],
+    "answer": 1,
+    "hint": "Consider what consumes memory outside the heap in a Java process.",
+    "explanation": "When applications create threads but don't properly terminate them, a thread leak occurs. Each thread consumes native memory for its stack, and when the OS limit for thread creation is reached, new threads cannot be created even if heap space is available."
+  },
+  {
+    "question": "An Oracle database is experiencing 'ORA-00060: deadlock detected' errors during batch processing. The deadlock graph shows conflicting row-level locks on the same table. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the deadlock detection timeout", "feedback": "This would only delay error detection, not prevent deadlocks."},
+      {"text": "Kill the blocking sessions immediately", "feedback": "This is a reactive measure, not a preventive solution."},
+      {"text": "Ensure consistent order of row access in all transactions", "feedback": "Correct! This prevents deadlocks by eliminating circular wait conditions."},
+      {"text": "Increase the size of the undo tablespace", "feedback": "This would help with long-running queries, not deadlocks."}
+    ],
+    "answer": 2,
+    "hint": "Consider what conditions are necessary for a deadlock to occur.",
+    "explanation": "Deadlocks occur when transactions wait for each other in a circular chain. By ensuring that all transactions access rows in the same order, the circular wait condition is eliminated, preventing deadlocks from occurring."
+  },
+  {
+    "question": "A WebLogic application shows 'javax.ejb.EJBException: Transaction rolled back: EJB Exception: nested exception is: javax.transaction.TransactionRolledbackException: Unable to enlist with the transaction' errors during certain operations. What is the most likely cause?",
+    "options": [
+      {"text": "Database connection pool exhaustion", "feedback": "This would cause 'Cannot get connection' errors, not enlistment issues."},
+      {"text": "Multiple resources in the transaction without XA configuration", "feedback": "Correct! This explains why the transaction manager cannot enlist all resources."},
+      {"text": "Transaction timeout configuration too low", "feedback": "This would cause 'Transaction timed out' errors, not enlistment issues."},
+      {"text": "Network connectivity issue between application and database", "feedback": "This would cause connection errors, not transaction enlistment issues."}
+    ],
+    "answer": 1,
+    "hint": "Consider what's required for a transaction to enlist multiple resources.",
+    "explanation": "When a transaction involves multiple resources (e.g., multiple databases or a JMS queue and a database), all resources must be configured as XA resources to participate in the same transaction. If any resource is not XA-capable or not configured as such, the transaction manager cannot enlist it, resulting in the 'Unable to enlist with the transaction' error."
+  },
+  {
+    "question": "An Oracle database is experiencing high 'gc buffer busy' waits in a RAC environment during peak hours. The AWR report shows that the waits are primarily on a single hot block in an index. What is the most effective solution?",
+    "options": [
+      {"text": "Increase the interconnect network bandwidth", "feedback": "This would help with general RAC performance but not specifically with hot block contention."},
+      {"text": "Implement reverse key indexes for the affected index", "feedback": "Correct! This distributes access across different blocks, reducing contention."},
+      {"text": "Increase the cache size for the affected objects", "feedback": "This would keep more data in memory but not reduce contention on the hot block."},
+      {"text": "Increase the number of RAC nodes", "feedback": "This would distribute workload but might increase contention on the hot block."}
+    ],
+    "answer": 1,
+    "hint": "Consider what causes hot block contention in a RAC environment and how to reduce it.",
+    "explanation": "In a RAC environment, 'gc buffer busy' waits occur when multiple nodes request access to the same block simultaneously. When this happens consistently with a single hot block in an index, implementing reverse key indexes can distribute access across different blocks, reducing contentio
+}
+]
